@@ -24,5 +24,5 @@
 
 import Foundation
 
-public protocol SynapseSource
+public protocol SynapseSource: AnyObject
 {}

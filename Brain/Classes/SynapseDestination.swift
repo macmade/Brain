@@ -24,5 +24,5 @@
 
 import Foundation
 
-public protocol SynapseDestination
+public protocol SynapseDestination: AnyObject
 {}
