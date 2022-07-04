@@ -26,11 +26,12 @@ import Foundation
 
 public class Brain
 {
-    public private( set ) var inputs:   [ Input  ]
-    public private( set ) var outputs:  [ Output ]
-    public private( set ) var neurons:  [ Neuron ]
-    public private( set ) var synapses: [ Synapse ]
-    public private( set ) var network:  [ [ SynapseConnection ] ]
+    public private( set ) var inputs:            [ Input  ]
+    public private( set ) var outputs:           [ Output ]
+    public private( set ) var neurons:           [ Neuron ]
+    public private( set ) var synapses:          [ Synapse ]
+    public private( set ) var linearNetwork:     [ [ SynapseConnection ] ]
+    public private( set ) var sequentialNetwork: [ [ SynapseConnection ] ]
     
     public init?( inputs: [ Input ], outputs: [ Output ], neurons: [ Neuron ], synapses: [ Synapse ] )
     {
@@ -39,11 +40,11 @@ public class Brain
             return nil
         }
         
-        self.inputs   = inputs
-        self.outputs  = outputs
-        self.neurons  = neurons
-        self.synapses = synapses
-        self.network  = []
+        self.inputs        = inputs
+        self.outputs       = outputs
+        self.neurons       = neurons
+        self.synapses      = synapses
+        self.linearNetwork = []
         
         // Gets all synapse connections
         let connections: [ SynapseConnection ] = self.synapses.map
@@ -62,6 +63,8 @@ public class Brain
             return SynapseConnection( source: source, destination: destination, synapse: synapse )
         }
         
+        var linearNetwork = [ [ SynapseConnection ] ]()
+        
         // Gets every connection originating from an input
         inputs.forEach
         {
@@ -72,7 +75,23 @@ public class Brain
             
             if network.isEmpty == false
             {
-                self.network.append( network )
+                linearNetwork.append( network )
+            }
+        }
+        
+        self.linearNetwork     = linearNetwork
+        self.sequentialNetwork = linearNetwork.reduce( into: [ [ SynapseConnection ] ]() )
+        {
+            array, element in element.enumerated().forEach
+            {
+                if $0.offset >= array.count
+                {
+                    array.append( [ $0.element ] )
+                }
+                else
+                {
+                    array[ $0.offset ].append( $0.element )
+                }
             }
         }
     }
@@ -105,7 +124,7 @@ public class Brain
     
     public func process()
     {
-        self.network.forEach
+        self.linearNetwork.forEach
         {
             $0.forEach
             {
