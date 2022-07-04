@@ -24,18 +24,30 @@
 
 import Foundation
 
+/*
+ * Synapses are encoded using a 32-bits number:
+ *
+ * | 0 | 0000000 | 0 | 0000000 | 0000000000000000 |
+ *   1         2   3         4                  5
+ *
+ *   1.  1 bit  (32):    Source type (0 = input, 1 = neuron)
+ *   2.  7 bits (25-31): Source ID
+ *   3.  1 bit  (24):    Destination type (0 = input, 1 = neuron)
+ *   4.  7 bits (17-23): Destination ID
+ *   5. 16 bits (1-16):  Weight
+ */
 public class Synapse: CustomDebugStringConvertible
 {
     public enum SourceType: UInt
     {
-        case input
-        case neuron
+        case input  = 0
+        case neuron = 1
     }
     
     public enum DestinationType: UInt
     {
-        case output
-        case neuron
+        case output = 0
+        case neuron = 1
     }
     
     public private( set ) var sourceType:      SourceType
@@ -44,48 +56,59 @@ public class Synapse: CustomDebugStringConvertible
     public private( set ) var destinationID:   UInt8
     public private( set ) var weight:          Double
     
-    public class func decode( from value: UInt32 ) -> Synapse
-    {
-        Synapse( from: value )
-    }
-    
-    private init( from value: UInt32 )
+    public convenience init( from value: UInt32 )
     {
         let sourceType       = ( value >> 31 ) & 0x0001
         let sourceID         = ( value >> 24 ) & 0x007F
         let destinationType  = ( value >> 23 ) & 0x0001
         let destinationID    = ( value >> 16 ) & 0x007F
         let weight           = ( value >>  0 ) & 0xFFFF
-        self.sourceType      = sourceType      == 0 ? .input  : .neuron
-        self.destinationType = destinationType == 0 ? .output : .neuron
-        self.sourceID        = UInt8( sourceID )
-        self.destinationID   = UInt8( destinationID )
-        self.weight          = ( Double( weight ) / ( Double( UInt16.max ) / 2.0 ) ) - 1.0
+        
+        self.init(
+            sourceType:      sourceType == 0 ? .input : .neuron,
+            sourceID:        UInt8( sourceID ),
+            destinationType: destinationType == 0 ? .output : .neuron,
+            destinationID:   UInt8( destinationID ),
+            weight:          Synapse.decodeWeight( weight )
+        )
+    }
+    
+    public init( sourceType: SourceType, sourceID: UInt8, destinationType: DestinationType, destinationID: UInt8, weight: Double )
+    {
+        self.sourceType      = sourceType
+        self.destinationType = destinationType
+        self.sourceID        = sourceID
+        self.destinationID   = destinationID
+        self.weight          = weight
+    }
+    
+    public class func decodeWeight( _ value: UInt32 ) -> Double
+    {
+        ( Double( value ) / ( Double( UInt16.max ) / 2.0 ) ) - 1.0
+    }
+    
+    public class func encodeWeight( _ value: Double ) -> UInt32
+    {
+        UInt32( ( 1.0 + value ) * ( Double( UInt16.max ) / 2.0 ) )
     }
     
     public func encode() -> UInt32
     {
-        let floatWeight      = ( 1.0 + self.weight ) * ( Double( UInt16.max ) / 2.0 )
         let sourceType       = ( UInt32( self.sourceType.rawValue      ) & 0x0001 ) << 31
         let sourceID         = ( UInt32( self.sourceID                 ) & 0x007F ) << 24
         let destinationType  = ( UInt32( self.destinationType.rawValue ) & 0x0001 ) << 23
         let destinationID    = ( UInt32( self.destinationID            ) & 0x007F ) << 16
-        let weight           = ( UInt32( floatWeight                   ) & 0xFFFF ) <<  0
+        let weight           = ( Synapse.encodeWeight( self.weight     ) & 0xFFFF ) <<  0
         
         return sourceType | sourceID | destinationType | destinationID | weight
     }
     
     public var debugDescription: String
     {
-        """
-        Synapse
-        {
-            Source type:      \( self.sourceType )
-            Source ID:        \( String( format: "%02X", self.sourceID ) )
-            Destination type: \( self.destinationType )
-            Destination ID:   \( String( format: "%02X", self.destinationID ) )
-            Weight:           \( self.weight )
-        }
-        """
+        let weight      = String( format: "%.02f", self.weight )
+        let source      = "\( self.sourceType )[\( self.sourceID )]"
+        let destination = "\( self.destinationType )[\( self.destinationID )]"
+        
+        return "{\( source )->\( destination ):\( weight )}"
     }
 }

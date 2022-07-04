@@ -25,4 +25,9 @@
 import Foundation
 
 public protocol SynapseSource: AnyObject
-{}
+{
+    var value: Double
+    {
+        get
+    }
+}

@@ -24,10 +24,26 @@
 
 import Foundation
 
-public class Input: SynapseSource
+public class SynapseConnection: Equatable, CustomDebugStringConvertible
 {
-    public var value: Double
+    public private( set ) var source:      SynapseSource
+    public private( set ) var destination: SynapseDestination
+    public private( set ) var synapse:     Synapse
+    
+    public init( source: SynapseSource, destination: SynapseDestination, synapse: Synapse )
     {
-        0.5
+        self.source      = source
+        self.destination = destination
+        self.synapse     = synapse
+    }
+    
+    public final class func == ( lhs: SynapseConnection, rhs: SynapseConnection ) -> Bool
+    {
+        lhs.source === rhs.source && lhs.destination === rhs.destination && lhs.synapse === rhs.synapse
+    }
+    
+    public var debugDescription: String
+    {
+        self.synapse.debugDescription
     }
 }

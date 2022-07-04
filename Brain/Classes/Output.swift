@@ -25,4 +25,16 @@
 import Foundation
 
 public class Output: SynapseDestination
-{}
+{
+    public private( set ) var values: [ Double ] = []
+    
+    public func take( value: Double )
+    {
+        self.values.append( value )
+    }
+    
+    public func reset()
+    {
+        self.values.removeAll()
+    }
+}

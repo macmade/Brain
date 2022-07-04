@@ -26,31 +26,97 @@ import Foundation
 
 public class Brain
 {
-    public private( set ) var inputs:  [ Input  ] = [ Input(), Input() ]
-    public private( set ) var outputs: [ Output ] = [ Output(), Output(), Output() ]
-    public private( set ) var neurons: [ Neuron ] = [ Neuron() ]
+    public private( set ) var inputs:   [ Input  ]
+    public private( set ) var outputs:  [ Output ]
+    public private( set ) var neurons:  [ Neuron ]
+    public private( set ) var synapses: [ Synapse ]
+    public private( set ) var network:  [ [ SynapseConnection ] ]
     
-    public func getSource( of synapse: Synapse ) -> SynapseSource?
+    public init?( inputs: [ Input ], outputs: [ Output ], neurons: [ Neuron ], synapses: [ Synapse ] )
     {
-        let values: [ SynapseSource ] = synapse.sourceType == .input ? self.inputs : self.neurons
-        
-        return self.getValue( id: synapse.sourceID, in: values )
-    }
-    
-    public func getDestination( of synapse: Synapse ) -> SynapseDestination?
-    {
-        let values: [ SynapseDestination ] = synapse.destinationType == .output ? self.outputs : self.neurons
-        
-        return self.getValue( id: synapse.destinationID, in: values )
-    }
-    
-    private func getValue< T >( id: UInt8, in values: [ T ] ) -> T?
-    {
-        if values.isEmpty
+        if inputs.isEmpty || outputs.isEmpty || neurons.isEmpty || synapses.isEmpty
         {
             return nil
         }
         
-        return values[ Int( id ) % values.count ]
+        self.inputs   = inputs
+        self.outputs  = outputs
+        self.neurons  = neurons
+        self.synapses = synapses
+        self.network  = []
+        
+        // Gets all synapse connections
+        let connections: [ SynapseConnection ] = self.synapses.map
+        {
+            // Remap the source and destination IDs so they correspond to the number of inputs, neurons or outputs.
+            let sourceID       = Int( $0.sourceID      ) % ( $0.sourceType      == .neuron ? neurons.count : inputs.count )
+            let destinationID  = Int( $0.destinationID ) % ( $0.destinationType == .neuron ? neurons.count : outputs.count )
+            
+            // Creates a new synapse with the remapped values.
+            let synapse = Synapse( sourceType: $0.sourceType, sourceID: UInt8( sourceID ), destinationType: $0.destinationType, destinationID: UInt8( destinationID ), weight: $0.weight )
+            
+            // Gets the source and destination for the synapse.
+            let source:      SynapseSource      = $0.sourceType      == .neuron ? neurons[ sourceID ]      : inputs[ sourceID ]
+            let destination: SynapseDestination = $0.destinationType == .neuron ? neurons[ destinationID ] : outputs[ destinationID ]
+            
+            return SynapseConnection( source: source, destination: destination, synapse: synapse )
+        }
+        
+        // Gets every connection originating from an input
+        inputs.forEach
+        {
+            var network = [ SynapseConnection ]()
+            
+            // Gets connections for the current input
+            Brain.connections( for: $0, from: connections, network: &network )
+            
+            if network.isEmpty == false
+            {
+                self.network.append( network )
+            }
+        }
+    }
+    
+    private class func connections( for source: SynapseSource, from allConnections: [ SynapseConnection ], network: inout [ SynapseConnection ] )
+    {
+        // All connections for the current source
+        let connections = allConnections.filter
+        {
+            $0.source === source
+        }
+        .filter // Avoids recursion if the connection has already been processed in the current network
+        {
+            synapse in network.contains { $0 === synapse } == false
+        }
+        
+        network.append( contentsOf: connections )
+        
+        // Gets all connections whose destination is also a source
+        connections.compactMap
+        {
+            $0.destination as? SynapseSource
+        }
+        .forEach
+        {
+            // Gets connections for the new source
+            self.connections( for: $0, from: allConnections, network: &network )
+        }
+    }
+    
+    public func process()
+    {
+        self.network.forEach
+        {
+            $0.forEach
+            {
+                $0.destination.take( value: $0.source.value * $0.synapse.weight )
+            }
+        }
+    }
+    
+    public func reset()
+    {
+        self.neurons.forEach { $0.reset() }
+        self.outputs.forEach { $0.reset() }
     }
 }

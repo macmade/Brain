@@ -25,4 +25,7 @@
 import Foundation
 
 public protocol SynapseDestination: AnyObject
-{}
+{
+    func take( value: Double )
+    func reset()
+}

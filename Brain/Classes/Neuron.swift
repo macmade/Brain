@@ -25,4 +25,26 @@
 import Foundation
 
 public class Neuron: SynapseSource, SynapseDestination
-{}
+{
+    public private( set ) var values: [ Double ] = []
+    
+    public var value: Double
+    {
+        if self.values.isEmpty
+        {
+            return 0.5
+        }
+        
+        return tanh( self.values.reduce( 0.0 ) { $0 + $1 } )
+    }
+    
+    public func take( value: Double )
+    {
+        self.values.append( value )
+    }
+    
+    public func reset()
+    {
+        self.values.removeAll()
+    }
+}
