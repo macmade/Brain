@@ -35,6 +35,8 @@ else
 
 var organisms = [ organism1, organism2 ]
 
+let start = Date()
+
 ( 0 ..< settings.numberOfGenerations ).forEach
 {
     print( "##################################################" )
@@ -76,3 +78,11 @@ var organisms = [ organism1, organism2 ]
         }
     }
 }
+
+let end = Date()
+
+print( "**************************************************" )
+print( "Generations:          \( settings.numberOfGenerations )" )
+print( "Steps per generation: \( settings.stepsPerGeneration )" )
+print( "Time:                 \( end.timeIntervalSince( start ) ) seconds" )
+print( "**************************************************" )
