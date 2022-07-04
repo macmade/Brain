@@ -37,10 +37,8 @@ else
 {
     print( "Synapses:" )
     $0.brain.synapses.forEach { print( "    \( $0 )" ) }
-    print( "Linear Network:" )
-    $0.brain.linearNetwork.forEach { print( "    \( $0 )" ) }
-    print( "Sequential Network:" )
-    $0.brain.sequentialNetwork.forEach { print( "    \( $0 )" ) }
+    print( "Network:" )
+    $0.brain.network.forEach { print( "    \( $0 )" ) }
     
     $0.brain.process()
     

@@ -35,7 +35,7 @@ public class Organism
         var neurons:  [ Neuron ]  = []
         var synapses: [ Synapse ] = []
         
-        ( 1 ..< settings.numberOfNeurons ).forEach
+        ( 0 ..< settings.numberOfNeurons ).forEach
         {
             _ in neurons.append( Neuron() )
         }
@@ -44,6 +44,39 @@ public class Organism
         {
             _ in synapses.append( Synapse( from: UInt32.random( in: 0 ... UInt32.max ) ) )
         }
+        
+        /*
+         * Inputs:  [ 0 ]     [ 1 ]     [ 2 ]-----\
+         *            |  \      |                 |
+         *            |   \     |                 |
+         *          1 |  1 \  1 |                 |
+         *            |     \   |                 |
+         * Neurons: [ 0 ]--2--[ 1 ]-2,3-[ 2 ]     |
+         *            |\        |        /|       |
+         *            | \_______|_______/ |       |
+         *            |     2   |         |       |
+         *            | 2       | 2,3     | 3,4   | 1
+         * Outputs: [ 0 ]     [ 1 ]     [ 2 ]-----/
+         *
+         * Level 1 (3): I[0]->N[0], I[0]->N[1], I[1]->N[1], I[2]->O[2]
+         * Level 2 (5): N[0]->N[1], N[0]->N[2], N[0]->O[0], [N1]->N[2], N[1]->O[1]
+         * Level 3 (3): N[1]->N[2], N[1]->O[1], N2[O2]
+         * Level 4 (1): N[2]->O[2]
+         */
+        
+        /*
+        synapses.removeAll()
+        synapses.append( Synapse( sourceType: .input,  sourceID: 0, destinationType: .neuron, destinationID: 0, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .input,  sourceID: 0, destinationType: .neuron, destinationID: 1, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .input,  sourceID: 1, destinationType: .neuron, destinationID: 1, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .input,  sourceID: 2, destinationType: .output, destinationID: 2, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .neuron, sourceID: 0, destinationType: .neuron, destinationID: 1, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .neuron, sourceID: 0, destinationType: .neuron, destinationID: 2, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .neuron, sourceID: 0, destinationType: .output, destinationID: 0, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .neuron, sourceID: 1, destinationType: .output, destinationID: 1, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .neuron, sourceID: 1, destinationType: .neuron, destinationID: 2, weight: 1 ) )
+        synapses.append( Synapse( sourceType: .neuron, sourceID: 2, destinationType: .output, destinationID: 2, weight: 1 ) )
+        */
         
         guard let brain = Brain( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses ) else
         {

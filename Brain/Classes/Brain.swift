@@ -26,12 +26,11 @@ import Foundation
 
 public class Brain
 {
-    public private( set ) var inputs:            [ Input  ]
-    public private( set ) var outputs:           [ Output ]
-    public private( set ) var neurons:           [ Neuron ]
-    public private( set ) var synapses:          [ Synapse ]
-    public private( set ) var linearNetwork:     [ [ SynapseConnection ] ]
-    public private( set ) var sequentialNetwork: [ [ SynapseConnection ] ]
+    public private( set ) var inputs:   [ Input  ]
+    public private( set ) var outputs:  [ Output ]
+    public private( set ) var neurons:  [ Neuron ]
+    public private( set ) var synapses: [ Synapse ]
+    public private( set ) var network:  [ [ SynapseConnection ] ]
     
     public init?( inputs: [ Input ], outputs: [ Output ], neurons: [ Neuron ], synapses: [ Synapse ] )
     {
@@ -40,11 +39,10 @@ public class Brain
             return nil
         }
         
-        self.inputs        = inputs
-        self.outputs       = outputs
-        self.neurons       = neurons
-        self.synapses      = synapses
-        self.linearNetwork = []
+        self.inputs   = inputs
+        self.outputs  = outputs
+        self.neurons  = neurons
+        self.synapses = synapses
         
         // Gets all synapse connections
         let allConnections: [ SynapseConnection ] = self.synapses.map
@@ -63,80 +61,68 @@ public class Brain
             return SynapseConnection( source: source, destination: destination, synapse: synapse )
         }
         
-        var linearNetwork = [ [ SynapseConnection ] ]()
-        
         // Gets every connection originating from an input
-        inputs.forEach
+        let inputNetwork: [ [ ( level: Int, connection: SynapseConnection ) ] ] = inputs.compactMap
         {
-            input in
+            var network = [ ( level: Int, connection: SynapseConnection ) ]()
             
-            // All connections for the current input
-            allConnections.filter
-            {
-                $0.source === input
-            }
-            .forEach
-            {
-                var network = [ SynapseConnection ]()
+            // Gets connections for the current input
+            Brain.connections( for: $0, from: allConnections, network: &network, level: 0 )
             
-                network.append( $0 )
-                
-                // Gets forward connections if the destination is also a source
-                if let source = $0.destination as? SynapseSource
-                {
-                    Brain.connections( for: source, from: allConnections, network: &network )
-                }
-                
-                linearNetwork.append( network )
+            if network.isEmpty
+            {
+                return nil
             }
+            
+            // Sorts connections by level
+            return network.sorted { $0.level < $1.level }
         }
         
-        self.linearNetwork     = linearNetwork
-        self.sequentialNetwork = linearNetwork.reduce( into: [ [ SynapseConnection ] ]() )
+        // Final network, sequenced by connection level
+        self.network = inputNetwork.reduce( into: [ [ SynapseConnection ] ]() )
         {
-            array, element in element.enumerated().forEach
+            array, element in element.forEach
             {
-                if $0.offset >= array.count
+                if $0.level >= array.count
                 {
-                    array.append( [ $0.element ] )
+                    array.append( [ $0.connection ] )
                 }
                 else
                 {
-                    array[ $0.offset ].append( $0.element )
+                    array[ $0.level ].append( $0.connection )
                 }
             }
         }
     }
     
-    private class func connections( for source: SynapseSource, from allConnections: [ SynapseConnection ], network: inout [ SynapseConnection ] )
+    private class func connections( for source: SynapseSource, from allConnections: [ SynapseConnection ], network: inout [ ( level: Int, connection: SynapseConnection ) ], level: Int )
     {
         // All connections for the current source
-        let connections = allConnections.filter
+        allConnections.filter
         {
             $0.source === source
         }
         .filter // Avoids recursion if the connection has already been processed in the current network
         {
-            synapse in network.contains { $0 === synapse } == false
-        }
-        
-        network.append( contentsOf: connections )
-        
-        // Gets all connections whose destination is also a source
-        connections.compactMap
-        {
-            $0.destination as? SynapseSource
+            connection in network.contains { $0.connection === connection } == false
         }
         .forEach
         {
-            // Gets connections for the new source
-            self.connections( for: $0, from: allConnections, network: &network )
+            // Appends the current connection
+            network.append( ( level: level, connection: $0 ) )
+            
+            // Gets all connections whose destination is also a source
+            if let source = $0.destination as? SynapseSource
+            {
+                // Gets connections for the new source
+                self.connections( for: source, from: allConnections, network: &network, level: level + 1 )
+            }
         }
     }
     
     public func process()
     {
-        self.sequentialNetwork.forEach
+        self.network.forEach
         {
             $0.forEach
             {
