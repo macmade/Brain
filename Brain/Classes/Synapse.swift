@@ -36,7 +36,7 @@ import Foundation
  *   4.  7 bits (17-23): Destination ID
  *   5. 16 bits (1-16):  Weight
  */
-public class Synapse: CustomDebugStringConvertible
+public class Synapse: NSCopying, CustomDebugStringConvertible
 {
     public enum SourceType: UInt
     {
@@ -110,5 +110,10 @@ public class Synapse: CustomDebugStringConvertible
         let destination = "\( self.destinationType )[\( self.destinationID )]"
         
         return "{\( source )->\( destination ):\( weight )}"
+    }
+    
+    public func copy( with zone: NSZone? = nil ) -> Any
+    {
+        Synapse( sourceType: self.sourceType, sourceID: self.sourceID, destinationType: self.destinationType, destinationID: self.destinationID, weight: self.weight )
     }
 }

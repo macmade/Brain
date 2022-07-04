@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class Output: SynapseDestination
+public class Output: SynapseDestination, NSCopying
 {
     public private( set ) var values: [ Double ] = []
     
@@ -36,5 +36,10 @@ public class Output: SynapseDestination
     public func reset()
     {
         self.values.removeAll()
+    }
+    
+    public func copy( with zone: NSZone? = nil ) -> Any
+    {
+        Output()
     }
 }

@@ -24,10 +24,15 @@
 
 import Foundation
 
-public class Input: SynapseSource
+public class Input: SynapseSource, NSCopying
 {
     public var value: Double
     {
         0.5
+    }
+    
+    public func copy( with zone: NSZone? = nil ) -> Any
+    {
+        Input()
     }
 }

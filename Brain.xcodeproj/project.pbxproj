@@ -16,6 +16,8 @@
 		05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC928722C3500A0D68B /* SynapseSource.swift */; };
 		05BB9FCC28722C3D00A0D68B /* SynapseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FCB28722C3D00A0D68B /* SynapseDestination.swift */; };
 		05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05228735BF600A0D68B /* SynapseConnection.swift */; };
+		05BBA05528737FF800A0D68B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05428737FF800A0D68B /* Settings.swift */; };
+		05BBA0572873803000A0D68B /* Organism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0562873803000A0D68B /* Organism.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +90,8 @@
 		05BBA00428722D3A00A0D68B /* FUNDING.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = FUNDING.yml; sourceTree = "<group>"; };
 		05BBA00528722D3A00A0D68B /* Debug - zld.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug - zld.xcconfig"; sourceTree = "<group>"; };
 		05BBA05228735BF600A0D68B /* SynapseConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynapseConnection.swift; sourceTree = "<group>"; };
+		05BBA05428737FF800A0D68B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		05BBA0562873803000A0D68B /* Organism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organism.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 				05BB9FBF28722BF300A0D68B /* Synapse.swift */,
 				05BB9FCB28722C3D00A0D68B /* SynapseDestination.swift */,
 				05BB9FC928722C3500A0D68B /* SynapseSource.swift */,
+				05BBA05428737FF800A0D68B /* Settings.swift */,
+				05BBA0562873803000A0D68B /* Organism.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -328,9 +334,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				05BB9FCC28722C3D00A0D68B /* SynapseDestination.swift in Sources */,
+				05BBA0572873803000A0D68B /* Organism.swift in Sources */,
 				05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */,
 				05BB9FC628722C2300A0D68B /* Output.swift in Sources */,
 				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
+				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
 				05B6C313286F4D810065CD26 /* main.swift in Sources */,
 				05BB9FC228722C0600A0D68B /* Brain.swift in Sources */,
 				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
