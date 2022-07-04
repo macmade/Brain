@@ -47,7 +47,7 @@ public class Brain
         self.linearNetwork = []
         
         // Gets all synapse connections
-        let connections: [ SynapseConnection ] = self.synapses.map
+        let allConnections: [ SynapseConnection ] = self.synapses.map
         {
             // Remap the source and destination IDs so they correspond to the number of inputs, neurons or outputs.
             let sourceID       = Int( $0.sourceID      ) % ( $0.sourceType      == .neuron ? neurons.count : inputs.count )
@@ -68,13 +68,25 @@ public class Brain
         // Gets every connection originating from an input
         inputs.forEach
         {
-            var network = [ SynapseConnection ]()
+            input in
             
-            // Gets connections for the current input
-            Brain.connections( for: $0, from: connections, network: &network )
-            
-            if network.isEmpty == false
+            // All connections for the current input
+            allConnections.filter
             {
+                $0.source === input
+            }
+            .forEach
+            {
+                var network = [ SynapseConnection ]()
+            
+                network.append( $0 )
+                
+                // Gets forward connections if the destination is also a source
+                if let source = $0.destination as? SynapseSource
+                {
+                    Brain.connections( for: source, from: allConnections, network: &network )
+                }
+                
                 linearNetwork.append( network )
             }
         }
@@ -124,7 +136,7 @@ public class Brain
     
     public func process()
     {
-        self.linearNetwork.forEach
+        self.sequentialNetwork.forEach
         {
             $0.forEach
             {
