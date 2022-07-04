@@ -112,4 +112,22 @@ public class Organism
         
         return Organism( brain: brain )
     }
+    
+    public func process()
+    {
+        self.brain.process()
+        
+        print( "Neuron values:" )
+        self.brain.neurons.forEach { print( "    \( $0.values )" ) }
+        
+        print( "Output values:" )
+        self.brain.outputs.forEach { print( "    \( $0.values )" ) }
+        
+        self.brain.outputs.forEach
+        {
+            $0.execute( with: self )
+        }
+        
+        self.brain.reset()
+    }
 }

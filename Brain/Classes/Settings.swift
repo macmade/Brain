@@ -26,6 +26,8 @@ import Foundation
 
 public class Settings: Codable
 {
-    public var numberOfNeurons  = 3
-    public var numberOfSynapses = 5
+    public var numberOfNeurons     = 3
+    public var numberOfSynapses    = 5
+    public var numberOfGenerations = 5
+    public var stepsPerGeneration  = 5
 }

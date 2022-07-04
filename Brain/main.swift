@@ -33,20 +33,46 @@ else
     exit( -1 )
 }
 
-[ organism1, organism2 ].forEach
+var organisms = [ organism1, organism2 ]
+
+( 0 ..< settings.numberOfGenerations ).forEach
 {
-    print( "Synapses:" )
-    $0.brain.synapses.forEach { print( "    \( $0 )" ) }
-    print( "Network:" )
-    $0.brain.network.forEach { print( "    \( $0 )" ) }
+    print( "##################################################" )
+    print( "GENERATION \( $0 + 1 )" )
+    print( "##################################################" )
     
-    $0.brain.process()
+    if $0 > 0
+    {
+        organisms = organisms.compactMap { $0.mutate() }
+    }
     
-    print( "Neuron values:" )
-    $0.brain.neurons.forEach { print( "    \( $0.values )" ) }
-    
-    print( "Output values:" )
-    $0.brain.outputs.forEach { print( "    \( $0.values )" ) }
-    
-    print( "--------------------------------------------------" )
+    organisms.forEach
+    {
+        print( "Synapses:" )
+        $0.brain.synapses.forEach { print( "    \( $0 )" ) }
+        print( "Network:" )
+        $0.brain.network.forEach { print( "    \( $0 )" ) }
+        
+        if $0 === organism1
+        {
+            print( "--------------------------------------------------" )
+        }
+    }
+
+    ( 0 ..< settings.stepsPerGeneration ).forEach
+    {
+        print( "==================================================" )
+        print( "STEP \( $0 + 1 )" )
+        print( "==================================================" )
+        
+        organisms.forEach
+        {
+            $0.process()
+            
+            if $0 === organism1
+            {
+                print( "--------------------------------------------------" )
+            }
+        }
+    }
 }

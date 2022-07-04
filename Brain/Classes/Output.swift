@@ -42,4 +42,7 @@ public class Output: SynapseDestination, NSCopying
     {
         Output()
     }
+    
+    public func execute( with organism: Organism )
+    {}
 }
