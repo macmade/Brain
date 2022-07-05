@@ -28,6 +28,7 @@ public class Settings: Codable
 {
     public var numberOfNeurons     = 3
     public var numberOfSynapses    = 5
-    public var numberOfGenerations = 100
-    public var stepsPerGeneration  = 25
+    public var initialPopulation   = 10
+    public var numberOfGenerations = 50
+    public var stepsPerGeneration  = 20
 }

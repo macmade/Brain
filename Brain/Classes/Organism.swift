@@ -26,9 +26,10 @@ import Foundation
 
 public class Organism
 {
-    public private( set ) var brain: Brain
+    public private( set ) var brain:      Brain
+    public private( set ) var generation: Int
     
-    public class func random( settings: Settings ) -> Organism?
+    public class func random( settings: Settings, generation: Int ) -> Organism?
     {
         let inputs:   [ Input  ]  = [ Input(),  Input(),  Input(),  Input(),  Input() ]
         let outputs:  [ Output ]  = [ Output(), Output(), Output(), Output(), Output() ]
@@ -83,12 +84,13 @@ public class Organism
             return nil
         }
         
-        return Organism( brain: brain )
+        return Organism( brain: brain, generation: generation )
     }
     
-    public init( brain: Brain )
+    public init( brain: Brain, generation: Int )
     {
-        self.brain = brain
+        self.brain      = brain
+        self.generation = generation
     }
     
     public func mutate() -> Organism?
@@ -110,7 +112,7 @@ public class Organism
             return nil
         }
         
-        return Organism( brain: brain )
+        return Organism( brain: brain, generation: self.generation + 1 )
     }
     
     public func process()

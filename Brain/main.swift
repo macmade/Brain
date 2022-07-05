@@ -26,14 +26,10 @@ import Foundation
 
 let settings = Settings()
 
-guard let organism1 = Organism.random( settings: settings ),
-      let organism2 = organism1.mutate()
-else
+var organisms = ( 0 ..< settings.initialPopulation ).compactMap
 {
-    exit( -1 )
+    _ in Organism.random( settings: settings, generation: 0 )
 }
-
-var organisms = [ organism1, organism2 ]
 
 let start = Date()
 
@@ -55,7 +51,7 @@ let start = Date()
         print( "Network:" )
         $0.brain.network.forEach { print( "    \( $0 )" ) }
         
-        if $0 === organism1
+        if $0 !== organisms.last
         {
             print( "--------------------------------------------------" )
         }
@@ -71,7 +67,7 @@ let start = Date()
         {
             $0.process()
             
-            if $0 === organism1
+            if $0 !== organisms.last
             {
                 print( "--------------------------------------------------" )
             }
@@ -82,6 +78,7 @@ let start = Date()
 let end = Date()
 
 print( "**************************************************" )
+print( "Organisms:            \( settings.initialPopulation )" )
 print( "Generations:          \( settings.numberOfGenerations )" )
 print( "Steps per generation: \( settings.stepsPerGeneration )" )
 print( "Time:                 \( end.timeIntervalSince( start ) ) seconds" )
