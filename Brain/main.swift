@@ -25,13 +25,8 @@
 import Foundation
 
 let settings = Settings()
-
-var organisms = ( 0 ..< settings.initialPopulation ).compactMap
-{
-    _ in Organism.random( settings: settings, generation: 0 )
-}
-
-let start = Date()
+let start    = Date()
+var grid     = Grid( settings: settings )
 
 ( 0 ..< settings.numberOfGenerations ).forEach
 {
@@ -41,33 +36,33 @@ let start = Date()
     
     if $0 > 0
     {
-        organisms = organisms.compactMap { $0.mutate() }
+        grid.mutate()
     }
     
-    organisms.forEach
+    grid.organisms.forEach
     {
         print( "Synapses:" )
         $0.brain.synapses.forEach { print( "    \( $0 )" ) }
         print( "Network:" )
         $0.brain.network.forEach { print( "    \( $0 )" ) }
         
-        if $0 !== organisms.last
+        if $0 !== grid.organisms.last
         {
             print( "--------------------------------------------------" )
         }
     }
-
+    
     ( 0 ..< settings.stepsPerGeneration ).forEach
     {
         print( "==================================================" )
         print( "STEP \( $0 + 1 )" )
         print( "==================================================" )
         
-        organisms.forEach
+        grid.organisms.forEach
         {
             $0.process()
             
-            if $0 !== organisms.last
+            if $0 !== grid.organisms.last
             {
                 print( "--------------------------------------------------" )
             }

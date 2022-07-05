@@ -24,13 +24,46 @@
 
 import Foundation
 
-public class Settings: Codable
+public class Grid
 {
-    public var numberOfNeurons     = 3
-    public var numberOfSynapses    = 5
-    public var initialPopulation   = 10
-    public var numberOfGenerations = 50
-    public var stepsPerGeneration  = 20
-    public var gridWidth           = 500
-    public var gridHeight          = 500
+    public private( set ) var size:      Size
+    public private( set ) var organisms: [ Organism ]
+    
+    init( settings: Settings )
+    {
+        self.size      = Size( width: settings.gridWidth, height: settings.gridHeight )
+        self.organisms = ( 0 ..< settings.initialPopulation ).compactMap
+        {
+            _ in Organism.random( settings: settings, generation: 0 )
+        }
+        
+        self.placeOrganisms()
+    }
+    
+    private func placeOrganisms()
+    {
+        self.organisms.forEach
+        {
+            organism in repeat
+            {
+                let x             = Int.random( in: 0 ..< size.width )
+                let y             = Int.random( in: 0 ..< size.height )
+                organism.position = Point( x: x, y: y )
+            }
+            while organisms.contains
+            {
+                $0 !== organism && $0.position == organism.position
+            }
+        }
+    }
+    
+    public func mutate()
+    {
+        self.organisms = self.organisms.compactMap
+        {
+            $0.mutate()
+        }
+        
+        self.placeOrganisms()
+    }
 }

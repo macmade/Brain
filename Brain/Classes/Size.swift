@@ -24,13 +24,13 @@
 
 import Foundation
 
-public class Settings: Codable
+public struct Size: Equatable, CustomDebugStringConvertible
 {
-    public var numberOfNeurons     = 3
-    public var numberOfSynapses    = 5
-    public var initialPopulation   = 10
-    public var numberOfGenerations = 50
-    public var stepsPerGeneration  = 20
-    public var gridWidth           = 500
-    public var gridHeight          = 500
+    public var width:  Int
+    public var height: Int
+    
+    public var debugDescription: String
+    {
+        "{width: \( self.width ), height: \( self.height )}"
+    }
 }

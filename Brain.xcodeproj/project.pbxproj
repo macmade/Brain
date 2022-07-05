@@ -18,6 +18,9 @@
 		05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05228735BF600A0D68B /* SynapseConnection.swift */; };
 		05BBA05528737FF800A0D68B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05428737FF800A0D68B /* Settings.swift */; };
 		05BBA0572873803000A0D68B /* Organism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0562873803000A0D68B /* Organism.swift */; };
+		05BBA06E2873B7F200A0D68B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06D2873B7F200A0D68B /* Grid.swift */; };
+		05BBA0702873B98200A0D68B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06F2873B98200A0D68B /* Size.swift */; };
+		05BBA0722873B98900A0D68B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0712873B98900A0D68B /* Point.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,6 +95,9 @@
 		05BBA05228735BF600A0D68B /* SynapseConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynapseConnection.swift; sourceTree = "<group>"; };
 		05BBA05428737FF800A0D68B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		05BBA0562873803000A0D68B /* Organism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organism.swift; sourceTree = "<group>"; };
+		05BBA06D2873B7F200A0D68B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		05BBA06F2873B98200A0D68B /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		05BBA0712873B98900A0D68B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,9 @@
 				05BB9FC928722C3500A0D68B /* SynapseSource.swift */,
 				05BBA05428737FF800A0D68B /* Settings.swift */,
 				05BBA0562873803000A0D68B /* Organism.swift */,
+				05BBA06D2873B7F200A0D68B /* Grid.swift */,
+				05BBA06F2873B98200A0D68B /* Size.swift */,
+				05BBA0712873B98900A0D68B /* Point.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -337,6 +346,7 @@
 				05BBA0572873803000A0D68B /* Organism.swift in Sources */,
 				05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */,
 				05BB9FC628722C2300A0D68B /* Output.swift in Sources */,
+				05BBA0722873B98900A0D68B /* Point.swift in Sources */,
 				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
 				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
 				05B6C313286F4D810065CD26 /* main.swift in Sources */,
@@ -344,6 +354,8 @@
 				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
 				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
 				05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */,
+				05BBA06E2873B7F200A0D68B /* Grid.swift in Sources */,
+				05BBA0702873B98200A0D68B /* Size.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

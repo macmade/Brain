@@ -29,6 +29,8 @@ public class Organism
     public private( set ) var brain:      Brain
     public private( set ) var generation: Int
     
+    public var position = Point( x: 0, y: 0 )
+    
     public class func random( settings: Settings, generation: Int ) -> Organism?
     {
         let inputs:   [ Input  ]  = [ Input(),  Input(),  Input(),  Input(),  Input() ]
