@@ -35,8 +35,8 @@ public class Settings: Codable
     public var gridHeight          = 200
     public var imageScaleFactor    = 2
     public var videoFPS            = 10
-    public var surviveAreas: Area  = [ .center ]
-    public var killAreas:    Area  = []
+    public var surviveAreas: Area  = [ .leftHalf ]
+    public var killAreas:    Area  = [ .leftBorder ]
     
     public struct Area: OptionSet, Codable, Hashable
     {

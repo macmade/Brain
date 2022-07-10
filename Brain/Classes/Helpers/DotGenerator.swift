@@ -26,6 +26,36 @@ import Foundation
 
 public class DotGenerator
 {
+    public init()
+    {}
+    
+    public func prepare( networks: [ NeuralNetwork ], generation: Int )
+    {}
+    
+    public func generate()
+    {
+    /*
+    public class func writeDotFiles( from networks: [ NeuralNetwork ], in directory: URL, generation: Int )
+    {
+        let directory = directory.appendingPathComponent( "generation-\( generation )" )
+        
+        try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
+        
+        networks.enumerated().forEach
+        {
+            let dot = DotGenerator.dot( for: $0.element )
+            
+            if dot.isEmpty == false, let data = dot.data( using: .utf8 )
+            {
+                let url = directory.appendingPathComponent( "organism-\( $0.offset ).dot" )
+                
+                try? data.write( to: url )
+            }
+        }
+    }
+     */
+    }
+    
     public class func dot( for network: NeuralNetwork ) -> String
     {
         var lines:   [ String ] = []
@@ -125,7 +155,4 @@ public class DotGenerator
         
         return "<unknown>"
     }
-    
-    private init()
-    {}
 }

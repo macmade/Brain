@@ -29,25 +29,6 @@ public class OutputGeneration
     private init()
     {}
     
-    public class func writeDotFiles( from networks: [ NeuralNetwork ], in directory: URL, generation: Int )
-    {
-        let directory = directory.appendingPathComponent( "generation-\( generation )" )
-        
-        try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
-        
-        networks.enumerated().forEach
-        {
-            let dot = DotGenerator.dot( for: $0.element )
-            
-            if dot.isEmpty == false, let data = dot.data( using: .utf8 )
-            {
-                let url = directory.appendingPathComponent( "organism-\( $0.offset ).dot" )
-                
-                try? data.write( to: url )
-            }
-        }
-    }
-    
     public class func generateMovies( from source: URL, in directory: URL, world: World )
     {
         guard let enumerator = FileManager.default.enumerator( atPath: source.path ) else
@@ -117,7 +98,7 @@ public class OutputGeneration
             let width      = world.size.width * world.settings.imageScaleFactor
             let height     = world.size.height * world.settings.imageScaleFactor
             let fps        = world.settings.videoFPS
-            let processor  = VideoProcessor( images: images, size: NSSize( width: width, height: height ), destination: url, fps: fps, codec: .h264, fileType: .mov )
+            let processor  = VideoGenerator( images: images, size: NSSize( width: width, height: height ), destination: url, fps: fps, codec: .h264, fileType: .mov )
             
             processor.generate()
         }

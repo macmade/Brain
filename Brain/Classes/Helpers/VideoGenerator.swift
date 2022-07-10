@@ -34,7 +34,7 @@
 import Cocoa
 import AVFoundation
 
-class VideoProcessor
+class VideoGenerator
 {
     private var images:           [ URL ]
     private var size:             NSSize
@@ -54,7 +54,7 @@ class VideoProcessor
         self.fps         = Int32( fps )
         self.codec       = codec
         self.fileType    = fileType
-        self.queue       = DispatchQueue( label: "com.xs-labs.Brain.VideoProcessor" )
+        self.queue       = DispatchQueue( label: "com.xs-labs.Brain.VideoGenerator" )
         
         self.videoSettings =
         [

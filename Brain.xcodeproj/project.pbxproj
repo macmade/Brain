@@ -21,12 +21,12 @@
 		05BBA06E2873B7F200A0D68B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06D2873B7F200A0D68B /* World.swift */; };
 		05BBA0702873B98200A0D68B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06F2873B98200A0D68B /* Size.swift */; };
 		05BBA0722873B98900A0D68B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0712873B98900A0D68B /* Point.swift */; };
-		05BBA0742873D6E000A0D68B /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0732873D6E000A0D68B /* ImageProcessor.swift */; };
+		05BBA0742873D6E000A0D68B /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0732873D6E000A0D68B /* ImageGenerator.swift */; };
 		05BBA076287452C300A0D68B /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA075287452C300A0D68B /* Simulation.swift */; };
 		05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA07728745B7E00A0D68B /* TimeTransformer.swift */; };
 		05BBA08528747A7500A0D68B /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08428747A7500A0D68B /* NSBundle.swift */; };
 		05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08828747D9B00A0D68B /* Synchronizable.swift */; };
-		05BBA0A028749DDC00A0D68B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA09F28749DDC00A0D68B /* VideoProcessor.swift */; };
+		05BBA0A028749DDC00A0D68B /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */; };
 		05BBA0A72874B8F600A0D68B /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A62874B8F600A0D68B /* Age.swift */; };
 		05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */; };
 		05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */; };
@@ -38,6 +38,7 @@
 		05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */; };
 		05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0EF28785C4200A0D68B /* MoveX.swift */; };
 		05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F128785C4A00A0D68B /* MoveY.swift */; };
+		05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,14 +116,14 @@
 		05BBA06D2873B7F200A0D68B /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		05BBA06F2873B98200A0D68B /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		05BBA0712873B98900A0D68B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
-		05BBA0732873D6E000A0D68B /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		05BBA0732873D6E000A0D68B /* ImageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerator.swift; sourceTree = "<group>"; };
 		05BBA075287452C300A0D68B /* Simulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulation.swift; sourceTree = "<group>"; };
 		05BBA07728745B7E00A0D68B /* TimeTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTransformer.swift; sourceTree = "<group>"; };
 		05BBA079287466F600A0D68B /* Brain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Brain.entitlements; sourceTree = "<group>"; };
 		05BBA07A2874676200A0D68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05BBA08428747A7500A0D68B /* NSBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSBundle.swift; sourceTree = "<group>"; };
 		05BBA08828747D9B00A0D68B /* Synchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
-		05BBA09F28749DDC00A0D68B /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
+		05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGenerator.swift; sourceTree = "<group>"; };
 		05BBA0A62874B8F600A0D68B /* Age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
 		05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGenerator.swift; sourceTree = "<group>"; };
 		05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseToTopBorder.swift; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 		05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputGeneration.swift; sourceTree = "<group>"; };
 		05BBA0EF28785C4200A0D68B /* MoveX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveX.swift; sourceTree = "<group>"; };
 		05BBA0F128785C4A00A0D68B /* MoveY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveY.swift; sourceTree = "<group>"; };
+		05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,10 +378,11 @@
 			isa = PBXGroup;
 			children = (
 				05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */,
-				05BBA0732873D6E000A0D68B /* ImageProcessor.swift */,
+				05BBA0732873D6E000A0D68B /* ImageGenerator.swift */,
+				05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */,
 				05BBA08828747D9B00A0D68B /* Synchronizable.swift */,
 				05BBA07728745B7E00A0D68B /* TimeTransformer.swift */,
-				05BBA09F28749DDC00A0D68B /* VideoProcessor.swift */,
+				05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */,
 				05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */,
 			);
 			path = Helpers;
@@ -462,17 +465,18 @@
 				05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */,
 				05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */,
 				05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */,
-				05BBA0A028749DDC00A0D68B /* VideoProcessor.swift in Sources */,
+				05BBA0A028749DDC00A0D68B /* VideoGenerator.swift in Sources */,
 				05BB9FC628722C2300A0D68B /* Output.swift in Sources */,
 				05BBA0722873B98900A0D68B /* Point.swift in Sources */,
 				05BBA0A72874B8F600A0D68B /* Age.swift in Sources */,
 				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
 				05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */,
+				05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */,
 				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
 				05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */,
 				05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */,
 				05BBA0AF2874F59E00A0D68B /* CloseToRightBorder.swift in Sources */,
-				05BBA0742873D6E000A0D68B /* ImageProcessor.swift in Sources */,
+				05BBA0742873D6E000A0D68B /* ImageGenerator.swift in Sources */,
 				05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */,
 				05B6C313286F4D810065CD26 /* main.swift in Sources */,
 				05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */,

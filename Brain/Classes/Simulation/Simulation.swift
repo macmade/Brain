@@ -28,7 +28,8 @@ public class Simulation
 {
     public private( set ) var world: World
     
-    private var imageProcessor:  ImageProcessor?
+    private var dotGenerator:    DotGenerator?
+    private var imageGenerator:  ImageGenerator?
     private var cachesDirectory: URL?
     
     public init( world: World )
@@ -39,7 +40,7 @@ public class Simulation
         
         if let caches = Bundle.main.cachesDirectory?.appendingPathComponent( "com.xs-labs.Brain-\( UUID().uuidString )" )
         {
-            self.imageProcessor  = ImageProcessor( cachesDirectory: caches.appendingPathComponent( "png" ) )
+            self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "png" ) )
             self.cachesDirectory = caches
         }
     }
@@ -67,11 +68,11 @@ public class Simulation
                     {
                         if self.world.currentStep == 0
                         {
-                            self.imageProcessor?.prepare( world: self.world, generation: self.world.currentGeneration, step: self.world.currentStep )
+                            self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep )
                         }
                         
                         self.world.step()
-                        self.imageProcessor?.prepare( world: self.world, generation: self.world.currentGeneration , step: self.world.currentStep )
+                        self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration , step: self.world.currentStep )
                     }
                 }
                 
@@ -80,21 +81,16 @@ public class Simulation
                 print( "    - \( survivors.count ) survivors" )
                 
                 self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
-                self.imageProcessor?.prepare( world: self.world, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
-                self.imageProcessor?.generate()
-                
-                if let caches = self.cachesDirectory
-                {
-                    OutputGeneration.writeDotFiles( from: self.world.organisms.map { $0.brain }, in: caches.appendingPathComponent( "dot" ), generation: self.world.currentGeneration )
-                }
+                self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
+                self.dotGenerator?.prepare( networks: self.world.organisms.map { $0.brain }, generation: self.world.currentGeneration )
             }
         }
         
         let end = Date()
         
         print( "Finished processing in \( TimeTransformer.string( for: end.timeIntervalSince( start ) ) )" )
-        print( "Wating for images to finish processing..." )
-        self.imageProcessor?.wait()
+        print( "Generating images..." )
+        self.imageGenerator?.generate( world: self.world )
         
         if let caches = self.cachesDirectory
         {
