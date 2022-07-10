@@ -47,57 +47,73 @@ public class Simulation
     
     public func run()
     {
-        let start = Date()
-        
-        print( "Simulating \( self.world.settings.numberOfGenerations ) generations:\n" )
-        
         var survivors: [ Organism ] = []
         
-        for _ in 0 ..< self.world.settings.numberOfGenerations
+        Benchmark.run
         {
-            autoreleasepool
+            print( "Simulating \( self.world.settings.numberOfGenerations ) generations:" )
+            
+            for _ in 0 ..< self.world.settings.numberOfGenerations
             {
-                self.world.spawnNewGeneration( from: survivors )
-                
-                print( "Generation \( self.world.currentGeneration ):" )
-                print( "    - Spawned \( self.world.organisms.count ) organisms" )
-                
-                for _ in 0 ..< self.world.settings.stepsPerGeneration
+                autoreleasepool
                 {
-                    autoreleasepool
+                    self.world.spawnNewGeneration( from: survivors )
+                    
+                    print( "Generation \( self.world.currentGeneration ):" )
+                    print( "    - Spawned \( self.world.organisms.count ) organisms" )
+                    
+                    for _ in 0 ..< self.world.settings.stepsPerGeneration
                     {
-                        if self.world.currentStep == 0
+                        autoreleasepool
                         {
-                            self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep )
+                            if self.world.currentStep == 0
+                            {
+                                self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep )
+                            }
+                            
+                            self.world.step()
+                            self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration , step: self.world.currentStep )
                         }
-                        
-                        self.world.step()
-                        self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration , step: self.world.currentStep )
                     }
+                    
+                    survivors = self.getSurvivors()
+                    
+                    print( "    - \( survivors.count ) survivors" )
+                    
+                    self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
+                    self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
+                    self.dotGenerator?.prepare( networks: self.world.organisms.map { $0.brain }, generation: self.world.currentGeneration )
                 }
-                
-                survivors = self.getSurvivors()
-                
-                print( "    - \( survivors.count ) survivors" )
-                
-                self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
-                self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
-                self.dotGenerator?.prepare( networks: self.world.organisms.map { $0.brain }, generation: self.world.currentGeneration )
             }
         }
+        finished:
+        {
+            print( "Finished processing in \( TimeTransformer.string( for: $0  ) )" )
+        }
         
-        let end = Date()
-        
-        print( "Finished processing in \( TimeTransformer.string( for: end.timeIntervalSince( start ) ) )" )
-        print( "Generating images..." )
-        self.imageGenerator?.generate( world: self.world )
+        Benchmark.run
+        {
+            print( "Generating images..." )
+            self.imageGenerator?.generate( world: self.world )
+        }
+        finished:
+        {
+            print( "Done in \( TimeTransformer.string( for: $0 ) )" )
+        }
         
         if let caches = self.cachesDirectory
         {
             OutputGeneration.writeSVGScriptForDotFiles( from: caches.appendingPathComponent( "dot" ), in: caches.appendingPathComponent( "svg" ) )
             
-            print( "Generating movies:" )
-            OutputGeneration.generateMovies( from: caches.appendingPathComponent( "png" ), in: caches.appendingPathComponent( "mov" ), world: self.world )
+            Benchmark.run
+            {
+                print( "Generating movies:" )
+                OutputGeneration.generateMovies( from: caches.appendingPathComponent( "png" ), in: caches.appendingPathComponent( "mov" ), world: self.world )
+            }
+            finished:
+            {
+                print( "Done in \( TimeTransformer.string( for: $0 ) )" )
+            }
             
             NSWorkspace.shared.selectFile( caches.path, inFileViewerRootedAtPath: caches.path )
         }

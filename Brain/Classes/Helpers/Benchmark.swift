@@ -24,21 +24,19 @@
 
 import Cocoa
 
-public class ImageGenerationInfo
+public class Benchmark
 {
-    public var generation: Int
-    public var step:       Int
-    public var organisms:  [ ( point: Point, color: UInt32 ) ]
+    private init()
+    {}
     
-    public convenience init( generation: Int, step: Int, organisms: [ Organism ] )
+    public class func run( closure: () -> Void, finished: ( TimeInterval ) -> Void )
     {
-        self.init( generation: generation, step: step, organisms: organisms.map { ( point: $0.position, color: $0.color.rgba ) } )
-    }
-    
-    public init( generation: Int, step: Int, organisms: [ ( point: Point, color: UInt32 ) ] )
-    {
-        self.generation = generation
-        self.step       = step
-        self.organisms  = organisms
+        autoreleasepool
+        {
+            let start = Date()
+            
+            closure()
+            finished( Date().timeIntervalSince( start ) )
+        }
     }
 }

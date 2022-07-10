@@ -39,6 +39,8 @@
 		05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0EF28785C4200A0D68B /* MoveX.swift */; };
 		05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F128785C4A00A0D68B /* MoveY.swift */; };
 		05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */; };
+		05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F5287AF94F00A0D68B /* Benchmark.swift */; };
+		05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +138,8 @@
 		05BBA0EF28785C4200A0D68B /* MoveX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveX.swift; sourceTree = "<group>"; };
 		05BBA0F128785C4A00A0D68B /* MoveY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveY.swift; sourceTree = "<group>"; };
 		05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationInfo.swift; sourceTree = "<group>"; };
+		05BBA0F5287AF94F00A0D68B /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
+		05BBA0F7287AFE4E00A0D68B /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				05BBA08428747A7500A0D68B /* NSBundle.swift */,
+				05BBA0F7287AFE4E00A0D68B /* NSColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				05BBA07728745B7E00A0D68B /* TimeTransformer.swift */,
 				05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */,
 				05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */,
+				05BBA0F5287AF94F00A0D68B /* Benchmark.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -472,6 +478,7 @@
 				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
 				05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */,
 				05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */,
+				05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */,
 				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
 				05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */,
 				05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */,
@@ -483,6 +490,7 @@
 				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
 				05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */,
 				05BBA08528747A7500A0D68B /* NSBundle.swift in Sources */,
+				05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */,
 				05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */,
 				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
 				05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */,

@@ -26,81 +26,40 @@ import Cocoa
 
 public class OutputGeneration
 {
+    private static let queue = DispatchQueue( label: "com.xs-labs.Brain.OutputGeneration", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil )
+    
     private init()
     {}
     
     public class func generateMovies( from source: URL, in directory: URL, world: World )
     {
-        guard let enumerator = FileManager.default.enumerator( atPath: source.path ) else
-        {
-            return
-        }
-        
         try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
         
-        var urls: [ URL ] = []
-        
-        enumerator.forEach
-        {
-            enumerator.skipDescendants()
-            
-            guard let name = $0 as? String else
-            {
-                return
-            }
-            
-            let url = source.appendingPathComponent( name )
-            
-            urls.append( url )
-        }
-        
-        urls.sort
+        let files = self.getFiles( in: source, fileExtension: "png" )
+        let keys  = files.keys.sorted
         {
             $0.path.compare( $1.path, options: [ .numeric, .caseInsensitive ], range: nil, locale: nil ) == .orderedAscending
         }
         
-        var images: [ URL ] = []
-        
-        urls.forEach
+        keys.forEach
         {
-            var dir = ObjCBool( false )
-            
-            if FileManager.default.fileExists( atPath: $0.path, isDirectory: &dir ), dir.boolValue
+            key in guard let info = files[ key ] else
             {
-                self.generateMovies( from: $0, in: directory, world: world )
+                return
+            }
+            
+            autoreleasepool
+            {
+                let name       = "\( key.lastPathComponent ).mov"
+                let url        = directory.appendingPathComponent( name )
+                let width      = world.size.width * world.settings.imageScaleFactor
+                let height     = world.size.height * world.settings.imageScaleFactor
+                let fps        = world.settings.videoFPS
+                let processor  = VideoGenerator( images: info, size: NSSize( width: width, height: height ), destination: url, fps: fps, codec: .h264, fileType: .mov )
                 
-                return
+                processor.generate()
+                print( "    - \( name )" )
             }
-            
-            if $0.pathExtension == "png"
-            {
-                images.append( $0 )
-            }
-        }
-        
-        images.sort
-        {
-            $0.path.compare( $1.path, options: [ .numeric, .caseInsensitive ], range: nil, locale: nil ) == .orderedAscending
-        }
-        
-        if images.isEmpty
-        {
-            return
-        }
-        
-        let name = source.deletingPathExtension().appendingPathExtension( "mov" ).lastPathComponent
-        
-        print( "    - \( name )" )
-        
-        autoreleasepool
-        {
-            let url        = directory.appendingPathComponent( "\( name )" )
-            let width      = world.size.width * world.settings.imageScaleFactor
-            let height     = world.size.height * world.settings.imageScaleFactor
-            let fps        = world.settings.videoFPS
-            let processor  = VideoGenerator( images: images, size: NSSize( width: width, height: height ), destination: url, fps: fps, codec: .h264, fileType: .mov )
-            
-            processor.generate()
         }
     }
     
@@ -195,6 +154,42 @@ public class OutputGeneration
             let url = caches.appendingPathComponent( name )
             
             NSWorkspace.shared.recycle( [ url ] )
+        }
+    }
+    
+    private class func getFiles( in directory: URL, fileExtension: String ) -> [ URL : [ URL ] ]
+    {
+        guard let enumerator = FileManager.default.enumerator( atPath: directory.path ) else
+        {
+            return [ : ]
+        }
+        
+        let files: [ URL ] = enumerator.compactMap
+        {
+            guard let name = $0 as? String else
+            {
+                return nil
+            }
+            
+            let url = directory.appendingPathComponent( name )
+            
+            return url.pathExtension == fileExtension ? url : nil
+        }
+        .sorted
+        {
+            $0.path.compare( $1.path, options: [ .numeric, .caseInsensitive ], range: nil, locale: nil ) == .orderedAscending
+        }
+        
+        return files.reduce( into: [ URL : [ URL ] ]() )
+        {
+            let dir = $1.deletingLastPathComponent()
+            
+            if $0[ dir ] == nil
+            {
+                $0[ dir ] = [ URL ]()
+            }
+            
+            $0[ dir ]?.append( $1 )
         }
     }
 }

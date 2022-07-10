@@ -51,29 +51,38 @@ public class ImageGenerator
         
         self.prepared.removeAll()
         
-        var groups = [ DispatchGroup ]()
+        let keys = prepared.keys.sorted { $0 < $1 }
         
-        prepared.forEach
+        keys.forEach
         {
-            let images = $0.value
-            let group  = DispatchGroup()
-            
-            groups.append( group )
-            group.enter()
-            
-            self.queue.async
+            guard let images = prepared[ $0 ] else
             {
-                images.forEach
+                return
+            }
+            
+            let generation = $0
+            var groups     = [ DispatchGroup ]()
+            let dir        = self.cachesDirectory.appendingPathComponent( "generation-\( generation )" )
+            let factor     = world.settings.imageScaleFactor
+            let size       = NSSize( width: world.size.width * factor, height: world.size.height * factor )
+            
+            try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
+            
+            images.forEach
+            {
+                info in
+                
+                let group = DispatchGroup()
+                
+                groups.append( group )
+                group.enter()
+                
+                self.queue.async
                 {
-                    info in autoreleasepool
+                    autoreleasepool
                     {
-                        let dir    = self.cachesDirectory.appendingPathComponent( "generation-\( info.generation )" )
                         let url    = dir.appendingPathComponent( "step-\( info.step ).png" )
-                        let factor = world.settings.imageScaleFactor
-                        let size   = NSSize( width: world.size.width * factor, height: world.size.height * factor )
                         let image  = NSImage( size: size )
-                        
-                        try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
                         
                         image.lockFocus()
                         NSColor.black.setFill()
@@ -84,7 +93,7 @@ public class ImageGenerator
                             let path       = NSBezierPath( ovalIn: NSRect( x: $0.point.x * factor, y: $0.point.y * factor, width: factor, height: factor ) )
                             path.lineWidth = Double( factor ) / 16
                             
-                            $0.color.setFill()
+                            NSColor( rgba: $0.color ).setFill()
                             NSColor.white.setStroke()
                             path.fill()
                             path.stroke()
@@ -100,14 +109,15 @@ public class ImageGenerator
                             
                             try? png?.write( to: url )
                         }
+                        
+                        group.leave()
                     }
                 }
-                
-                group.leave()
             }
+            
+            groups.forEach { $0.wait() }
+            print( "    - generation-\( generation )" )
         }
-        
-        groups.forEach { $0.wait() }
     }
     
     public func prepare( organisms: [ Organism ], generation: Int, step: Int )
