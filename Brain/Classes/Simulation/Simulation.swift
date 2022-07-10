@@ -41,6 +41,7 @@ public class Simulation
         if let caches = Bundle.main.cachesDirectory?.appendingPathComponent( "com.xs-labs.Brain-\( UUID().uuidString )" )
         {
             self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "png" ) )
+            self.dotGenerator    = DotGenerator(   cachesDirectory: caches.appendingPathComponent( "dot" ) )
             self.cachesDirectory = caches
         }
     }
@@ -89,6 +90,16 @@ public class Simulation
         finished:
         {
             print( "Finished processing in \( TimeTransformer.string( for: $0  ) )" )
+        }
+        
+        Benchmark.run
+        {
+            print( "Generating graphs..." )
+            self.dotGenerator?.generate()
+        }
+        finished:
+        {
+            print( "Done in \( TimeTransformer.string( for: $0 ) )" )
         }
         
         Benchmark.run

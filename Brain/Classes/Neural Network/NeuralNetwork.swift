@@ -44,6 +44,12 @@ public class NeuralNetwork
         self.neurons  = neurons
         self.synapses = synapses
         
+        // Gives a name to all neurons
+        self.neurons.enumerated().forEach
+        {
+            $0.element.name = "N\( $0.offset )"
+        }
+        
         // If there's no neuron, connect everything from inputs to outputs, to prevent dead connections
         if neurons.count == 0
         {

@@ -28,9 +28,9 @@ public class Output: SynapseDestination, NSCopying
 {
     public private( set ) var values: [ Double ] = []
     
-    public var name: String?
+    public var name: String
     {
-        nil
+        "O"
     }
     
     public func take( value: Double )

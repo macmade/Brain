@@ -26,7 +26,7 @@ import Foundation
 
 public class MoveX: Output
 {
-    public override var name: String?
+    public override var name: String
     {
         "MvX"
     }

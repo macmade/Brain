@@ -29,7 +29,7 @@ public protocol SynapseDestination: AnyObject
     func take( value: Double )
     func reset()
     
-    var name: String?
+    var name: String
     {
         get
     }

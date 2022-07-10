@@ -26,7 +26,7 @@ import Foundation
 
 public class CloseToTopBorder: Input
 {
-    public override var name: String?
+    public override var name: String
     {
         "BdT"
     }

@@ -28,10 +28,7 @@ public class Neuron: SynapseSource, SynapseDestination, NSCopying
 {
     public private( set ) var values: [ Double ] = []
     
-    public var name: String?
-    {
-        nil
-    }
+    public var name: String
     
     public var value: Double
     {
@@ -41,6 +38,11 @@ public class Neuron: SynapseSource, SynapseDestination, NSCopying
         }
         
         return tanh( self.values.reduce( 0.0 ) { $0 + $1 } )
+    }
+    
+    public init()
+    {
+        self.name = "N"
     }
     
     public func take( value: Double )

@@ -28,9 +28,9 @@ public class Input: SynapseSource, NSCopying
 {
     public weak var organism: Organism?
     
-    public var name: String?
+    public var name: String
     {
-        nil
+        "I"
     }
     
     public var value: Double

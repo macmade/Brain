@@ -31,7 +31,7 @@ public protocol SynapseSource: AnyObject
         get
     }
     
-    var name: String?
+    var name: String
     {
         get
     }
