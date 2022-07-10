@@ -50,11 +50,11 @@ public class Synapse: NSCopying, CustomDebugStringConvertible
         case neuron = 1
     }
     
-    public private( set ) var sourceType:      SourceType
-    public private( set ) var sourceID:        UInt8
-    public private( set ) var destinationType: DestinationType
-    public private( set ) var destinationID:   UInt8
-    public private( set ) var weight:          Double
+    public var sourceType:      SourceType
+    public var sourceID:        UInt8
+    public var destinationType: DestinationType
+    public var destinationID:   UInt8
+    public var weight:          Double
     
     public convenience init( from value: UInt32 )
     {

@@ -24,8 +24,15 @@
 
 import Cocoa
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+public extension Bundle
+{
+    var cachesDirectory: URL?
+    {
+        if let caches = NSSearchPathForDirectoriesInDomains( .cachesDirectory, .userDomainMask, true ).first, caches.isEmpty == false
+        {
+            return URL( fileURLWithPath: caches )
+        }
+        
+        return nil
+    }
+}

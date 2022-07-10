@@ -24,15 +24,27 @@
 
 import Foundation
 
-public class Input: SynapseSource, NSCopying
+public class Age: Input
 {
-    public var value: Double
+    public override var name: String?
     {
-        0.5
+        "Age"
     }
     
-    public func copy( with zone: NSZone? = nil ) -> Any
+    public override func copy( with zone: NSZone? = nil ) -> Any
     {
-        Input()
+        Age()
+    }
+    
+    public override var value: Double
+    {
+        guard let organism = self.organism, let world = organism.world else
+        {
+            return 0
+        }
+        
+        let step = max( 0, world.currentStep )
+        
+        return Double( step ) / Double( world.settings.stepsPerGeneration )
     }
 }

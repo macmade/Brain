@@ -22,10 +22,37 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+public class MoveY: Output
+{
+    public override var name: String?
+    {
+        "MvY"
+    }
+    
+    public override func copy( with zone: NSZone? = nil ) -> Any
+    {
+        MoveY()
+    }
+    
+    public override func execute( with organism: Organism )
+    {
+        let value = self.values.reduce( 0.0 ) { $0 + $1 }
+        
+        if value > 0
+        {
+            var point = organism.position
+            point.y  += 1
+            
+            organism.move( to: point )
+        }
+        else if value < 0
+        {
+            var point = organism.position
+            point.y  -= 1
+            
+            organism.move( to: point )
+        }
+    }
+}

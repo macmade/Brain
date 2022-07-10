@@ -22,10 +22,24 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+public class Input: SynapseSource, NSCopying
+{
+    public weak var organism: Organism?
+    
+    public var name: String?
+    {
+        nil
+    }
+    
+    public var value: Double
+    {
+        0
+    }
+    
+    public func copy( with zone: NSZone? = nil ) -> Any
+    {
+        Input()
+    }
+}

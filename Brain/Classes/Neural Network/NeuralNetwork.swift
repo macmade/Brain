@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class Brain
+public class NeuralNetwork
 {
     public private( set ) var inputs:   [ Input  ]
     public private( set ) var outputs:  [ Output ]
@@ -34,7 +34,7 @@ public class Brain
     
     public init?( inputs: [ Input ], outputs: [ Output ], neurons: [ Neuron ], synapses: [ Synapse ] )
     {
-        if inputs.isEmpty || outputs.isEmpty || neurons.isEmpty || synapses.isEmpty
+        if inputs.isEmpty || outputs.isEmpty || synapses.isEmpty
         {
             return nil
         }
@@ -44,8 +44,15 @@ public class Brain
         self.neurons  = neurons
         self.synapses = synapses
         
+        // If there's no neuron, connect everything from inputs to outputs, to prevent dead connections
+        if neurons.count == 0
+        {
+            self.synapses.filter { $0.sourceType      == .neuron }.forEach { $0.sourceType      = .input }
+            self.synapses.filter { $0.destinationType == .neuron }.forEach { $0.destinationType = .output }
+        }
+        
         // Gets all synapse connections
-        let allConnections: [ SynapseConnection ] = self.synapses.map
+        let allConnections: [ SynapseConnection ] = self.synapses.compactMap
         {
             // Remap the source and destination IDs so they correspond to the number of inputs, neurons or outputs.
             let sourceID       = Int( $0.sourceID      ) % ( $0.sourceType      == .neuron ? neurons.count : inputs.count )
@@ -67,7 +74,7 @@ public class Brain
             var network = [ ( level: Int, connection: SynapseConnection ) ]()
             
             // Gets connections for the current input
-            Brain.connections( for: $0, from: allConnections, network: &network, level: 0 )
+            NeuralNetwork.connections( for: $0, from: allConnections, network: &network, level: 0 )
             
             if network.isEmpty
             {

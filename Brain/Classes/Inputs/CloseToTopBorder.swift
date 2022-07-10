@@ -24,25 +24,25 @@
 
 import Foundation
 
-public class Output: SynapseDestination, NSCopying
+public class CloseToTopBorder: Input
 {
-    public private( set ) var values: [ Double ] = []
-    
-    public func take( value: Double )
+    public override var name: String?
     {
-        self.values.append( value )
+        "BdT"
     }
     
-    public func reset()
+    public override func copy( with zone: NSZone? = nil ) -> Any
     {
-        self.values.removeAll()
+        CloseToTopBorder()
     }
     
-    public func copy( with zone: NSZone? = nil ) -> Any
+    public override var value: Double
     {
-        Output()
+        guard let organism = self.organism, let world = organism.world else
+        {
+            return 0
+        }
+        
+        return Double( organism.position.y ) / Double( world.size.height )
     }
-    
-    public func execute( with organism: Organism )
-    {}
 }

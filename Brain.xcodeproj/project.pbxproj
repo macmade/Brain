@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		05B6C313286F4D810065CD26 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B6C312286F4D810065CD26 /* main.swift */; };
 		05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FBF28722BF300A0D68B /* Synapse.swift */; };
-		05BB9FC228722C0600A0D68B /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC128722C0600A0D68B /* Brain.swift */; };
+		05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC128722C0600A0D68B /* NeuralNetwork.swift */; };
 		05BB9FC428722C1D00A0D68B /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC328722C1D00A0D68B /* Input.swift */; };
 		05BB9FC628722C2300A0D68B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC528722C2300A0D68B /* Output.swift */; };
 		05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC728722C2A00A0D68B /* Neuron.swift */; };
@@ -18,9 +18,26 @@
 		05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05228735BF600A0D68B /* SynapseConnection.swift */; };
 		05BBA05528737FF800A0D68B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05428737FF800A0D68B /* Settings.swift */; };
 		05BBA0572873803000A0D68B /* Organism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0562873803000A0D68B /* Organism.swift */; };
-		05BBA06E2873B7F200A0D68B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06D2873B7F200A0D68B /* Grid.swift */; };
+		05BBA06E2873B7F200A0D68B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06D2873B7F200A0D68B /* World.swift */; };
 		05BBA0702873B98200A0D68B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06F2873B98200A0D68B /* Size.swift */; };
 		05BBA0722873B98900A0D68B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0712873B98900A0D68B /* Point.swift */; };
+		05BBA0742873D6E000A0D68B /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0732873D6E000A0D68B /* ImageProcessor.swift */; };
+		05BBA076287452C300A0D68B /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA075287452C300A0D68B /* Simulation.swift */; };
+		05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA07728745B7E00A0D68B /* TimeTransformer.swift */; };
+		05BBA08528747A7500A0D68B /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08428747A7500A0D68B /* NSBundle.swift */; };
+		05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08828747D9B00A0D68B /* Synchronizable.swift */; };
+		05BBA0A028749DDC00A0D68B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA09F28749DDC00A0D68B /* VideoProcessor.swift */; };
+		05BBA0A72874B8F600A0D68B /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A62874B8F600A0D68B /* Age.swift */; };
+		05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */; };
+		05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */; };
+		05BBA0AF2874F59E00A0D68B /* CloseToRightBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */; };
+		05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */; };
+		05BBA0B12874F59E00A0D68B /* CloseToBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AD2874F59E00A0D68B /* CloseToBottomBorder.swift */; };
+		05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D02875A9F800A0D68B /* Rect.swift */; };
+		05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D32875B18F00A0D68B /* SurviveState.swift */; };
+		05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */; };
+		05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0EF28785C4200A0D68B /* MoveX.swift */; };
+		05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F128785C4A00A0D68B /* MoveY.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +57,7 @@
 		05B6C312286F4D810065CD26 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		05BB9FBE2872294400A0D68B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		05BB9FBF28722BF300A0D68B /* Synapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synapse.swift; sourceTree = "<group>"; };
-		05BB9FC128722C0600A0D68B /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
+		05BB9FC128722C0600A0D68B /* NeuralNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralNetwork.swift; sourceTree = "<group>"; };
 		05BB9FC328722C1D00A0D68B /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		05BB9FC528722C2300A0D68B /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		05BB9FC728722C2A00A0D68B /* Neuron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neuron.swift; sourceTree = "<group>"; };
@@ -95,9 +112,28 @@
 		05BBA05228735BF600A0D68B /* SynapseConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynapseConnection.swift; sourceTree = "<group>"; };
 		05BBA05428737FF800A0D68B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		05BBA0562873803000A0D68B /* Organism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organism.swift; sourceTree = "<group>"; };
-		05BBA06D2873B7F200A0D68B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		05BBA06D2873B7F200A0D68B /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		05BBA06F2873B98200A0D68B /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		05BBA0712873B98900A0D68B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		05BBA0732873D6E000A0D68B /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		05BBA075287452C300A0D68B /* Simulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulation.swift; sourceTree = "<group>"; };
+		05BBA07728745B7E00A0D68B /* TimeTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTransformer.swift; sourceTree = "<group>"; };
+		05BBA079287466F600A0D68B /* Brain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Brain.entitlements; sourceTree = "<group>"; };
+		05BBA07A2874676200A0D68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05BBA08428747A7500A0D68B /* NSBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSBundle.swift; sourceTree = "<group>"; };
+		05BBA08828747D9B00A0D68B /* Synchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
+		05BBA09F28749DDC00A0D68B /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
+		05BBA0A62874B8F600A0D68B /* Age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
+		05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGenerator.swift; sourceTree = "<group>"; };
+		05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseToTopBorder.swift; sourceTree = "<group>"; };
+		05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseToRightBorder.swift; sourceTree = "<group>"; };
+		05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseToLeftBorder.swift; sourceTree = "<group>"; };
+		05BBA0AD2874F59E00A0D68B /* CloseToBottomBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseToBottomBorder.swift; sourceTree = "<group>"; };
+		05BBA0D02875A9F800A0D68B /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		05BBA0D32875B18F00A0D68B /* SurviveState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurviveState.swift; sourceTree = "<group>"; };
+		05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputGeneration.swift; sourceTree = "<group>"; };
+		05BBA0EF28785C4200A0D68B /* MoveX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveX.swift; sourceTree = "<group>"; };
+		05BBA0F128785C4A00A0D68B /* MoveY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveY.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +168,8 @@
 		05B6C311286F4D810065CD26 /* Brain */ = {
 			isa = PBXGroup;
 			children = (
+				05BBA079287466F600A0D68B /* Brain.entitlements */,
+				05BBA07A2874676200A0D68B /* Info.plist */,
 				05BB9FCD28722CA500A0D68B /* Classes */,
 				05B6C312286F4D810065CD26 /* main.swift */,
 			);
@@ -141,19 +179,13 @@
 		05BB9FCD28722CA500A0D68B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				05BB9FC128722C0600A0D68B /* Brain.swift */,
-				05BBA05228735BF600A0D68B /* SynapseConnection.swift */,
-				05BB9FC328722C1D00A0D68B /* Input.swift */,
-				05BB9FC728722C2A00A0D68B /* Neuron.swift */,
-				05BB9FC528722C2300A0D68B /* Output.swift */,
-				05BB9FBF28722BF300A0D68B /* Synapse.swift */,
-				05BB9FCB28722C3D00A0D68B /* SynapseDestination.swift */,
-				05BB9FC928722C3500A0D68B /* SynapseSource.swift */,
-				05BBA05428737FF800A0D68B /* Settings.swift */,
-				05BBA0562873803000A0D68B /* Organism.swift */,
-				05BBA06D2873B7F200A0D68B /* Grid.swift */,
-				05BBA06F2873B98200A0D68B /* Size.swift */,
-				05BBA0712873B98900A0D68B /* Point.swift */,
+				05BBA0B4287579BF00A0D68B /* Extensions */,
+				05BBA0D22875A9FF00A0D68B /* Geometry */,
+				05BBA0B5287579D400A0D68B /* Helpers */,
+				05BBA0A12874A76900A0D68B /* Inputs */,
+				05BBA0B22875796E00A0D68B /* Neural Network */,
+				05BBA07B287470E100A0D68B /* Outputs */,
+				05BBA0B3287579A900A0D68B /* Simulation */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -284,6 +316,85 @@
 			path = .github;
 			sourceTree = "<group>";
 		};
+		05BBA07B287470E100A0D68B /* Outputs */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA0EF28785C4200A0D68B /* MoveX.swift */,
+				05BBA0F128785C4A00A0D68B /* MoveY.swift */,
+			);
+			path = Outputs;
+			sourceTree = "<group>";
+		};
+		05BBA0A12874A76900A0D68B /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA0A62874B8F600A0D68B /* Age.swift */,
+				05BBA0AD2874F59E00A0D68B /* CloseToBottomBorder.swift */,
+				05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */,
+				05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */,
+				05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */,
+			);
+			path = Inputs;
+			sourceTree = "<group>";
+		};
+		05BBA0B22875796E00A0D68B /* Neural Network */ = {
+			isa = PBXGroup;
+			children = (
+				05BB9FC328722C1D00A0D68B /* Input.swift */,
+				05BB9FC128722C0600A0D68B /* NeuralNetwork.swift */,
+				05BB9FC728722C2A00A0D68B /* Neuron.swift */,
+				05BB9FC528722C2300A0D68B /* Output.swift */,
+				05BB9FBF28722BF300A0D68B /* Synapse.swift */,
+				05BBA05228735BF600A0D68B /* SynapseConnection.swift */,
+				05BB9FCB28722C3D00A0D68B /* SynapseDestination.swift */,
+				05BB9FC928722C3500A0D68B /* SynapseSource.swift */,
+			);
+			path = "Neural Network";
+			sourceTree = "<group>";
+		};
+		05BBA0B3287579A900A0D68B /* Simulation */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA0562873803000A0D68B /* Organism.swift */,
+				05BBA05428737FF800A0D68B /* Settings.swift */,
+				05BBA075287452C300A0D68B /* Simulation.swift */,
+				05BBA0D32875B18F00A0D68B /* SurviveState.swift */,
+				05BBA06D2873B7F200A0D68B /* World.swift */,
+			);
+			path = Simulation;
+			sourceTree = "<group>";
+		};
+		05BBA0B4287579BF00A0D68B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA08428747A7500A0D68B /* NSBundle.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		05BBA0B5287579D400A0D68B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */,
+				05BBA0732873D6E000A0D68B /* ImageProcessor.swift */,
+				05BBA08828747D9B00A0D68B /* Synchronizable.swift */,
+				05BBA07728745B7E00A0D68B /* TimeTransformer.swift */,
+				05BBA09F28749DDC00A0D68B /* VideoProcessor.swift */,
+				05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		05BBA0D22875A9FF00A0D68B /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA0712873B98900A0D68B /* Point.swift */,
+				05BBA0D02875A9F800A0D68B /* Rect.swift */,
+				05BBA06F2873B98200A0D68B /* Size.swift */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -342,19 +453,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BBA0B12874F59E00A0D68B /* CloseToBottomBorder.swift in Sources */,
+				05BBA076287452C300A0D68B /* Simulation.swift in Sources */,
+				05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */,
+				05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */,
 				05BB9FCC28722C3D00A0D68B /* SynapseDestination.swift in Sources */,
 				05BBA0572873803000A0D68B /* Organism.swift in Sources */,
+				05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */,
 				05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */,
+				05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */,
+				05BBA0A028749DDC00A0D68B /* VideoProcessor.swift in Sources */,
 				05BB9FC628722C2300A0D68B /* Output.swift in Sources */,
 				05BBA0722873B98900A0D68B /* Point.swift in Sources */,
+				05BBA0A72874B8F600A0D68B /* Age.swift in Sources */,
 				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
+				05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */,
 				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
+				05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */,
+				05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */,
+				05BBA0AF2874F59E00A0D68B /* CloseToRightBorder.swift in Sources */,
+				05BBA0742873D6E000A0D68B /* ImageProcessor.swift in Sources */,
+				05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */,
 				05B6C313286F4D810065CD26 /* main.swift in Sources */,
-				05BB9FC228722C0600A0D68B /* Brain.swift in Sources */,
+				05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */,
 				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
+				05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */,
+				05BBA08528747A7500A0D68B /* NSBundle.swift in Sources */,
+				05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */,
 				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
 				05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */,
-				05BBA06E2873B7F200A0D68B /* Grid.swift in Sources */,
+				05BBA06E2873B7F200A0D68B /* World.swift in Sources */,
 				05BBA0702873B98200A0D68B /* Size.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +507,10 @@
 		05B6C317286F4D810065CD26 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Brain/Brain.entitlements;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Brain/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.Brain";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -386,6 +518,10 @@
 		05B6C318286F4D810065CD26 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Brain/Brain.entitlements;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Brain/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.Brain";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -24,32 +24,53 @@
 
 import Foundation
 
-public class Neuron: SynapseSource, SynapseDestination, NSCopying
+public struct Rect: Equatable, CustomDebugStringConvertible
 {
-    public private( set ) var values: [ Double ] = []
+    public var origin: Point
+    public var size:   Size
     
-    public var value: Double
+    public var debugDescription: String
     {
-        if self.values.isEmpty
-        {
-            return 0.5
-        }
+        "{x: \( self.origin.x ), y: \( self.origin.y ), width: \( self.size.width ), height: \( self.size.height )}"
+    }
+    
+    public func contains( point: Point ) -> Bool
+    {
+        let x = point.x
+        let y = point.y
         
-        return tanh( self.values.reduce( 0.0 ) { $0 + $1 } )
+        return x >= self.origin.x && y >= self.origin.y && x < self.origin.x + self.size.width && y < self.origin.x + self.size.height
     }
     
-    public func take( value: Double )
+    public func adjustingX( adding x: Int ) -> Rect
     {
-        self.values.append( value )
+        var rect       = self
+        rect.origin.x += x
+        
+        return rect
     }
     
-    public func reset()
+    public func adjustingX( to x: Int ) -> Rect
     {
-        self.values.removeAll()
+        var rect      = self
+        rect.origin.x = x
+        
+        return rect
     }
     
-    public func copy( with zone: NSZone? = nil ) -> Any
+    public func adjustingY( adding y: Int ) -> Rect
     {
-        Neuron()
+        var rect       = self
+        rect.origin.y += y
+        
+        return rect
+    }
+    
+    public func adjustingY( to y: Int ) -> Rect
+    {
+        var rect      = self
+        rect.origin.y = y
+        
+        return rect
     }
 }

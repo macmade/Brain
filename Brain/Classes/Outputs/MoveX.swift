@@ -24,46 +24,35 @@
 
 import Foundation
 
-public class Grid
+public class MoveX: Output
 {
-    public private( set ) var size:      Size
-    public private( set ) var organisms: [ Organism ]
-    
-    init( settings: Settings )
+    public override var name: String?
     {
-        self.size      = Size( width: settings.gridWidth, height: settings.gridHeight )
-        self.organisms = ( 0 ..< settings.initialPopulation ).compactMap
-        {
-            _ in Organism.random( settings: settings, generation: 0 )
-        }
-        
-        self.placeOrganisms()
+        "MvX"
     }
     
-    private func placeOrganisms()
+    public override func copy( with zone: NSZone? = nil ) -> Any
     {
-        self.organisms.forEach
-        {
-            organism in repeat
-            {
-                let x             = Int.random( in: 0 ..< size.width )
-                let y             = Int.random( in: 0 ..< size.height )
-                organism.position = Point( x: x, y: y )
-            }
-            while organisms.contains
-            {
-                $0 !== organism && $0.position == organism.position
-            }
-        }
+        MoveX()
     }
     
-    public func mutate()
+    public override func execute( with organism: Organism )
     {
-        self.organisms = self.organisms.compactMap
-        {
-            $0.mutate()
-        }
+        let value = self.values.reduce( 0.0 ) { $0 + $1 }
         
-        self.placeOrganisms()
+        if value > 0
+        {
+            var point = organism.position
+            point.x  += 1
+            
+            organism.move( to: point )
+        }
+        else if value < 0
+        {
+            var point = organism.position
+            point.x  -= 1
+            
+            organism.move( to: point )
+        }
     }
 }

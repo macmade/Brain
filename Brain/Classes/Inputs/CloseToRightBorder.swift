@@ -24,10 +24,25 @@
 
 import Foundation
 
-public protocol SynapseSource: AnyObject
+public class CloseToRightBorder: Input
 {
-    var value: Double
+    public override var name: String?
     {
-        get
+        "BdR"
+    }
+    
+    public override func copy( with zone: NSZone? = nil ) -> Any
+    {
+        CloseToRightBorder()
+    }
+    
+    public override var value: Double
+    {
+        guard let organism = self.organism, let world = organism.world else
+        {
+            return 0
+        }
+        
+        return Double( organism.position.x ) / Double( world.size.width )
     }
 }

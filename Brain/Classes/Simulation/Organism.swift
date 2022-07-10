@@ -22,28 +22,45 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Foundation
+import Cocoa
 
 public class Organism
 {
-    public private( set ) var brain:      Brain
-    public private( set ) var generation: Int
+    public private( set ) weak var world: World?
+    public private( set )      var brain: NeuralNetwork
     
     public var position = Point( x: 0, y: 0 )
     
-    public class func random( settings: Settings, generation: Int ) -> Organism?
+    public class func defaultInputs() -> [ Input ]
     {
-        let inputs:   [ Input  ]  = [ Input(),  Input(),  Input(),  Input(),  Input() ]
-        let outputs:  [ Output ]  = [ Output(), Output(), Output(), Output(), Output() ]
+        [
+            Age(),
+            CloseToTopBorder(),
+            CloseToBottomBorder(),
+            CloseToLeftBorder(),
+            CloseToRightBorder(),
+        ]
+    }
+    
+    public class func defaultOutputs() -> [ Output ]
+    {
+        [
+            MoveX(),
+            MoveY(),
+        ]
+    }
+    
+    public class func random( world: World ) -> Organism?
+    {
         var neurons:  [ Neuron ]  = []
         var synapses: [ Synapse ] = []
         
-        ( 0 ..< settings.numberOfNeurons ).forEach
+        ( 0 ..< world.settings.numberOfNeurons ).forEach
         {
             _ in neurons.append( Neuron() )
         }
         
-        ( 0 ..< settings.numberOfSynapses ).forEach
+        ( 0 ..< world.settings.numberOfSynapses ).forEach
         {
             _ in synapses.append( Synapse( from: UInt32.random( in: 0 ... UInt32.max ) ) )
         }
@@ -80,18 +97,36 @@ public class Organism
         synapses.append( Synapse( sourceType: .neuron, sourceID: 2, destinationType: .output, destinationID: 2, weight: 1 ) )
         */
         
-        guard let brain = Brain( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses ) else
+        guard let brain = NeuralNetwork( inputs: Organism.defaultInputs(), outputs: Organism.defaultOutputs(), neurons: neurons, synapses: synapses ) else
         {
             return nil
         }
         
-        return Organism( brain: brain, generation: generation )
+        return Organism( world: world, brain: brain )
     }
     
-    public init( brain: Brain, generation: Int )
+    public init( world: World, brain: NeuralNetwork )
     {
-        self.brain      = brain
-        self.generation = generation
+        self.world = world
+        self.brain = brain
+        
+        self.brain.inputs.forEach
+        {
+            $0.organism = self
+        }
+    }
+    
+    @discardableResult
+    public func move( to point: Point ) -> Bool
+    {
+        if self.world?.locationIsAvailable( point ) ?? false
+        {
+            self.position = point
+            
+            return true
+        }
+        
+        return false
     }
     
     public func mutate() -> Organism?
@@ -108,23 +143,19 @@ public class Organism
         outputs.forEach { $0.reset() }
         neurons.forEach { $0.reset() }
         
-        guard let brain = Brain( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses ) else
+        guard let world = self.world,
+              let brain = NeuralNetwork( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses )
+        else
         {
             return nil
         }
         
-        return Organism( brain: brain, generation: self.generation + 1 )
+        return Organism( world: world, brain: brain )
     }
     
     public func process()
     {
         self.brain.process()
-        
-        print( "Neuron values:" )
-        self.brain.neurons.forEach { print( "    \( $0.values )" ) }
-        
-        print( "Output values:" )
-        self.brain.outputs.forEach { print( "    \( $0.values )" ) }
         
         self.brain.outputs.forEach
         {
@@ -132,5 +163,38 @@ public class Organism
         }
         
         self.brain.reset()
+    }
+    
+    public var color: NSColor
+    {
+        var rgb = self.brain.synapses.enumerated().reduce( into: [ Int32() ] )
+        {
+            let value = Int32( bitPattern: $1.element.encode() )
+            let index = $1.offset % 3
+            
+            if index >= $0.count
+            {
+                $0.append( value )
+            }
+            else
+            {
+                $0[ index ] = $0[ index ] &+ value
+            }
+        }
+        .map
+        {
+            UInt32( bitPattern: $0 )
+        }
+        
+        while rgb.count < 3
+        {
+            rgb.append( 0 )
+        }
+        
+        let r = Double( rgb[ 0 ] ) / Double( UInt32.max )
+        let g = Double( rgb[ 1 ] ) / Double( UInt32.max )
+        let b = Double( rgb[ 2 ] ) / Double( UInt32.max )
+        
+        return NSColor( calibratedRed: r, green: g, blue: b, alpha: 1 )
     }
 }

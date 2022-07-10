@@ -22,10 +22,36 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
+public protocol Synchronizable
+{
+    static func synchronized< T >( closure: () -> T ) -> T
+    
+    func synchronized< T >( closure: () -> T ) -> T
+}
 
-simulation.run()
+public extension Synchronizable
+{
+    static func synchronized< T >( closure: () -> T ) -> T
+    {
+        objc_sync_enter( self )
+        
+        let r = closure()
+        
+        objc_sync_exit( self )
+        
+        return r
+    }
+    
+    func synchronized< T >( closure: () -> T ) -> T
+    {
+        objc_sync_enter( self )
+        
+        let r = closure()
+        
+        objc_sync_exit( self )
+        
+        return r
+    }
+}

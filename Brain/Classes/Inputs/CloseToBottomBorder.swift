@@ -22,10 +22,27 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+public class CloseToBottomBorder: Input
+{
+    public override var name: String?
+    {
+        "BdB"
+    }
+    
+    public override func copy( with zone: NSZone? = nil ) -> Any
+    {
+        CloseToBottomBorder()
+    }
+    
+    public override var value: Double
+    {
+        guard let organism = self.organism, let world = organism.world else
+        {
+            return 0
+        }
+        
+        return ( Double( world.size.height ) - Double( organism.position.y ) ) / Double( world.size.height )
+    }
+}

@@ -22,10 +22,15 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+public protocol SynapseDestination: AnyObject
+{
+    func take( value: Double )
+    func reset()
+    
+    var name: String?
+    {
+        get
+    }
+}

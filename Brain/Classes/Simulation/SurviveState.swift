@@ -24,8 +24,14 @@
 
 import Foundation
 
-public protocol SynapseDestination: AnyObject
+public class SurviveState
 {
-    func take( value: Double )
-    func reset()
+    public var survive:  Bool
+    public var organism: Organism
+    
+    init( organism: Organism )
+    {
+        self.survive  = false
+        self.organism = organism
+    }
 }

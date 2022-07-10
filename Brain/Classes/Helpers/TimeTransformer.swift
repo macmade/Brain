@@ -24,13 +24,37 @@
 
 import Foundation
 
-public class Settings: Codable
+public class TimeTransformer: ValueTransformer
 {
-    public var numberOfNeurons     = 3
-    public var numberOfSynapses    = 5
-    public var initialPopulation   = 10
-    public var numberOfGenerations = 50
-    public var stepsPerGeneration  = 20
-    public var gridWidth           = 500
-    public var gridHeight          = 500
+    public class func string( for interval: TimeInterval ) -> String
+    {
+        TimeTransformer().transformedValue( interval ) as? String ?? "--"
+    }
+    
+    public override class func transformedValueClass() -> AnyClass
+    {
+        NSString.self
+    }
+    
+    public override class func allowsReverseTransformation() -> Bool
+    {
+        false
+    }
+    
+    public override func transformedValue( _ value: Any? ) -> Any?
+    {
+        guard let interval = value as? TimeInterval else
+        {
+            return "--"
+        }
+        
+        let msecs     = Int( interval * 1000 )
+        let time      = msecs / 1000
+        let remaining = msecs - ( time * 1000 )
+        let seconds   = time % 60
+        let minutes   = ( time % ( 60 * 60 ) ) / 60
+        let hours     = time / 60 / 60
+        
+        return String( format: "%02i:%02i:%02i.%i", hours, minutes, seconds, remaining )
+    }
 }

@@ -22,10 +22,39 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+public class Neuron: SynapseSource, SynapseDestination, NSCopying
+{
+    public private( set ) var values: [ Double ] = []
+    
+    public var name: String?
+    {
+        nil
+    }
+    
+    public var value: Double
+    {
+        if self.values.isEmpty
+        {
+            return 0
+        }
+        
+        return tanh( self.values.reduce( 0.0 ) { $0 + $1 } )
+    }
+    
+    public func take( value: Double )
+    {
+        self.values.append( value )
+    }
+    
+    public func reset()
+    {
+        self.values.removeAll()
+    }
+    
+    public func copy( with zone: NSZone? = nil ) -> Any
+    {
+        Neuron()
+    }
+}
