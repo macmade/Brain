@@ -27,7 +27,7 @@ import Cocoa
 public class ImageGenerator
 {
     private var prepared       = [ ImageGeneratorInfo ]()
-    private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.ImageGenerator", qos: .userInitiated )
+    private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.ImageGenerator", qos: .userInteractive )
     private var cachesDirectory: URL
     
     public init( cachesDirectory: URL )

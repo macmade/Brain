@@ -56,42 +56,51 @@ public class Simulation
             
             for _ in 0 ..< self.world.settings.numberOfGenerations
             {
-                autoreleasepool
+                Benchmark.run
                 {
-                    self.world.spawnNewGeneration( from: survivors )
-                    
-                    print( "Generation \( self.world.currentGeneration ):" )
-                    
-                    for _ in 0 ..< self.world.settings.stepsPerGeneration
+                    autoreleasepool
                     {
-                        autoreleasepool
+                        self.world.spawnNewGeneration( from: survivors )
+                        
+                        for _ in 0 ..< self.world.settings.stepsPerGeneration
                         {
-                            if self.world.currentStep == 0
+                            autoreleasepool
                             {
-                                self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep )
+                                if self.world.currentStep == 0
+                                {
+                                    self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep )
+                                }
+                                
+                                self.world.step()
+                                self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration , step: self.world.currentStep )
                             }
-                            
-                            self.world.step()
-                            self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration , step: self.world.currentStep )
                         }
+                        
+                        let surviveState = self.getSurviveState()
+                        survivors        = surviveState.filter { $0.survive }.map { $0.organism }
+                        
+                        self.dotGenerator?.prepare( state: surviveState, generation: self.world.currentGeneration )
+                        self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
+                        self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
                     }
+                }
+                finished:
+                {
+                    let percent = Int( ( Double( survivors.count ) / Double( self.world.settings.population ) ) * 100 )
                     
-                    
-                    let surviveState = self.getSurviveState()
-                    survivors        = surviveState.filter { $0.survive }.map { $0.organism }
-                    let percent      = Int( ( Double( survivors.count ) / Double( self.world.settings.population ) ) * 100 )
-                    
-                    print( "    - \( survivors.count ) survivors out of \( self.world.organisms.count ): \( percent )%" )
-                    
-                    self.dotGenerator?.prepare( state: surviveState, generation: self.world.currentGeneration )
-                    self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
-                    self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
+                    print(
+                        """
+                        Generation \( self.world.currentGeneration ):
+                            - \( survivors.count ) survivors out of \( self.world.settings.population ): \( percent )%"
+                            - Time: \( TimeTransformer.string( for: $0 ) )
+                        """
+                    )
                 }
             }
         }
         finished:
         {
-            print( "Finished processing in \( TimeTransformer.string( for: $0  ) )" )
+            print( "Finished processing in \( TimeTransformer.string( for: $0 ) )" )
         }
         
         Benchmark.run

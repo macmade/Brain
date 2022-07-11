@@ -42,11 +42,11 @@ public class MoveY: Output
         
         if value > 0
         {
-            organism.move( to: organism.position.adjustingY( adding: 1 ) )
+            organism.nextPosition = organism.position.adjustingY( adding: 1 )
         }
         else if value < 0
         {
-            organism.move( to: organism.position.adjustingY( adding: -1 ) )
+            organism.nextPosition = organism.position.adjustingY( adding: -1 )
         }
     }
 }

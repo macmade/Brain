@@ -29,7 +29,8 @@ public class Organism
     public private( set ) weak var world: World?
     public private( set )      var brain: NeuralNetwork
     
-    public var position = Point( x: 0, y: 0 )
+    public var position    = Point( x: 0, y: 0 )
+    public var nextPosition: Point?
     
     public class func defaultInputs() -> [ Input ]
     {
@@ -121,19 +122,6 @@ public class Organism
         }
     }
     
-    @discardableResult
-    public func move( to point: Point ) -> Bool
-    {
-        if self.world?.locationIsAvailable( point ) ?? false
-        {
-            self.position = point
-            
-            return true
-        }
-        
-        return false
-    }
-    
     public func replicate() -> Organism?
     {
         guard let world = self.world else
@@ -167,18 +155,6 @@ public class Organism
         }
         
         return Organism( world: world, brain: brain )
-    }
-    
-    public func process()
-    {
-        self.brain.process()
-        
-        self.brain.outputs.forEach
-        {
-            $0.execute( with: self )
-        }
-        
-        self.brain.reset()
     }
     
     public var color: NSColor

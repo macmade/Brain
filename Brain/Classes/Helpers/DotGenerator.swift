@@ -27,7 +27,7 @@ import Foundation
 public class DotGenerator
 {
     private var prepared       = [ Int : [ DotGeneratorInfo ] ]()
-    private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.DotGenerator", qos: .userInitiated )
+    private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.DotGenerator", qos: .userInteractive )
     private var cachesDirectory: URL
     
     public init( cachesDirectory: URL )

@@ -32,6 +32,8 @@ public class World
     public private( set ) var currentGeneration: Int
     public private( set ) var currentStep:       Int
     
+    private var queue = WaitableOperationQueue( label: "com.xs-labs.Brain.World", qos: .userInteractive )
+    
     init( settings: Settings )
     {
         self.settings          = settings
@@ -77,7 +79,25 @@ public class World
         
         self.organisms.forEach
         {
-            $0.process()
+            organism in self.queue.run
+            {
+                organism.brain.process()
+                organism.brain.outputs.forEach
+                {
+                    $0.execute( with: organism )
+                }
+                organism.brain.reset()
+            }
+        }
+        self.queue.wait()
+        self.organisms.forEach
+        {
+            if let pos = $0.nextPosition, self.locationIsAvailable( pos )
+            {
+                $0.position = pos
+            }
+            
+            $0.nextPosition = nil
         }
     }
     
