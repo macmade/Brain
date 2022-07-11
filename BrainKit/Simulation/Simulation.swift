@@ -40,8 +40,6 @@ public class Simulation
         
         if let caches = Bundle.main.cachesDirectory?.appendingPathComponent( "com.xs-labs.Brain-\( UUID().uuidString )" )
         {
-            self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "jpg" ) )
-            self.dotGenerator    = DotGenerator(   cachesDirectory: caches.appendingPathComponent( "dot" ) )
             self.cachesDirectory = caches
         }
     }
@@ -53,7 +51,17 @@ public class Simulation
         
         repeat
         {
-            world = World( settings: self.settings )
+            autoreleasepool
+            {
+                world = World( settings: self.settings )
+                
+                if let caches = self.cachesDirectory
+                {
+                    self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "jpg" ) )
+                    self.dotGenerator    = DotGenerator(   cachesDirectory: caches.appendingPathComponent( "dot" ) )
+                    self.cachesDirectory = caches
+                }
+            }
             
             Benchmark.run
             {
@@ -136,33 +144,30 @@ public class Simulation
     
     private func runGeneration( from organisms: [ Organism ], in world: World ) -> [ Organism ]
     {
-        autoreleasepool
+        world.spawnNewGeneration( from: organisms )
+        
+        for _ in 0 ..< self.settings.stepsPerGeneration
         {
-            world.spawnNewGeneration( from: organisms )
-            
-            for _ in 0 ..< self.settings.stepsPerGeneration
+            autoreleasepool
             {
-                autoreleasepool
+                if world.currentStep == 0
                 {
-                    if world.currentStep == 0
-                    {
-                        self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration, step: world.currentStep )
-                    }
-                    
-                    world.step()
-                    self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration , step: world.currentStep )
+                    self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration, step: world.currentStep )
                 }
+                
+                world.step()
+                self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration , step: world.currentStep )
             }
-            
-            let surviveState = self.getSurviveState( in: world )
-            let survivors    = surviveState.filter { $0.survive }.map { $0.organism }
-            
-            self.dotGenerator?.prepare( state: surviveState, generation: world.currentGeneration )
-            world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
-            self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration, step: world.currentStep + 1 )
-            
-            return survivors
         }
+        
+        let surviveState = self.getSurviveState( in: world )
+        let survivors    = surviveState.filter { $0.survive }.map { $0.organism }
+        
+        self.dotGenerator?.prepare( state: surviveState, generation: world.currentGeneration )
+        world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
+        self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration, step: world.currentStep + 1 )
+        
+        return survivors
     }
     
     private func getSurviveState( in world: World ) -> [ SurviveState ]

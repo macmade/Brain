@@ -32,7 +32,7 @@ public class Settings: Codable
     public var numberOfGenerations:   UInt   = 200
     public var stepsPerGeneration:    UInt   = 200
     public var mutationChance:        Double = 5
-    public var requiredSurvivability: Double = 0
+    public var requiredSurvivability: Double = 50
     public var gridWidth:             UInt   = 200
     public var gridHeight:            UInt   = 200
     public var imageScaleFactor:      UInt   = 2
