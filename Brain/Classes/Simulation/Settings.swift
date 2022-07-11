@@ -26,40 +26,34 @@ import Foundation
 
 public class Settings: Codable
 {
-    public var numberOfNeurons     = 2
-    public var numberOfSynapses    = 5
-    public var population          = 200
-    public var numberOfGenerations = 100
-    public var stepsPerGeneration  = 200
-    public var mutationChance      = 2.0
-    public var gridWidth           = 200
-    public var gridHeight          = 200
-    public var imageScaleFactor    = 2
-    public var videoFPS            = 10
-    public var surviveAreas: Area  = [ .leftHalf ]
-    public var killAreas:    Area  = [ .leftBorder ]
+    public var numberOfNeurons:     UInt   = 2
+    public var numberOfSynapses:    UInt   = 5
+    public var population:          UInt   = 200
+    public var numberOfGenerations: UInt   = 200
+    public var stepsPerGeneration:  UInt   = 200
+    public var mutationChance:      Double = 2
+    public var gridWidth:           UInt   = 200
+    public var gridHeight:          UInt   = 200
+    public var imageScaleFactor:    UInt   = 2
+    public var videoFPS:            UInt   = 10
     
-    public struct Area: OptionSet, Codable, Hashable
-    {
-        public let rawValue: UInt
-        
-        public init( rawValue: UInt )
-        {
-            self.rawValue = rawValue
-        }
-        
-        public static let leftHalf          = Area( rawValue: 1 <<  0 )
-        public static let topHalf           = Area( rawValue: 1 <<  1 )
-        public static let rightHalf         = Area( rawValue: 1 <<  2 )
-        public static let bottomHalf        = Area( rawValue: 1 <<  3 )
-        public static let leftBorder        = Area( rawValue: 1 <<  4 )
-        public static let topBorder         = Area( rawValue: 1 <<  5 )
-        public static let rightBorder       = Area( rawValue: 1 <<  6 )
-        public static let bottomBorder      = Area( rawValue: 1 <<  7 )
-        public static let topLeftCorner     = Area( rawValue: 1 <<  8 )
-        public static let topRightCorner    = Area( rawValue: 1 <<  9 )
-        public static let bottomLeftCorner  = Area( rawValue: 1 << 10 )
-        public static let bottomRightCorner = Area( rawValue: 1 << 11 )
-        public static let center            = Area( rawValue: 1 << 12 )
-    }
+    public var surviveAreas: [ Rect ] =
+    [
+        Rect( x: 0, y: 75, width: 50, height: 50 ),
+    ]
+    
+    public var killAreas: [ Rect ] =
+    [
+        Rect( x: 0, y: 0, width: 1, height: 200 ),
+    ]
+    
+    public var barriers =
+    [
+        Rect( x: 60, y:  15, width: 10, height: 20 ),
+        Rect( x: 60, y:  45, width: 10, height: 20 ),
+        Rect( x: 60, y:  75, width: 10, height: 20 ),
+        Rect( x: 60, y: 105, width: 10, height: 20 ),
+        Rect( x: 60, y: 135, width: 10, height: 20 ),
+        Rect( x: 60, y: 165, width: 10, height: 20 ),
+    ]
 }

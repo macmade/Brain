@@ -134,47 +134,16 @@ public class Simulation
     
     public func getSurviveState() -> [ SurviveState ]
     {
-        let organisms   = self.world.organisms.map { SurviveState( organism: $0 ) }
-        let rect        = Rect( origin: Point( x: 0, y: 0 ), size: Size( width: self.world.size.width / 3, height: self.world.size.height / 3 ) )
-        let topLeft     = rect.adjustingY( to: ( self.world.size.height / 3 ) * 2 )
-        let topRight    = rect.adjustingX( to: ( self.world.size.width / 3 ) * 2 ).adjustingY( to: ( self.world.size.height / 3 ) * 2 )
-        let bottomLeft  = rect
-        let bottomRight = rect.adjustingX( to: ( self.world.size.width / 3 ) * 2 )
-        let center      = rect.adjustingX( to: self.world.size.width / 3 ).adjustingY( to: self.world.size.height / 3 )
+        let organisms = self.world.organisms.map { SurviveState( organism: $0 ) }
         
-        let predicates: [ Settings.Area : ( Organism ) -> Bool ] =
-        [
-            .leftBorder   : { $0.position.x == 0 },
-            .bottomBorder : { $0.position.y == 0 },
-            .rightBorder  : { $0.position.x == self.world.size.width  - 1 },
-            .topBorder    : { $0.position.y == self.world.size.height - 1 },
-            
-            .leftHalf   : { $0.position.x < self.world.size.width  / 2 },
-            .bottomHalf : { $0.position.y < self.world.size.height / 2 },
-            .rightHalf  : { $0.position.x > self.world.size.width  / 2 },
-            .topHalf    : { $0.position.y > self.world.size.height / 2 },
-            
-            .topLeftCorner     : { topLeft.contains( point: $0.position ) },
-            .topRightCorner    : { topRight.contains( point: $0.position ) },
-            .bottomLeftCorner  : { bottomLeft.contains( point: $0.position ) },
-            .bottomRightCorner : { bottomRight.contains( point: $0.position ) },
-            .center            : { center.contains( point: $0.position ) },
-        ]
-        
-        predicates.forEach
+        self.world.settings.surviveAreas.forEach
         {
-            predicate in if self.world.settings.surviveAreas.contains( predicate.key )
-            {
-                organisms.forEach { $0.survive = predicate.value( $0.organism ) }
-            }
+            rect in organisms.forEach { $0.survive = rect.contains( point: $0.organism.position ) }
         }
         
-        predicates.forEach
+        self.world.settings.killAreas.forEach
         {
-            predicate in if self.world.settings.killAreas.contains( predicate.key )
-            {
-                organisms.forEach { $0.survive = predicate.value( $0.organism ) ? false : $0.survive }
-            }
+            rect in organisms.forEach { $0.survive = rect.contains( point: $0.organism.position ) ? false : $0.survive }
         }
         
         return organisms

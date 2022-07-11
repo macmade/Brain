@@ -42,17 +42,11 @@ public class MoveX: Output
         
         if value > 0
         {
-            var point = organism.position
-            point.x  += 1
-            
-            organism.move( to: point )
+            organism.move( to: organism.position.adjustingX( adding: 1 ) )
         }
         else if value < 0
         {
-            var point = organism.position
-            point.x  -= 1
-            
-            organism.move( to: point )
+            organism.move( to: organism.position.adjustingX( adding: -1 ) )
         }
     }
 }

@@ -47,8 +47,8 @@ public class OutputGeneration
             {
                 let name       = "\( key.lastPathComponent ).mov"
                 let url        = directory.appendingPathComponent( name )
-                let width      = world.size.width * world.settings.imageScaleFactor
-                let height     = world.size.height * world.settings.imageScaleFactor
+                let width      = Double( world.size.width ) * Double( world.settings.imageScaleFactor )
+                let height     = Double( world.size.height ) * Double( world.settings.imageScaleFactor )
                 let fps        = world.settings.videoFPS
                 let processor  = VideoGenerator( images: info, size: NSSize( width: width, height: height ), destination: url, fps: fps, codec: .h264, fileType: .mov )
                 

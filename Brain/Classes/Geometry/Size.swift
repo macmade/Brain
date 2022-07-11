@@ -24,7 +24,7 @@
 
 import Foundation
 
-public struct Size: Equatable, CustomDebugStringConvertible
+public struct Size: Codable, Equatable, CustomDebugStringConvertible
 {
     public var width:  Int
     public var height: Int
@@ -32,5 +32,25 @@ public struct Size: Equatable, CustomDebugStringConvertible
     public var debugDescription: String
     {
         "{width: \( self.width ), height: \( self.height )}"
+    }
+    
+    public func adjustingWidth( adding width: Int ) -> Size
+    {
+        Size( width: self.width + width, height: self.height )
+    }
+    
+    public func adjustingWidth( to width: Int ) -> Size
+    {
+        Size( width: width, height: self.height )
+    }
+    
+    public func adjustingHeight( adding height: Int ) -> Size
+    {
+        Size( width: self.width, height: self.height + height )
+    }
+    
+    public func adjustingHeight( to height: Int ) -> Size
+    {
+        Size( width: self.width, height: height )
     }
 }

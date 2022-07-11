@@ -24,7 +24,7 @@
 
 import Foundation
 
-public struct Point: Equatable, CustomDebugStringConvertible
+public struct Point: Codable, Equatable, CustomDebugStringConvertible
 {
     public var x: Int
     public var y: Int
@@ -32,5 +32,25 @@ public struct Point: Equatable, CustomDebugStringConvertible
     public var debugDescription: String
     {
         "{x: \( self.x ), y: \( self.y )}"
+    }
+    
+    public func adjustingX( adding x: Int ) -> Point
+    {
+        Point( x: self.x + x, y: self.y )
+    }
+    
+    public func adjustingX( to x: Int ) -> Point
+    {
+        Point( x: x, y: self.y )
+    }
+    
+    public func adjustingY( adding y: Int ) -> Point
+    {
+        Point( x: self.x, y: self.y + y )
+    }
+    
+    public func adjustingY( to y: Int ) -> Point
+    {
+        Point( x: self.x, y: y )
     }
 }

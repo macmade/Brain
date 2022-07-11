@@ -24,10 +24,21 @@
 
 import Foundation
 
-public struct Rect: Equatable, CustomDebugStringConvertible
+public struct Rect: Codable, Equatable, CustomDebugStringConvertible
 {
     public var origin: Point
     public var size:   Size
+    
+    public init( x: Int, y: Int, width: Int, height: Int )
+    {
+        self.init( origin: Point( x: x, y: y ), size: Size( width: width, height: height ) )
+    }
+    
+    public init( origin: Point, size: Size )
+    {
+        self.origin = origin
+        self.size   = size
+    }
     
     public var debugDescription: String
     {
@@ -39,38 +50,46 @@ public struct Rect: Equatable, CustomDebugStringConvertible
         let x = point.x
         let y = point.y
         
-        return x >= self.origin.x && y >= self.origin.y && x < self.origin.x + self.size.width && y < self.origin.x + self.size.height
+        return x >= self.origin.x && y >= self.origin.y && x < self.origin.x + self.size.width && y < self.origin.y + self.size.height
     }
     
     public func adjustingX( adding x: Int ) -> Rect
     {
-        var rect       = self
-        rect.origin.x += x
-        
-        return rect
+        Rect( origin: self.origin.adjustingX( adding: x ), size: self.size )
     }
     
     public func adjustingX( to x: Int ) -> Rect
     {
-        var rect      = self
-        rect.origin.x = x
-        
-        return rect
+        Rect( origin: self.origin.adjustingX( to: x ), size: self.size )
     }
     
     public func adjustingY( adding y: Int ) -> Rect
     {
-        var rect       = self
-        rect.origin.y += y
-        
-        return rect
+        Rect( origin: self.origin.adjustingY( adding: y ), size: self.size )
     }
     
     public func adjustingY( to y: Int ) -> Rect
     {
-        var rect      = self
-        rect.origin.y = y
-        
-        return rect
+        Rect( origin: self.origin.adjustingY( to: y ), size: self.size )
+    }
+    
+    public func adjustingWidth( adding width: Int ) -> Rect
+    {
+        Rect( origin: self.origin, size: self.size.adjustingWidth( adding: width ) )
+    }
+    
+    public func adjustingWidth( to width: Int ) -> Rect
+    {
+        Rect( origin: self.origin, size: self.size.adjustingWidth( to: width ) )
+    }
+    
+    public func adjustingHeight( adding height: Int ) -> Rect
+    {
+        Rect( origin: self.origin, size: self.size.adjustingHeight( adding: height ) )
+    }
+    
+    public func adjustingHeight( to height: Int ) -> Rect
+    {
+        Rect( origin: self.origin, size: self.size.adjustingHeight( to: height ) )
     }
 }

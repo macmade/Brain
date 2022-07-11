@@ -46,7 +46,7 @@ class VideoGenerator
     private var videoSettings:    [ String : Any ]
     private var bufferAttributes: [ String : Any ]
     
-    public init( images: [ URL ], size: NSSize, destination: URL, fps: Int, codec: AVVideoCodecType, fileType: AVFileType )
+    public init( images: [ URL ], size: NSSize, destination: URL, fps: UInt, codec: AVVideoCodecType, fileType: AVFileType )
     {
         self.images      = images
         self.size        = size

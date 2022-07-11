@@ -66,7 +66,7 @@ public class ImageGenerator
             {
                 info in self.queue.run
                 {
-                    ImageGenerator.writeImage( for: info, size: world.size, scale: world.settings.imageScaleFactor, to: dir.appendingPathComponent( "step-\( info.step ).jpg" ) )
+                    ImageGenerator.writeImage( for: info, world: world, to: dir.appendingPathComponent( "step-\( info.step ).jpg" ) )
                 }
             }
             
@@ -80,18 +80,34 @@ public class ImageGenerator
         self.prepared.append( ImageGeneratorInfo( generation: generation, step: step, organisms: organisms ) )
     }
     
-    private class func writeImage( for info: ImageGeneratorInfo, size: Size, scale: Int, to url: URL )
+    private class func writeImage( for info: ImageGeneratorInfo, world: World, to url: URL )
     {
-        let size  = NSSize( width: size.width * scale, height: size.height * scale )
+        let scale = Double( world.settings.imageScaleFactor )
+        let size  = NSSize( width: Double( world.size.width ) * scale, height: Double( world.size.height ) * scale )
         let image = NSImage( size: size )
         
         image.lockFocus()
         NSColor.black.setFill()
         NSRect( x: 0, y: 0, width: size.width, height: size.height ).fill()
         
+        world.settings.surviveAreas.forEach
+        {
+            self.drawArea( rect: $0, scale: scale, color: NSColor.green.withAlphaComponent( 0.1 ) )
+        }
+        
+        world.settings.killAreas.forEach
+        {
+            self.drawArea( rect: $0, scale: scale, color: NSColor.red.withAlphaComponent( 0.2 ) )
+        }
+        
+        world.settings.barriers.forEach
+        {
+            self.drawArea( rect: $0, scale: scale, color: NSColor( calibratedHue: 0, saturation: 0, brightness: 0.1, alpha: 1 ) )
+        }
+        
         info.organisms.forEach
         {
-            let path = NSBezierPath( ovalIn: NSRect( x: $0.point.x * scale, y: $0.point.y * scale, width: scale, height: scale ) )
+            let path = NSBezierPath( ovalIn: NSRect( x: Double( $0.point.x ) * scale, y: Double( $0.point.y ) * scale, width: scale, height: scale ) )
             
             NSColor( rgba: $0.color ).setFill()
             path.fill()
@@ -100,5 +116,18 @@ public class ImageGenerator
         image.unlockFocus()
         
         try? image.jpegRepresentation?.write( to: url )
+    }
+    
+    private class func drawArea( rect: Rect, scale: Double, color: NSColor )
+    {
+        let rect = NSRect(
+            x:      scale * Double( rect.origin.x ),
+            y:      scale * Double( rect.origin.y ),
+            width:  scale * Double( rect.size.width ),
+            height: scale * Double( rect.size.height )
+        )
+        
+        color.setFill()
+        rect.fill()
     }
 }

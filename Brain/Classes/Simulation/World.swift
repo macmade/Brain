@@ -35,7 +35,7 @@ public class World
     init( settings: Settings )
     {
         self.settings          = settings
-        self.size              = Size( width: settings.gridWidth, height: settings.gridHeight )
+        self.size              = Size( width: Int( settings.gridWidth ), height: Int( settings.gridHeight ) )
         self.organisms         = []
         self.currentGeneration = 0
         self.currentStep       = 0
@@ -51,22 +51,18 @@ public class World
             _ in organisms.randomElement()?.replicate() ?? Organism.random( world: self )
         }
         
-        var points: [ Point ] = []
-        
         self.organisms.forEach
         {
-            organism in repeat
-            {
-                let x             = Int.random( in: 0 ..< size.width )
-                let y             = Int.random( in: 0 ..< size.height )
-                organism.position = Point( x: x, y: y )
-            }
-            while points.contains
-            {
-                $0 == organism.position
-            }
+            var point = Point( x: 0, y: 0 )
             
-            points.append( organism.position )
+            repeat
+            {
+                point.x = Int.random( in: 0 ..< size.width )
+                point.y = Int.random( in: 0 ..< size.height )
+            }
+            while self.locationIsAvailable( point ) == false
+            
+            $0.position = point
         }
     }
     
@@ -97,6 +93,16 @@ public class World
             return false
         }
         
-        return self.organisms.contains { $0.position == point } == false
+        if self.organisms.contains( where: { $0.position == point } )
+        {
+            return false
+        }
+        
+        if self.settings.barriers.contains( where: { $0.contains( point: point ) } )
+        {
+            return false
+        }
+        
+        return true
     }
 }

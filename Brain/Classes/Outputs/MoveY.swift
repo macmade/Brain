@@ -42,17 +42,11 @@ public class MoveY: Output
         
         if value > 0
         {
-            var point = organism.position
-            point.y  += 1
-            
-            organism.move( to: point )
+            organism.move( to: organism.position.adjustingY( adding: 1 ) )
         }
         else if value < 0
         {
-            var point = organism.position
-            point.y  -= 1
-            
-            organism.move( to: point )
+            organism.move( to: organism.position.adjustingY( adding: -1 ) )
         }
     }
 }
