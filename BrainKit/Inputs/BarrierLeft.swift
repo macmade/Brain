@@ -49,7 +49,7 @@ public class BarrierLeft: Input
         }
         .map
         {
-            organism.position.x - $0.origin.x
+            organism.position.x - ( $0.origin.x + $0.size.width )
         }
         .sorted
         {

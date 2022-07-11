@@ -23,26 +23,123 @@
  ******************************************************************************/
 
 import XCTest
+import BrainKit
 
 class Barriers: XCTestCase
 {
     func testBarrierLeft() throws
     {
+        let settings        = Settings()
+        settings.gridWidth  = 100
+        settings.gridHeight = 100
+        settings.barriers   = [ Rect( x: 0, y: 0, width: 10, height: 10 ) ]
         
+        let world    = World( settings: settings )
+        let organism = Organism.random( world: world )
+        
+        let sensor      = BarrierLeft()
+        sensor.organism = organism
+        
+        organism?.position = Point( x: 11, y: 0 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 1 )
+        XCTAssertLessThan( sensor.value, 1.01 )
+        
+        organism?.position = Point( x: 20, y: 0 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.9 )
+        XCTAssertLessThan( sensor.value, 0.91 )
+        
+        organism?.position = Point( x: 30, y: 0 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.8 )
+        XCTAssertLessThan( sensor.value, 0.81 )
+        
+        organism?.position = Point( x: 20, y: 20 )
+        XCTAssertEqual( sensor.value, 0 )
     }
     
     func testBarrierRight() throws
     {
+        let settings        = Settings()
+        settings.gridWidth  = 100
+        settings.gridHeight = 100
+        settings.barriers   = [ Rect( x: 90, y: 0, width: 10, height: 10 ) ]
         
+        let world    = World( settings: settings )
+        let organism = Organism.random( world: world )
+        
+        let sensor      = BarrierRight()
+        sensor.organism = organism
+        
+        organism?.position = Point( x: 89, y: 0 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 1 )
+        XCTAssertLessThan( sensor.value, 1.01 )
+        
+        organism?.position = Point( x: 80, y: 0 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.9 )
+        XCTAssertLessThan( sensor.value, 0.91 )
+        
+        organism?.position = Point( x: 70, y: 0 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.8 )
+        XCTAssertLessThan( sensor.value, 0.81 )
+        
+        organism?.position = Point( x: 20, y: 20 )
+        XCTAssertEqual( sensor.value, 0 )
     }
     
     func testBarrierUp() throws
     {
+        let settings        = Settings()
+        settings.gridWidth  = 100
+        settings.gridHeight = 100
+        settings.barriers   = [ Rect( x: 0, y: 90, width: 10, height: 10 ) ]
         
+        let world    = World( settings: settings )
+        let organism = Organism.random( world: world )
+        
+        let sensor      = BarrierUp()
+        sensor.organism = organism
+        
+        organism?.position = Point( x: 0, y: 89 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 1 )
+        XCTAssertLessThan( sensor.value, 1.01 )
+        
+        organism?.position = Point( x: 0, y: 80 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.9 )
+        XCTAssertLessThan( sensor.value, 0.91 )
+        
+        organism?.position = Point( x: 0, y: 70 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.8 )
+        XCTAssertLessThan( sensor.value, 0.81 )
+        
+        organism?.position = Point( x: 20, y: 20 )
+        XCTAssertEqual( sensor.value, 0 )
     }
     
     func testBarrierDown() throws
     {
+        let settings        = Settings()
+        settings.gridWidth  = 100
+        settings.gridHeight = 100
+        settings.barriers   = [ Rect( x: 0, y: 0, width: 10, height: 10 ) ]
         
+        let world    = World( settings: settings )
+        let organism = Organism.random( world: world )
+        
+        let sensor      = BarrierDown()
+        sensor.organism = organism
+        
+        organism?.position = Point( x: 0, y: 11 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 1 )
+        XCTAssertLessThan( sensor.value, 1.01 )
+        
+        organism?.position = Point( x: 0, y: 20 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.9 )
+        XCTAssertLessThan( sensor.value, 0.91 )
+        
+        organism?.position = Point( x: 0, y: 30 )
+        XCTAssertGreaterThanOrEqual( sensor.value, 0.8 )
+        XCTAssertLessThan( sensor.value, 0.81 )
+        
+        organism?.position = Point( x: 20, y: 20 )
+        XCTAssertEqual( sensor.value, 0 )
     }
 }

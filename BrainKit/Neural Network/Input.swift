@@ -38,6 +38,9 @@ public class Input: SynapseSource, NSCopying
         0
     }
     
+    public init()
+    {}
+    
     public func copy( with zone: NSZone? = nil ) -> Any
     {
         Input()

@@ -49,7 +49,7 @@ public class BarrierDown: Input
         }
         .map
         {
-             organism.position.y - $0.origin.y
+            organism.position.y - ( $0.origin.y + $0.size.height )
         }
         .sorted
         {

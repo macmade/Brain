@@ -29,6 +29,12 @@ public struct Size: Codable, Equatable, CustomDebugStringConvertible
     public var width:  Int
     public var height: Int
     
+    public init( width: Int, height: Int )
+    {
+        self.width  = width
+        self.height = height
+    }
+    
     public var debugDescription: String
     {
         "{width: \( self.width ), height: \( self.height )}"
