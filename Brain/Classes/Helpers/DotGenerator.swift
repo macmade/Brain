@@ -26,7 +26,7 @@ import Foundation
 
 public class DotGenerator
 {
-    private var prepared       = [ Int : [ String ] ]()
+    private var prepared       = [ Int : [ DotGeneratorInfo ] ]()
     private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.DotGenerator", qos: .userInitiated )
     private var cachesDirectory: URL
     
@@ -37,14 +37,14 @@ public class DotGenerator
         try? FileManager.default.createDirectory( at: self.cachesDirectory, withIntermediateDirectories: true )
     }
     
-    public func prepare( networks: [ NeuralNetwork ], generation: Int )
+    public func prepare( state: [ SurviveState ], generation: Int )
     {
         if self.prepared[ generation ] == nil
         {
             self.prepared[ generation ] = []
         }
         
-        self.prepared[ generation ]?.append( contentsOf: networks.map { DotGenerator.dot( for: $0 ) } )
+        self.prepared[ generation ]?.append( contentsOf: state.map { DotGeneratorInfo( survive: $0.survive, dot: DotGenerator.dot( for: $0.organism.brain ) ) } )
     }
     
     public func generate()
@@ -66,14 +66,16 @@ public class DotGenerator
             
             graphs.enumerated().forEach
             {
-                graph in self.queue.run
+                info in self.queue.run
                 {
-                    guard let data = graph.element.data( using: .utf8 ) else
+                    guard let data = info.element.dot.data( using: .utf8 ) else
                     {
                         return
                     }
                     
-                    try? data.write( to: dir.appendingPathComponent( "organism-\( graph.offset ).dot" ) )
+                    let status = info.element.survive ? "alive" : "dead"
+                    
+                    try? data.write( to: dir.appendingPathComponent( "organism-\( info.offset ).\( status ).dot" ) )
                 }
             }
             

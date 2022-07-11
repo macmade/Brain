@@ -76,12 +76,14 @@ public class Simulation
                         }
                     }
                     
-                    survivors   = self.getSurvivors()
-                    let percent = Int( ( Double( survivors.count ) / Double( self.world.settings.population ) ) * 100 )
+                    
+                    let surviveState = self.getSurviveState()
+                    survivors        = surviveState.filter { $0.survive }.map { $0.organism }
+                    let percent      = Int( ( Double( survivors.count ) / Double( self.world.settings.population ) ) * 100 )
                     
                     print( "    - \( survivors.count ) survivors out of \( self.world.organisms.count ): \( percent )%" )
                     
-                    self.dotGenerator?.prepare( networks: self.world.organisms.map { $0.brain }, generation: self.world.currentGeneration )
+                    self.dotGenerator?.prepare( state: surviveState, generation: self.world.currentGeneration )
                     self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
                     self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
                 }
@@ -130,7 +132,7 @@ public class Simulation
         }
     }
     
-    public func getSurvivors() -> [ Organism ]
+    public func getSurviveState() -> [ SurviveState ]
     {
         let organisms   = self.world.organisms.map { SurviveState( organism: $0 ) }
         let rect        = Rect( origin: Point( x: 0, y: 0 ), size: Size( width: self.world.size.width / 3, height: self.world.size.height / 3 ) )
@@ -175,6 +177,6 @@ public class Simulation
             }
         }
         
-        return organisms.filter { $0.survive }.map { $0.organism }
+        return organisms
     }
 }
