@@ -26,16 +26,17 @@ import Foundation
 
 public class Settings: Codable
 {
-    public var numberOfNeurons:     UInt   = 5
-    public var numberOfSynapses:    UInt   = 20
-    public var population:          UInt   = 200
-    public var numberOfGenerations: UInt   = 200
-    public var stepsPerGeneration:  UInt   = 200
-    public var mutationChance:      Double = 2
-    public var gridWidth:           UInt   = 200
-    public var gridHeight:          UInt   = 200
-    public var imageScaleFactor:    UInt   = 2
-    public var videoFPS:            UInt   = 10
+    public var numberOfNeurons:       UInt   = 5
+    public var numberOfSynapses:      UInt   = 20
+    public var population:            UInt   = 200
+    public var numberOfGenerations:   UInt   = 200
+    public var stepsPerGeneration:    UInt   = 200
+    public var mutationChance:        Double = 5
+    public var requiredSurvivability: Double = 0
+    public var gridWidth:             UInt   = 200
+    public var gridHeight:            UInt   = 200
+    public var imageScaleFactor:      UInt   = 2
+    public var videoFPS:              UInt   = 10
     
     public var surviveAreas: [ Rect ] =
     [

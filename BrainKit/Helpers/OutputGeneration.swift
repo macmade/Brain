@@ -31,8 +31,6 @@ public class OutputGeneration
     
     public class func generateMovies( from source: URL, in directory: URL, world: World )
     {
-        try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
-        
         let files = self.getFiles( in: source, fileExtension: "jpg" )
         let keys  = files.keys.sorted { $0.path.numericCaseInsensitiveCompare( $1.path ) == .orderedAscending }
         
@@ -42,6 +40,8 @@ public class OutputGeneration
             {
                 return
             }
+            
+            try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
             
             autoreleasepool
             {
@@ -60,8 +60,6 @@ public class OutputGeneration
     
     public class func generateSVGScriptsForDotFiles( from source: URL, in directory: URL )
     {
-        try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
-        
         let files   = self.getFiles( in: source, fileExtension: "dot" )
         let keys    = files.keys.sorted { $0.path.numericCaseInsensitiveCompare( $1.path ) == .orderedAscending }
         var scripts = [ String ]()

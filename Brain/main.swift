@@ -25,8 +25,4 @@
 import Cocoa
 import BrainKit
 
-fileprivate let settings   = Settings()
-fileprivate let world      = World( settings: settings )
-fileprivate let simulation = Simulation( world: world )
-
-simulation.run()
+Simulation( settings: Settings() ).run()

@@ -33,8 +33,6 @@ public class ImageGenerator
     public init( cachesDirectory: URL )
     {
         self.cachesDirectory = cachesDirectory
-        
-        try? FileManager.default.createDirectory( at: self.cachesDirectory, withIntermediateDirectories: true )
     }
     
     public func generate( world: World )

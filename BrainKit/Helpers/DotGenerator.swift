@@ -33,8 +33,6 @@ public class DotGenerator
     public init( cachesDirectory: URL )
     {
         self.cachesDirectory = cachesDirectory
-        
-        try? FileManager.default.createDirectory( at: self.cachesDirectory, withIntermediateDirectories: true )
     }
     
     public func prepare( state: [ SurviveState ], generation: Int )

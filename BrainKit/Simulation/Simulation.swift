@@ -26,17 +26,17 @@ import Cocoa
 
 public class Simulation
 {
-    public private( set ) var world: World
+    public private( set ) var settings: Settings
     
     private var dotGenerator:    DotGenerator?
     private var imageGenerator:  ImageGenerator?
     private var cachesDirectory: URL?
     
-    public init( world: World )
+    public init( settings: Settings )
     {
         OutputGeneration.clearAll()
         
-        self.world = world
+        self.settings = settings
         
         if let caches = Bundle.main.cachesDirectory?.appendingPathComponent( "com.xs-labs.Brain-\( UUID().uuidString )" )
         {
@@ -48,89 +48,82 @@ public class Simulation
     
     public func run()
     {
-        var survivors: [ Organism ] = []
+        var survivability = 0.0
+        var world:          World!
         
-        Benchmark.run
+        repeat
         {
-            print( "Simulating \( self.world.settings.numberOfGenerations ) generations:" )
+            world = World( settings: self.settings )
             
-            for _ in 0 ..< self.world.settings.numberOfGenerations
+            Benchmark.run
             {
-                Benchmark.run
+                print( "Simulating \( self.settings.numberOfGenerations ) generations:" )
+                
+                var survivors = [ Organism ]()
+                
+                for _ in 0 ..< self.settings.numberOfGenerations
                 {
-                    autoreleasepool
+                    Benchmark.run
                     {
-                        self.world.spawnNewGeneration( from: survivors )
+                        survivors = self.runGeneration( from: survivors, in: world )
+                    }
+                    finished:
+                    {
+                        survivability = ( Double( survivors.count ) / Double( self.settings.population ) ) * 100.0
                         
-                        for _ in 0 ..< self.world.settings.stepsPerGeneration
-                        {
-                            autoreleasepool
-                            {
-                                if self.world.currentStep == 0
-                                {
-                                    self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep )
-                                }
-                                
-                                self.world.step()
-                                self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration , step: self.world.currentStep )
-                            }
-                        }
-                        
-                        let surviveState = self.getSurviveState()
-                        survivors        = surviveState.filter { $0.survive }.map { $0.organism }
-                        
-                        self.dotGenerator?.prepare( state: surviveState, generation: self.world.currentGeneration )
-                        self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
-                        self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
+                        print(
+                            """
+                            Generation \( world.currentGeneration ):
+                                - \( survivors.count ) survivors out of \( self.settings.population ): \( Int( survivability ) )%"
+                                - Time: \( TimeTransformer.string( for: $0 ) )
+                            """
+                        )
                     }
                 }
-                finished:
-                {
-                    let percent = Int( ( Double( survivors.count ) / Double( self.world.settings.population ) ) * 100 )
-                    
-                    print(
-                        """
-                        Generation \( self.world.currentGeneration ):
-                            - \( survivors.count ) survivors out of \( self.world.settings.population ): \( percent )%"
-                            - Time: \( TimeTransformer.string( for: $0 ) )
-                        """
-                    )
-                }
+            }
+            finished:
+            {
+                print( "Finished processing in \( TimeTransformer.string( for: $0 ) )" )
             }
         }
-        finished:
-        {
-            print( "Finished processing in \( TimeTransformer.string( for: $0 ) )" )
-        }
-        
-        Benchmark.run
-        {
-            print( "Generating graphs..." )
-            self.dotGenerator?.generate()
-        }
-        finished:
-        {
-            print( "Done in \( TimeTransformer.string( for: $0 ) )" )
-        }
-        
-        Benchmark.run
-        {
-            print( "Generating images..." )
-            self.imageGenerator?.generate( world: self.world )
-        }
-        finished:
-        {
-            print( "Done in \( TimeTransformer.string( for: $0 ) )" )
-        }
+        while survivability < self.settings.requiredSurvivability
         
         if let caches = self.cachesDirectory
         {
-            OutputGeneration.generateSVGScriptsForDotFiles( from: caches.appendingPathComponent( "dot" ), in: caches.appendingPathComponent( "svg" ) )
+            Benchmark.run
+            {
+                print( "Generating graphs..." )
+                self.dotGenerator?.generate()
+            }
+            finished:
+            {
+                print( "Done in \( TimeTransformer.string( for: $0 ) )" )
+            }
+            
+            Benchmark.run
+            {
+                print( "Generating SVG scripts:" )
+                OutputGeneration.generateSVGScriptsForDotFiles( from: caches.appendingPathComponent( "dot" ), in: caches.appendingPathComponent( "svg" ) )
+            }
+            finished:
+            {
+                print( "Done in \( TimeTransformer.string( for: $0 ) )" )
+            }
+            
+            Benchmark.run
+            {
+                print( "Generating images..." )
+                self.imageGenerator?.generate( world: world )
+            }
+            finished:
+            {
+                print( "Done in \( TimeTransformer.string( for: $0 ) )" )
+            }
             
             Benchmark.run
             {
                 print( "Generating movies:" )
-                OutputGeneration.generateMovies( from: caches.appendingPathComponent( "jpg" ), in: caches.appendingPathComponent( "mov" ), world: self.world )
+                OutputGeneration.generateMovies( from: caches.appendingPathComponent( "jpg" ), in: caches.appendingPathComponent( "mov" ), world: world )
             }
             finished:
             {
@@ -141,16 +134,47 @@ public class Simulation
         }
     }
     
-    public func getSurviveState() -> [ SurviveState ]
+    private func runGeneration( from organisms: [ Organism ], in world: World ) -> [ Organism ]
     {
-        let organisms = self.world.organisms.map { SurviveState( organism: $0 ) }
+        autoreleasepool
+        {
+            world.spawnNewGeneration( from: organisms )
+            
+            for _ in 0 ..< self.settings.stepsPerGeneration
+            {
+                autoreleasepool
+                {
+                    if world.currentStep == 0
+                    {
+                        self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration, step: world.currentStep )
+                    }
+                    
+                    world.step()
+                    self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration , step: world.currentStep )
+                }
+            }
+            
+            let surviveState = self.getSurviveState( in: world )
+            let survivors    = surviveState.filter { $0.survive }.map { $0.organism }
+            
+            self.dotGenerator?.prepare( state: surviveState, generation: world.currentGeneration )
+            world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
+            self.imageGenerator?.prepare( organisms: world.organisms, generation: world.currentGeneration, step: world.currentStep + 1 )
+            
+            return survivors
+        }
+    }
+    
+    private func getSurviveState( in world: World ) -> [ SurviveState ]
+    {
+        let organisms = world.organisms.map { SurviveState( organism: $0 ) }
         
-        self.world.settings.surviveAreas.forEach
+        self.settings.surviveAreas.forEach
         {
             rect in organisms.forEach { $0.survive = rect.contains( point: $0.organism.position ) }
         }
         
-        self.world.settings.killAreas.forEach
+        self.settings.killAreas.forEach
         {
             rect in organisms.forEach { $0.survive = rect.contains( point: $0.organism.position ) ? false : $0.survive }
         }
