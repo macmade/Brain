@@ -27,7 +27,7 @@ import Cocoa
 public class ImageGenerator
 {
     private var prepared       = [ ImageGeneratorInfo ]()
-    private let queue          = DispatchQueue( label: "com.xs-labs.Brain.ImageGenerator", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil )
+    private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.ImageGenerator", qos: .userInitiated )
     private var cachesDirectory: URL
     
     public init( cachesDirectory: URL )
@@ -58,30 +58,20 @@ public class ImageGenerator
                 return
             }
             
-            let generation = $0
-            var groups     = [ DispatchGroup ]()
-            let dir        = self.cachesDirectory.appendingPathComponent( "generation-\( generation )" )
+            let dir = self.cachesDirectory.appendingPathComponent( "generation-\( $0 )" )
             
             try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
             
             images.forEach
             {
-                info in
-                
-                let group = DispatchGroup()
-                
-                groups.append( group )
-                group.enter()
-                
-                self.queue.async
+                info in self.queue.run
                 {
-                    self.writeImage( for: info, size: world.size, scale: world.settings.imageScaleFactor, to: dir.appendingPathComponent( "step-\( info.step ).jpg" ) )
-                    group.leave()
+                    ImageGenerator.writeImage( for: info, size: world.size, scale: world.settings.imageScaleFactor, to: dir.appendingPathComponent( "step-\( info.step ).jpg" ) )
                 }
             }
             
-            groups.forEach { $0.wait() }
-            print( "    - generation-\( generation )" )
+            self.queue.wait()
+            print( "    - generation-\( $0 )" )
         }
     }
     
@@ -90,28 +80,25 @@ public class ImageGenerator
         self.prepared.append( ImageGeneratorInfo( generation: generation, step: step, organisms: organisms ) )
     }
     
-    private func writeImage( for info: ImageGeneratorInfo, size: Size, scale: Int, to url: URL )
+    private class func writeImage( for info: ImageGeneratorInfo, size: Size, scale: Int, to url: URL )
     {
-        autoreleasepool
+        let size  = NSSize( width: size.width * scale, height: size.height * scale )
+        let image = NSImage( size: size )
+        
+        image.lockFocus()
+        NSColor.black.setFill()
+        NSRect( x: 0, y: 0, width: size.width, height: size.height ).fill()
+        
+        info.organisms.forEach
         {
-            let size  = NSSize( width: size.width * scale, height: size.height * scale )
-            let image = NSImage( size: size )
+            let path = NSBezierPath( ovalIn: NSRect( x: $0.point.x * scale, y: $0.point.y * scale, width: scale, height: scale ) )
             
-            image.lockFocus()
-            NSColor.black.setFill()
-            NSRect( x: 0, y: 0, width: size.width, height: size.height ).fill()
-            
-            info.organisms.forEach
-            {
-                let path = NSBezierPath( ovalIn: NSRect( x: $0.point.x * scale, y: $0.point.y * scale, width: scale, height: scale ) )
-                
-                NSColor( rgba: $0.color ).setFill()
-                path.fill()
-            }
-            
-            image.unlockFocus()
-            
-            try? image.jpegRepresentation?.write( to: url )
+            NSColor( rgba: $0.color ).setFill()
+            path.fill()
         }
+        
+        image.unlockFocus()
+        
+        try? image.jpegRepresentation?.write( to: url )
     }
 }

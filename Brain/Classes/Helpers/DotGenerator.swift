@@ -27,7 +27,7 @@ import Foundation
 public class DotGenerator
 {
     private var prepared       = [ Int : [ String ] ]()
-    private let queue          = DispatchQueue( label: "com.xs-labs.Brain.DotGenerator", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil )
+    private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.DotGenerator", qos: .userInitiated )
     private var cachesDirectory: URL
     
     public init( cachesDirectory: URL )
@@ -50,50 +50,35 @@ public class DotGenerator
     public func generate()
     {
         let prepared = self.prepared
-        let keys     = prepared.keys.sorted { $0 < $1 }
         
         self.prepared.removeAll()
         
-        keys.forEach
+        prepared.keys.sorted { $0 < $1 }.forEach
         {
-            generation in
-            
-            guard let graphs = prepared[ generation ] else
+            guard let graphs = prepared[ $0 ] else
             {
                 return
             }
             
-            var groups = [ DispatchGroup ]()
-            let dir    = self.cachesDirectory.appendingPathComponent( "generation-\( generation )" )
+            let dir = self.cachesDirectory.appendingPathComponent( "generation-\( $0 )" )
             
             try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
             
             graphs.enumerated().forEach
             {
-                graph in
-                
-                let group = DispatchGroup()
-                
-                groups.append( group )
-                group.enter()
-                
-                self.queue.async
+                graph in self.queue.run
                 {
-                    autoreleasepool
+                    guard let data = graph.element.data( using: .utf8 ) else
                     {
-                        guard let data = graph.element.data( using: .utf8 ) else
-                        {
-                            return
-                        }
-                        
-                        try? data.write( to: dir.appendingPathComponent( "organism-\( graph.offset ).dot" ) )
-                        group.leave()
+                        return
                     }
+                    
+                    try? data.write( to: dir.appendingPathComponent( "organism-\( graph.offset ).dot" ) )
                 }
             }
             
-            groups.forEach { $0.wait() }
-            print( "    - generation-\( generation )" )
+            self.queue.wait()
+            print( "    - generation-\( $0 )" )
         }
     }
     

@@ -43,6 +43,7 @@
 		05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
 		05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FD287C84CC00A0D68B /* NSImage.swift */; };
 		05BBA100287C84EF00A0D68B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FF287C84EF00A0D68B /* String.swift */; };
+		05BBA115287C8E2B00A0D68B /* WaitableOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -144,6 +145,7 @@
 		05BBA0F7287AFE4E00A0D68B /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		05BBA0FD287C84CC00A0D68B /* NSImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		05BBA0FF287C84EF00A0D68B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitableOperationQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +398,7 @@
 				05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */,
 				05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */,
 				05BBA0F5287AF94F00A0D68B /* Benchmark.swift */,
+				05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				05BBA0F4287AF1BC00A0D68B /* ImageGeneratorInfo.swift in Sources */,
 				05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */,
 				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
+				05BBA115287C8E2B00A0D68B /* WaitableOperationQueue.swift in Sources */,
 				05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */,
 				05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */,
 				05BBA0AF2874F59E00A0D68B /* CloseToRightBorder.swift in Sources */,
