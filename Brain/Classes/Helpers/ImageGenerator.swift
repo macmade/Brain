@@ -51,9 +51,7 @@ public class ImageGenerator
         
         self.prepared.removeAll()
         
-        let keys = prepared.keys.sorted { $0 < $1 }
-        
-        keys.forEach
+        prepared.keys.sorted { $0 < $1 }.forEach
         {
             guard let images = prepared[ $0 ] else
             {
@@ -63,8 +61,6 @@ public class ImageGenerator
             let generation = $0
             var groups     = [ DispatchGroup ]()
             let dir        = self.cachesDirectory.appendingPathComponent( "generation-\( generation )" )
-            let factor     = world.settings.imageScaleFactor
-            let size       = NSSize( width: world.size.width * factor, height: world.size.height * factor )
             
             try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
             
@@ -79,29 +75,8 @@ public class ImageGenerator
                 
                 self.queue.async
                 {
-                    autoreleasepool
-                    {
-                        let url    = dir.appendingPathComponent( "step-\( info.step ).jpg" )
-                        let image  = NSImage( size: size )
-                        
-                        image.lockFocus()
-                        NSColor.black.setFill()
-                        NSRect( x: 0, y: 0, width: size.width, height: size.height ).fill()
-                        
-                        info.organisms.forEach
-                        {
-                            let path = NSBezierPath( ovalIn: NSRect( x: $0.point.x * factor, y: $0.point.y * factor, width: factor, height: factor ) )
-                            
-                            NSColor( rgba: $0.color ).setFill()
-                            path.fill()
-                        }
-                        
-                        image.unlockFocus()
-                        
-                        try? image.jpegRepresentation?.write( to: url )
-                        
-                        group.leave()
-                    }
+                    self.writeImage( for: info, size: world.size, scale: world.settings.imageScaleFactor, to: dir.appendingPathComponent( "step-\( info.step ).jpg" ) )
+                    group.leave()
                 }
             }
             
@@ -113,5 +88,30 @@ public class ImageGenerator
     public func prepare( organisms: [ Organism ], generation: Int, step: Int )
     {
         self.prepared.append( ImageGeneratorInfo( generation: generation, step: step, organisms: organisms ) )
+    }
+    
+    private func writeImage( for info: ImageGeneratorInfo, size: Size, scale: Int, to url: URL )
+    {
+        autoreleasepool
+        {
+            let size  = NSSize( width: size.width * scale, height: size.height * scale )
+            let image = NSImage( size: size )
+            
+            image.lockFocus()
+            NSColor.black.setFill()
+            NSRect( x: 0, y: 0, width: size.width, height: size.height ).fill()
+            
+            info.organisms.forEach
+            {
+                let path = NSBezierPath( ovalIn: NSRect( x: $0.point.x * scale, y: $0.point.y * scale, width: scale, height: scale ) )
+                
+                NSColor( rgba: $0.color ).setFill()
+                path.fill()
+            }
+            
+            image.unlockFocus()
+            
+            try? image.jpegRepresentation?.write( to: url )
+        }
     }
 }
