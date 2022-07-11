@@ -25,7 +25,7 @@
 import XCTest
 import BrainKit
 
-class Barriers: XCTestCase
+class BarrierInputs: XCTestCase
 {
     func testBarrierLeft() throws
     {

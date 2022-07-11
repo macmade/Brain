@@ -25,7 +25,7 @@
 import XCTest
 import BrainKit
 
-class Borders: XCTestCase
+class BorderInputs: XCTestCase
 {
     func testLeftBorder() throws
     {
