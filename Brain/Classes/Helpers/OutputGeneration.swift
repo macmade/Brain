@@ -26,8 +26,6 @@ import Cocoa
 
 public class OutputGeneration
 {
-    private static let queue = DispatchQueue( label: "com.xs-labs.Brain.OutputGeneration", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil )
-    
     private init()
     {}
     
