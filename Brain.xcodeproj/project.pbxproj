@@ -45,6 +45,7 @@
 		05BBA100287C84EF00A0D68B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FF287C84EF00A0D68B /* String.swift */; };
 		05BBA115287C8E2B00A0D68B /* WaitableOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */; };
 		05BBA117287C934200A0D68B /* DotGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA116287C934200A0D68B /* DotGeneratorInfo.swift */; };
+		05BBA119287C95B800A0D68B /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA118287C95B800A0D68B /* Random.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -148,6 +149,7 @@
 		05BBA0FF287C84EF00A0D68B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitableOperationQueue.swift; sourceTree = "<group>"; };
 		05BBA116287C934200A0D68B /* DotGeneratorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGeneratorInfo.swift; sourceTree = "<group>"; };
+		05BBA118287C95B800A0D68B /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				05BBA0A62874B8F600A0D68B /* Age.swift */,
+				05BBA118287C95B800A0D68B /* Random.swift */,
 				05BBA0AD2874F59E00A0D68B /* CloseToBottomBorder.swift */,
 				05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */,
 				05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */,
@@ -476,6 +479,7 @@
 			files = (
 				05BBA0B12874F59E00A0D68B /* CloseToBottomBorder.swift in Sources */,
 				05BBA076287452C300A0D68B /* Simulation.swift in Sources */,
+				05BBA119287C95B800A0D68B /* Random.swift in Sources */,
 				05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */,
 				05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */,
 				05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */,

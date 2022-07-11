@@ -35,6 +35,7 @@ public class Organism
     {
         [
             Age(),
+            Random(),
             CloseToTopBorder(),
             CloseToBottomBorder(),
             CloseToLeftBorder(),
