@@ -35,11 +35,8 @@ public class OutputGeneration
     {
         try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
         
-        let files = self.getFiles( in: source, fileExtension: "png" )
-        let keys  = files.keys.sorted
-        {
-            $0.path.compare( $1.path, options: [ .numeric, .caseInsensitive ], range: nil, locale: nil ) == .orderedAscending
-        }
+        let files = self.getFiles( in: source, fileExtension: "jpg" )
+        let keys  = files.keys.sorted { $0.path.numericCaseInsensitiveCompare( $1.path ) == .orderedAscending }
         
         keys.forEach
         {
@@ -63,71 +60,56 @@ public class OutputGeneration
         }
     }
     
-    @discardableResult
-    public class func writeSVGScriptForDotFiles( from source: URL, in directory: URL ) -> Bool
+    public class func generateSVGScriptsForDotFiles( from source: URL, in directory: URL )
     {
-        guard let enumerator = FileManager.default.enumerator( atPath: source.path ) else
-        {
-            return false
-        }
-        
         try? FileManager.default.createDirectory( at: directory, withIntermediateDirectories: true )
         
-        var lines: [ String ] = []
+        let files   = self.getFiles( in: source, fileExtension: "dot" )
+        let keys    = files.keys.sorted { $0.path.numericCaseInsensitiveCompare( $1.path ) == .orderedAscending }
+        var scripts = [ String ]()
         
-        enumerator.forEach
+        keys.forEach
         {
-            enumerator.skipDescendants()
-            
-            guard let name = $0 as? String else
+            key in guard let info = files[ key ] else
             {
                 return
             }
             
-            let url = source.appendingPathComponent( name )
-            var dir = ObjCBool( false )
+            let name   = key.path.replacingOccurrences( of: source.path, with: "" )
+            let dir    = directory.appendingPathComponent( name )
+            let script = dir.appendingPathComponent( "generate" ).appendingPathExtension( "sh" )
             
-            if FileManager.default.fileExists( atPath: url.path, isDirectory: &dir ), dir.boolValue
+            try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
+            
+            var lines: [ String ] = info.map
             {
-                let directory = directory.appendingPathComponent( name )
+                let name = $0.deletingPathExtension().lastPathComponent
+                let svg  = dir.appendingPathComponent( name ).appendingPathExtension( "svg" )
                 
-                if self.writeSVGScriptForDotFiles( from: url, in: directory )
-                {
-                    lines.append( "sh \( directory.appendingPathComponent( "generate.sh" ).path )" )
-                }
-                
-                return
+                return "/opt/homebrew/bin/dot -Tsvg -o\( svg.path ) \( $0.path )"
             }
             
-            if url.pathExtension != "dot"
+            lines.insert( "#!/bin/sh", at: 0 )
+            lines.insert( "", at: 1 )
+            
+            guard let data = lines.joined( separator: "\n" ).data( using: .utf8 ) else
             {
                 return
             }
             
-            let svg = directory.appendingPathComponent( name ).deletingPathExtension().appendingPathExtension( "svg" )
-            
-            lines.append( "/opt/homebrew/bin/dot -Tsvg -o\( svg.path ) \( url.path )" )
+            do
+            {
+                try data.write( to: script )
+                scripts.append( "sh \( script.path )" )
+            }
+            catch
+            {}
         }
         
-        if lines.isEmpty
-        {
-            return false
-        }
+        scripts.insert( "#!/bin/sh", at: 0 )
+        scripts.insert( "", at: 1 )
         
-        lines.sort
-        {
-            $0.compare( $1, options: [ .numeric, .caseInsensitive ], range: nil, locale: nil ) == .orderedAscending
-        }
-        
-        lines.insert( "#!/bin/sh", at: 0 )
-        lines.insert( "", at: 1 )
-        
-        if let data = lines.joined( separator: "\n" ).data( using: .utf8 )
-        {
-            try? data.write( to: directory.appendingPathComponent( "generate.sh" ) )
-        }
-        
-        return true
+        try? scripts.joined( separator: "\n" ).data( using: .utf8 )?.write( to: directory.appendingPathComponent( "generate" ).appendingPathExtension( "sh" ) )
     }
     
     public class func clearAll()
@@ -153,7 +135,7 @@ public class OutputGeneration
             
             let url = caches.appendingPathComponent( name )
             
-            NSWorkspace.shared.recycle( [ url ] )
+            try? FileManager.default.removeItem( at: url )
         }
     }
     
@@ -177,7 +159,7 @@ public class OutputGeneration
         }
         .sorted
         {
-            $0.path.compare( $1.path, options: [ .numeric, .caseInsensitive ], range: nil, locale: nil ) == .orderedAscending
+            $0.path.numericCaseInsensitiveCompare( $1.path ) == .orderedAscending
         }
         
         return files.reduce( into: [ URL : [ URL ] ]() )
