@@ -81,7 +81,7 @@ public class ImageGenerator
                 {
                     autoreleasepool
                     {
-                        let url    = dir.appendingPathComponent( "step-\( info.step ).png" )
+                        let url    = dir.appendingPathComponent( "step-\( info.step ).jpg" )
                         let image  = NSImage( size: size )
                         
                         image.lockFocus()
@@ -101,14 +101,7 @@ public class ImageGenerator
                         
                         image.unlockFocus()
                         
-                        if let cgImage = image.cgImage( forProposedRect: nil, context: nil, hints: nil )
-                        {
-                            let rep  = NSBitmapImageRep( cgImage: cgImage )
-                            rep.size = image.size
-                            let png  = rep.representation( using: .png, properties: [:] )
-                            
-                            try? png?.write( to: url )
-                        }
+                        try? image.jpegRepresentation?.write( to: url )
                         
                         group.leave()
                     }
