@@ -178,34 +178,23 @@ public class Organism
     
     public var color: NSColor
     {
-        var rgb = self.brain.synapses.enumerated().reduce( into: [ Int32() ] )
+        let hue = self.brain.synapses.map
         {
-            let value = Int32( bitPattern: $1.element.encode() )
-            let index = $1.offset % 3
-            
-            if index >= $0.count
+            $0.encode() >> 16
+        }
+        .enumerated().reduce( into: [ UInt32 ]() )
+        {
+            if $1.offset % 2 == 0
             {
-                $0.append( value )
+                $0.append( $1.element << 16 )
             }
             else
             {
-                $0[ index ] = $0[ index ] &+ value
+                $0[ $0.count - 1 ] |= $1.element
             }
         }
-        .map
-        {
-            UInt32( bitPattern: $0 )
-        }
+        .reduce( UInt32( 0 ) ) { $0 &+ $1 }
         
-        while rgb.count < 3
-        {
-            rgb.append( 0 )
-        }
-        
-        let r = Double( rgb[ 0 ] ) / Double( UInt32.max )
-        let g = Double( rgb[ 1 ] ) / Double( UInt32.max )
-        let b = Double( rgb[ 2 ] ) / Double( UInt32.max )
-        
-        return NSColor( calibratedRed: r, green: g, blue: b, alpha: 1 )
+        return NSColor( calibratedHue: CGFloat( hue ) / CGFloat( UInt32.max ), saturation: 1, brightness: 0.75, alpha: 1 )
     }
 }

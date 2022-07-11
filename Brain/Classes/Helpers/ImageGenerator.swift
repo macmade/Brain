@@ -90,13 +90,10 @@ public class ImageGenerator
                         
                         info.organisms.forEach
                         {
-                            let path       = NSBezierPath( ovalIn: NSRect( x: $0.point.x * factor, y: $0.point.y * factor, width: factor, height: factor ) )
-                            path.lineWidth = Double( factor ) / 16
+                            let path = NSBezierPath( ovalIn: NSRect( x: $0.point.x * factor, y: $0.point.y * factor, width: factor, height: factor ) )
                             
                             NSColor( rgba: $0.color ).setFill()
-                            NSColor.white.setStroke()
                             path.fill()
-                            path.stroke()
                         }
                         
                         image.unlockFocus()
