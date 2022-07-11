@@ -40,7 +40,7 @@ public class Simulation
         
         if let caches = Bundle.main.cachesDirectory?.appendingPathComponent( "com.xs-labs.Brain-\( UUID().uuidString )" )
         {
-            self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "png" ) )
+            self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "jpg" ) )
             self.dotGenerator    = DotGenerator(   cachesDirectory: caches.appendingPathComponent( "dot" ) )
             self.cachesDirectory = caches
         }
@@ -61,7 +61,6 @@ public class Simulation
                     self.world.spawnNewGeneration( from: survivors )
                     
                     print( "Generation \( self.world.currentGeneration ):" )
-                    print( "    - Spawned \( self.world.organisms.count ) organisms" )
                     
                     for _ in 0 ..< self.world.settings.stepsPerGeneration
                     {
@@ -77,13 +76,14 @@ public class Simulation
                         }
                     }
                     
-                    survivors = self.getSurvivors()
+                    survivors   = self.getSurvivors()
+                    let percent = Int( ( Double( survivors.count ) / Double( self.world.settings.population ) ) * 100 )
                     
-                    print( "    - \( survivors.count ) survivors" )
+                    print( "    - \( survivors.count ) survivors out of \( self.world.organisms.count ): \( percent )%" )
                     
+                    self.dotGenerator?.prepare( networks: self.world.organisms.map { $0.brain }, generation: self.world.currentGeneration )
                     self.world.removeOrganisms { organism in survivors.contains { $0 === organism } == false }
                     self.imageGenerator?.prepare( organisms: self.world.organisms, generation: self.world.currentGeneration, step: self.world.currentStep + 1 )
-                    self.dotGenerator?.prepare( networks: self.world.organisms.map { $0.brain }, generation: self.world.currentGeneration )
                 }
             }
         }
@@ -114,12 +114,12 @@ public class Simulation
         
         if let caches = self.cachesDirectory
         {
-            OutputGeneration.writeSVGScriptForDotFiles( from: caches.appendingPathComponent( "dot" ), in: caches.appendingPathComponent( "svg" ) )
+            OutputGeneration.generateSVGScriptsForDotFiles( from: caches.appendingPathComponent( "dot" ), in: caches.appendingPathComponent( "svg" ) )
             
             Benchmark.run
             {
                 print( "Generating movies:" )
-                OutputGeneration.generateMovies( from: caches.appendingPathComponent( "png" ), in: caches.appendingPathComponent( "mov" ), world: self.world )
+                OutputGeneration.generateMovies( from: caches.appendingPathComponent( "jpg" ), in: caches.appendingPathComponent( "mov" ), world: self.world )
             }
             finished:
             {
