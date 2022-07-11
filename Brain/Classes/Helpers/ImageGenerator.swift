@@ -26,7 +26,7 @@ import Cocoa
 
 public class ImageGenerator
 {
-    private var prepared       = [ ImageGenerationInfo ]()
+    private var prepared       = [ ImageGeneratorInfo ]()
     private let queue          = DispatchQueue( label: "com.xs-labs.Brain.ImageGenerator", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil )
     private var cachesDirectory: URL
     
@@ -39,11 +39,11 @@ public class ImageGenerator
     
     public func generate( world: World )
     {
-        let prepared = self.prepared.reduce( into: [ Int : [ ImageGenerationInfo ] ]() )
+        let prepared = self.prepared.reduce( into: [ Int : [ ImageGeneratorInfo ] ]() )
         {
             if $0[ $1.generation ] == nil
             {
-               $0[ $1.generation ] = [ ImageGenerationInfo ]()
+               $0[ $1.generation ] = [ ImageGeneratorInfo ]()
             }
             
             $0[ $1.generation ]?.append( $1 )
@@ -115,6 +115,6 @@ public class ImageGenerator
     
     public func prepare( organisms: [ Organism ], generation: Int, step: Int )
     {
-        self.prepared.append( ImageGenerationInfo( generation: generation, step: step, organisms: organisms ) )
+        self.prepared.append( ImageGeneratorInfo( generation: generation, step: step, organisms: organisms ) )
     }
 }

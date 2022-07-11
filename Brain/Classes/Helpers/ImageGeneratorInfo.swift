@@ -24,7 +24,7 @@
 
 import Cocoa
 
-public class ImageGenerationInfo
+public class ImageGeneratorInfo
 {
     public var generation: Int
     public var step:       Int

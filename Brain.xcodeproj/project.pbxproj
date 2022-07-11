@@ -38,7 +38,7 @@
 		05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */; };
 		05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0EF28785C4200A0D68B /* MoveX.swift */; };
 		05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F128785C4A00A0D68B /* MoveY.swift */; };
-		05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */; };
+		05BBA0F4287AF1BC00A0D68B /* ImageGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGeneratorInfo.swift */; };
 		05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F5287AF94F00A0D68B /* Benchmark.swift */; };
 		05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
 		05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FD287C84CC00A0D68B /* NSImage.swift */; };
@@ -139,7 +139,7 @@
 		05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputGeneration.swift; sourceTree = "<group>"; };
 		05BBA0EF28785C4200A0D68B /* MoveX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveX.swift; sourceTree = "<group>"; };
 		05BBA0F128785C4A00A0D68B /* MoveY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveY.swift; sourceTree = "<group>"; };
-		05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationInfo.swift; sourceTree = "<group>"; };
+		05BBA0F3287AF1BC00A0D68B /* ImageGeneratorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneratorInfo.swift; sourceTree = "<group>"; };
 		05BBA0F5287AF94F00A0D68B /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
 		05BBA0F7287AFE4E00A0D68B /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		05BBA0FD287C84CC00A0D68B /* NSImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
@@ -390,7 +390,7 @@
 			children = (
 				05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */,
 				05BBA0732873D6E000A0D68B /* ImageGenerator.swift */,
-				05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */,
+				05BBA0F3287AF1BC00A0D68B /* ImageGeneratorInfo.swift */,
 				05BBA08828747D9B00A0D68B /* Synchronizable.swift */,
 				05BBA07728745B7E00A0D68B /* TimeTransformer.swift */,
 				05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */,
@@ -484,7 +484,7 @@
 				05BBA0A72874B8F600A0D68B /* Age.swift in Sources */,
 				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
 				05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */,
-				05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */,
+				05BBA0F4287AF1BC00A0D68B /* ImageGeneratorInfo.swift in Sources */,
 				05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */,
 				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
 				05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */,
