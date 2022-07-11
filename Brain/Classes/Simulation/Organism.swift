@@ -129,23 +129,34 @@ public class Organism
         return false
     }
     
-    public func mutate() -> Organism?
+    public func replicate() -> Organism?
     {
-        let inputs        = self.brain.inputs.compactMap   { $0.copy() as? Input }
-        let outputs       = self.brain.outputs.compactMap  { $0.copy() as? Output }
-        let neurons       = self.brain.neurons.compactMap  { $0.copy() as? Neuron }
-        var synapses      = self.brain.synapses.compactMap { $0.copy() as? Synapse }
-        let index         = Int.random( in: 0 ..< synapses.count )
-        let encoded       = synapses[ index ].encode()
-        let mutate        = UInt32( 1 ) << Int.random( in: 0 ..< encoded.bitWidth )
-        synapses[ index ] = Synapse( from: encoded ^ mutate )
+        guard let world = self.world else
+        {
+            return nil
+        }
+        
+        let synapses: [ Synapse ] = self.brain.synapses.compactMap
+        {
+            if Double.random( in: 0 ... 100 ) > world.settings.mutationChance
+            {
+                return $0.copy() as? Synapse
+            }
+            
+            let encoded = $0.encode()
+            let mutate  = UInt32( 1 ) << Int.random( in: 0 ..< encoded.bitWidth )
+            
+            return Synapse( from: encoded ^ mutate )
+        }
+        
+        let inputs  = self.brain.inputs.compactMap  { $0.copy() as? Input }
+        let outputs = self.brain.outputs.compactMap { $0.copy() as? Output }
+        let neurons = self.brain.neurons.compactMap { $0.copy() as? Neuron }
         
         outputs.forEach { $0.reset() }
         neurons.forEach { $0.reset() }
         
-        guard let world = self.world,
-              let brain = NeuralNetwork( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses )
-        else
+        guard let brain = NeuralNetwork( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses ) else
         {
             return nil
         }

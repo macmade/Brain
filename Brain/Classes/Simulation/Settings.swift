@@ -31,6 +31,7 @@ public class Settings: Codable
     public var population          = 200
     public var numberOfGenerations = 100
     public var stepsPerGeneration  = 200
+    public var mutationChance      = 2.0
     public var gridWidth           = 200
     public var gridHeight          = 200
     public var imageScaleFactor    = 2
