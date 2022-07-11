@@ -46,27 +46,12 @@ public class World
         self.currentGeneration += 1
         self.currentStep        = 0
         
-        var organisms = organisms
+        self.organisms = ( 0 ..< self.settings.population ).compactMap
+        {
+            _ in organisms.randomElement()?.replicate() ?? Organism.random( world: self )
+        }
         
-        if organisms.isEmpty
-        {
-            self.organisms = ( 0 ..< self.settings.population ).compactMap
-            {
-                _ in Organism.random( world: self )
-            }
-        }
-        else
-        {
-            while organisms.count < self.settings.population
-            {
-                organisms.append( contentsOf: organisms )
-            }
-            
-            self.organisms = organisms.prefix( self.settings.population ).compactMap
-            {
-                $0.mutate()
-            }
-        }
+        var points: [ Point ] = []
         
         self.organisms.forEach
         {
@@ -76,10 +61,12 @@ public class World
                 let y             = Int.random( in: 0 ..< size.height )
                 organism.position = Point( x: x, y: y )
             }
-            while organisms.contains
+            while points.contains
             {
-                $0 !== organism && $0.position == organism.position
+                $0 == organism.position
             }
+            
+            points.append( organism.position )
         }
     }
     
