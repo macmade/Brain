@@ -55,6 +55,7 @@
 		05BBA178287CCF0900A0D68B /* libBrainKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBA13B287CCDEE00A0D68B /* libBrainKit.a */; };
 		05BBA17F287CD62400A0D68B /* BorderInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA17E287CD62400A0D68B /* BorderInputs.swift */; };
 		05BBA181287CD81500A0D68B /* AgeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA180287CD81500A0D68B /* AgeInput.swift */; };
+		05BBA183287CDC7900A0D68B /* RandomInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA182287CDC7900A0D68B /* RandomInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,7 @@
 		05BBA176287CCF0900A0D68B /* BarrierInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierInputs.swift; sourceTree = "<group>"; };
 		05BBA17E287CD62400A0D68B /* BorderInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderInputs.swift; sourceTree = "<group>"; };
 		05BBA180287CD81500A0D68B /* AgeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeInput.swift; sourceTree = "<group>"; };
+		05BBA182287CDC7900A0D68B /* RandomInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -484,6 +486,7 @@
 				05BBA176287CCF0900A0D68B /* BarrierInputs.swift */,
 				05BBA17E287CD62400A0D68B /* BorderInputs.swift */,
 				05BBA180287CD81500A0D68B /* AgeInput.swift */,
+				05BBA182287CDC7900A0D68B /* RandomInput.swift */,
 			);
 			path = "BrainKit-Tests";
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05BBA181287CD81500A0D68B /* AgeInput.swift in Sources */,
+				05BBA183287CDC7900A0D68B /* RandomInput.swift in Sources */,
 				05BBA177287CCF0900A0D68B /* BarrierInputs.swift in Sources */,
 				05BBA17F287CD62400A0D68B /* BorderInputs.swift in Sources */,
 			);
