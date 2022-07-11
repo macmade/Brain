@@ -46,6 +46,10 @@
 		05BBA115287C8E2B00A0D68B /* WaitableOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */; };
 		05BBA117287C934200A0D68B /* DotGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA116287C934200A0D68B /* DotGeneratorInfo.swift */; };
 		05BBA119287C95B800A0D68B /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA118287C95B800A0D68B /* Random.swift */; };
+		05BBA11B287CAB9B00A0D68B /* BarrierLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11A287CAB9B00A0D68B /* BarrierLeft.swift */; };
+		05BBA11D287CABD400A0D68B /* BarrierRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11C287CABD400A0D68B /* BarrierRight.swift */; };
+		05BBA11F287CABDC00A0D68B /* BarrierUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11E287CABDC00A0D68B /* BarrierUp.swift */; };
+		05BBA121287CABF300A0D68B /* BarrierDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA120287CABF300A0D68B /* BarrierDown.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -150,6 +154,10 @@
 		05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitableOperationQueue.swift; sourceTree = "<group>"; };
 		05BBA116287C934200A0D68B /* DotGeneratorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGeneratorInfo.swift; sourceTree = "<group>"; };
 		05BBA118287C95B800A0D68B /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		05BBA11A287CAB9B00A0D68B /* BarrierLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierLeft.swift; sourceTree = "<group>"; };
+		05BBA11C287CABD400A0D68B /* BarrierRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierRight.swift; sourceTree = "<group>"; };
+		05BBA11E287CABDC00A0D68B /* BarrierUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierUp.swift; sourceTree = "<group>"; };
+		05BBA120287CABF300A0D68B /* BarrierDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierDown.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +358,10 @@
 				05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */,
 				05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */,
 				05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */,
+				05BBA11A287CAB9B00A0D68B /* BarrierLeft.swift */,
+				05BBA11C287CABD400A0D68B /* BarrierRight.swift */,
+				05BBA11E287CABDC00A0D68B /* BarrierUp.swift */,
+				05BBA120287CABF300A0D68B /* BarrierDown.swift */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
@@ -478,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05BBA0B12874F59E00A0D68B /* CloseToBottomBorder.swift in Sources */,
+				05BBA121287CABF300A0D68B /* BarrierDown.swift in Sources */,
 				05BBA076287452C300A0D68B /* Simulation.swift in Sources */,
 				05BBA119287C95B800A0D68B /* Random.swift in Sources */,
 				05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */,
@@ -487,6 +500,7 @@
 				05BBA0572873803000A0D68B /* Organism.swift in Sources */,
 				05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */,
 				05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */,
+				05BBA11D287CABD400A0D68B /* BarrierRight.swift in Sources */,
 				05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */,
 				05BBA0A028749DDC00A0D68B /* VideoGenerator.swift in Sources */,
 				05BB9FC628722C2300A0D68B /* Output.swift in Sources */,
@@ -508,12 +522,14 @@
 				05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */,
 				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
 				05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */,
+				05BBA11F287CABDC00A0D68B /* BarrierUp.swift in Sources */,
 				05BBA08528747A7500A0D68B /* Bundle.swift in Sources */,
 				05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */,
 				05BBA100287C84EF00A0D68B /* String.swift in Sources */,
 				05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */,
 				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
 				05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */,
+				05BBA11B287CAB9B00A0D68B /* BarrierLeft.swift in Sources */,
 				05BBA06E2873B7F200A0D68B /* World.swift in Sources */,
 				05BBA0702873B98200A0D68B /* Size.swift in Sources */,
 			);

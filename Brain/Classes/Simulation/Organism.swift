@@ -40,6 +40,10 @@ public class Organism
             CloseToBottomBorder(),
             CloseToLeftBorder(),
             CloseToRightBorder(),
+            BarrierUp(),
+            BarrierDown(),
+            BarrierLeft(),
+            BarrierRight(),
         ]
     }
     

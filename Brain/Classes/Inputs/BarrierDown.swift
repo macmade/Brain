@@ -24,36 +24,39 @@
 
 import Foundation
 
-public class Settings: Codable
+public class BarrierDown: Input
 {
-    public var numberOfNeurons:     UInt   = 5
-    public var numberOfSynapses:    UInt   = 20
-    public var population:          UInt   = 200
-    public var numberOfGenerations: UInt   = 200
-    public var stepsPerGeneration:  UInt   = 200
-    public var mutationChance:      Double = 2
-    public var gridWidth:           UInt   = 200
-    public var gridHeight:          UInt   = 200
-    public var imageScaleFactor:    UInt   = 2
-    public var videoFPS:            UInt   = 10
+    public override var name: String
+    {
+        "BrD"
+    }
     
-    public var surviveAreas: [ Rect ] =
-    [
-        Rect( x: 0, y: 75, width: 50, height: 50 ),
-    ]
+    public override func copy( with zone: NSZone? = nil ) -> Any
+    {
+        BarrierDown()
+    }
     
-    public var killAreas: [ Rect ] =
-    [
-        Rect( x: 0, y: 0, width: 1, height: 200 ),
-    ]
-    
-    public var barriers =
-    [
-        Rect( x: 60, y:  15, width: 10, height: 20 ),
-        Rect( x: 60, y:  45, width: 10, height: 20 ),
-        Rect( x: 60, y:  75, width: 10, height: 20 ),
-        Rect( x: 60, y: 105, width: 10, height: 20 ),
-        Rect( x: 60, y: 135, width: 10, height: 20 ),
-        Rect( x: 60, y: 165, width: 10, height: 20 ),
-    ]
+    public override var value: Double
+    {
+        guard let organism = self.organism, let world = organism.world else
+        {
+            return 0
+        }
+        
+        var point = organism.position
+        
+        while point.y > 0
+        {
+            if let barrier = world.settings.barriers.first( where: { $0.contains( point: point ) } )
+            {
+                let distance = point.y - barrier.origin.y
+                
+                return Double( world.size.height - distance ) / Double( world.size.height - 1 )
+            }
+            
+            point.y -= 1
+        }
+        
+        return 0
+    }
 }
