@@ -24,7 +24,7 @@
 		05BBA0742873D6E000A0D68B /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0732873D6E000A0D68B /* ImageGenerator.swift */; };
 		05BBA076287452C300A0D68B /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA075287452C300A0D68B /* Simulation.swift */; };
 		05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA07728745B7E00A0D68B /* TimeTransformer.swift */; };
-		05BBA08528747A7500A0D68B /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08428747A7500A0D68B /* NSBundle.swift */; };
+		05BBA08528747A7500A0D68B /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08428747A7500A0D68B /* Bundle.swift */; };
 		05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08828747D9B00A0D68B /* Synchronizable.swift */; };
 		05BBA0A028749DDC00A0D68B /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */; };
 		05BBA0A72874B8F600A0D68B /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A62874B8F600A0D68B /* Age.swift */; };
@@ -123,7 +123,7 @@
 		05BBA07728745B7E00A0D68B /* TimeTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTransformer.swift; sourceTree = "<group>"; };
 		05BBA079287466F600A0D68B /* Brain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Brain.entitlements; sourceTree = "<group>"; };
 		05BBA07A2874676200A0D68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05BBA08428747A7500A0D68B /* NSBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSBundle.swift; sourceTree = "<group>"; };
+		05BBA08428747A7500A0D68B /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		05BBA08828747D9B00A0D68B /* Synchronizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
 		05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGenerator.swift; sourceTree = "<group>"; };
 		05BBA0A62874B8F600A0D68B /* Age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 		05BBA0B4287579BF00A0D68B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				05BBA08428747A7500A0D68B /* NSBundle.swift */,
+				05BBA08428747A7500A0D68B /* Bundle.swift */,
 				05BBA0F7287AFE4E00A0D68B /* NSColor.swift */,
 			);
 			path = Extensions;
@@ -489,7 +489,7 @@
 				05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */,
 				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
 				05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */,
-				05BBA08528747A7500A0D68B /* NSBundle.swift in Sources */,
+				05BBA08528747A7500A0D68B /* Bundle.swift in Sources */,
 				05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */,
 				05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */,
 				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
