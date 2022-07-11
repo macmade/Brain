@@ -99,16 +99,21 @@ class VideoGenerator
                 writer.startSession( atSourceTime: .zero )
                 group.enter()
                 
+                var time = CMTimeMake( value: 0, timescale: self.fps )
+                
                 input.requestMediaDataWhenReady( on: self.queue )
                 {
-                    var time = CMTimeMake( value: 0, timescale: self.fps )
-                    
                     while input.isReadyForMoreMediaData && images.isEmpty == false
                     {
-                        guard self.append( image: images.removeFirst(), adaptor: adaptor, time: time ) else
+                        guard let image = images.first, self.append( image: image, adaptor: adaptor, time: time ) else
                         {
+                            input.markAsFinished()
+                            group.leave()
+                            
                             break
                         }
+                        
+                        images.removeFirst()
                         
                         time = CMTimeAdd( time, CMTimeMake( value: 1, timescale: self.fps ) )
                     }
