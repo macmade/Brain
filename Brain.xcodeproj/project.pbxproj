@@ -53,6 +53,7 @@
 		05BBA16F287CCE7300A0D68B /* libBrainKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBA13B287CCDEE00A0D68B /* libBrainKit.a */; };
 		05BBA177287CCF0900A0D68B /* Barriers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA176287CCF0900A0D68B /* Barriers.swift */; };
 		05BBA178287CCF0900A0D68B /* libBrainKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBA13B287CCDEE00A0D68B /* libBrainKit.a */; };
+		05BBA17F287CD62400A0D68B /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA17E287CD62400A0D68B /* Borders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,7 @@
 		05BBA13B287CCDEE00A0D68B /* libBrainKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBrainKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BBA174287CCF0900A0D68B /* BrainKit-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrainKit-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BBA176287CCF0900A0D68B /* Barriers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barriers.swift; sourceTree = "<group>"; };
+		05BBA17E287CD62400A0D68B /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				05BBA176287CCF0900A0D68B /* Barriers.swift */,
+				05BBA17E287CD62400A0D68B /* Borders.swift */,
 			);
 			path = "BrainKit-Tests";
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05BBA177287CCF0900A0D68B /* Barriers.swift in Sources */,
+				05BBA17F287CD62400A0D68B /* Borders.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

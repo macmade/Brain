@@ -43,6 +43,6 @@ public class CloseToTopBorder: Input
             return 0
         }
         
-        return Double( organism.position.y ) / Double( world.size.height )
+        return Double( organism.position.y ) / Double( world.size.height - 1 )
     }
 }

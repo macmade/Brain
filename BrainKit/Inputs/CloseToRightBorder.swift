@@ -43,6 +43,6 @@ public class CloseToRightBorder: Input
             return 0
         }
         
-        return Double( organism.position.x ) / Double( world.size.width )
+        return Double( organism.position.x ) / Double( world.size.width - 1 )
     }
 }
