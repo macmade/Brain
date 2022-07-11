@@ -155,6 +155,7 @@ class VideoGenerator
             
             CVPixelBufferLockBaseAddress( buffer, CVPixelBufferLockFlags( rawValue: 0 ) )
             
+            let info    = url.pathExtension == "jpg" || url.pathExtension == "jpeg" ? CGImageAlphaInfo.premultipliedFirst.rawValue : CGImageAlphaInfo.premultipliedLast.rawValue
             let context = CGContext(
                 data:             CVPixelBufferGetBaseAddress( buffer ),
                 width:            Int( image.size.width ),
@@ -162,7 +163,7 @@ class VideoGenerator
                 bitsPerComponent: 8,
                 bytesPerRow:      CVPixelBufferGetBytesPerRow( buffer ),
                 space:            CGColorSpaceCreateDeviceRGB(),
-                bitmapInfo:       CGImageAlphaInfo.premultipliedFirst.rawValue
+                bitmapInfo:       info
             )
             
             guard let context = context else
