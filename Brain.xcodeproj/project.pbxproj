@@ -41,6 +41,7 @@
 		05BBA0F4287AF1BC00A0D68B /* ImageGenerationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */; };
 		05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F5287AF94F00A0D68B /* Benchmark.swift */; };
 		05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
+		05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FD287C84CC00A0D68B /* NSImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -140,6 +141,7 @@
 		05BBA0F3287AF1BC00A0D68B /* ImageGenerationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationInfo.swift; sourceTree = "<group>"; };
 		05BBA0F5287AF94F00A0D68B /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
 		05BBA0F7287AFE4E00A0D68B /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
+		05BBA0FD287C84CC00A0D68B /* NSImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +375,7 @@
 		05BBA0B4287579BF00A0D68B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				05BBA0FD287C84CC00A0D68B /* NSImage.swift */,
 				05BBA08428747A7500A0D68B /* Bundle.swift */,
 				05BBA0F7287AFE4E00A0D68B /* NSColor.swift */,
 			);
@@ -466,6 +469,7 @@
 				05BBA076287452C300A0D68B /* Simulation.swift in Sources */,
 				05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */,
 				05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */,
+				05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */,
 				05BB9FCC28722C3D00A0D68B /* SynapseDestination.swift in Sources */,
 				05BBA0572873803000A0D68B /* Organism.swift in Sources */,
 				05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */,
