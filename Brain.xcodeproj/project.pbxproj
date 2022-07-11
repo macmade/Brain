@@ -42,6 +42,7 @@
 		05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F5287AF94F00A0D68B /* Benchmark.swift */; };
 		05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
 		05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FD287C84CC00A0D68B /* NSImage.swift */; };
+		05BBA100287C84EF00A0D68B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FF287C84EF00A0D68B /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -142,6 +143,7 @@
 		05BBA0F5287AF94F00A0D68B /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
 		05BBA0F7287AFE4E00A0D68B /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		05BBA0FD287C84CC00A0D68B /* NSImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		05BBA0FF287C84EF00A0D68B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,9 +377,10 @@
 		05BBA0B4287579BF00A0D68B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				05BBA0FD287C84CC00A0D68B /* NSImage.swift */,
 				05BBA08428747A7500A0D68B /* Bundle.swift */,
 				05BBA0F7287AFE4E00A0D68B /* NSColor.swift */,
+				05BBA0FD287C84CC00A0D68B /* NSImage.swift */,
+				05BBA0FF287C84EF00A0D68B /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */,
 				05BBA08528747A7500A0D68B /* Bundle.swift in Sources */,
 				05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */,
+				05BBA100287C84EF00A0D68B /* String.swift in Sources */,
 				05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */,
 				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
 				05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */,
