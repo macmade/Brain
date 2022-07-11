@@ -24,16 +24,16 @@
 
 import Foundation
 
-public class BarrierRight: Input
+public class BarrierUp: Input
 {
     public override var name: String
     {
-        "BrR"
+        "BrU"
     }
     
     public override func copy( with zone: NSZone? = nil ) -> Any
     {
-        BarrierRight()
+        BarrierUp()
     }
     
     public override var value: Double
@@ -43,18 +43,22 @@ public class BarrierRight: Input
             return 0
         }
         
-        var point = organism.position
-        
-        while point.x < world.size.width
+        let distances = world.settings.barriers.filter
         {
-            if let barrier = world.settings.barriers.first( where: { $0.contains( point: point ) } )
-            {
-                let distance = barrier.origin.x - point.x
-                
-                return Double( world.size.width - distance ) / Double( world.size.width - 1 )
-            }
-            
-            point.x += 1
+            $0.origin.y > organism.position.y && $0.origin.x <= organism.position.x && $0.origin.x + $0.size.width >= organism.position.x
+        }
+        .map
+        {
+             $0.origin.y - organism.position.y
+        }
+        .sorted
+        {
+            $0 < $1
+        }
+        
+        if let distance = distances.first
+        {
+            return Double( world.size.height - distance ) / Double( world.size.height - 1 )
         }
         
         return 0

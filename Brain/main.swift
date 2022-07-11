@@ -23,6 +23,7 @@
  ******************************************************************************/
 
 import Cocoa
+import BrainKit
 
 fileprivate let settings   = Settings()
 fileprivate let world      = World( settings: settings )

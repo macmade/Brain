@@ -8,48 +8,49 @@
 
 /* Begin PBXBuildFile section */
 		05B6C313286F4D810065CD26 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B6C312286F4D810065CD26 /* main.swift */; };
-		05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FBF28722BF300A0D68B /* Synapse.swift */; };
-		05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC128722C0600A0D68B /* NeuralNetwork.swift */; };
-		05BB9FC428722C1D00A0D68B /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC328722C1D00A0D68B /* Input.swift */; };
-		05BB9FC628722C2300A0D68B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC528722C2300A0D68B /* Output.swift */; };
-		05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC728722C2A00A0D68B /* Neuron.swift */; };
-		05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC928722C3500A0D68B /* SynapseSource.swift */; };
-		05BB9FCC28722C3D00A0D68B /* SynapseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FCB28722C3D00A0D68B /* SynapseDestination.swift */; };
-		05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05228735BF600A0D68B /* SynapseConnection.swift */; };
-		05BBA05528737FF800A0D68B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05428737FF800A0D68B /* Settings.swift */; };
-		05BBA0572873803000A0D68B /* Organism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0562873803000A0D68B /* Organism.swift */; };
-		05BBA06E2873B7F200A0D68B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06D2873B7F200A0D68B /* World.swift */; };
-		05BBA0702873B98200A0D68B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06F2873B98200A0D68B /* Size.swift */; };
-		05BBA0722873B98900A0D68B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0712873B98900A0D68B /* Point.swift */; };
-		05BBA0742873D6E000A0D68B /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0732873D6E000A0D68B /* ImageGenerator.swift */; };
-		05BBA076287452C300A0D68B /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA075287452C300A0D68B /* Simulation.swift */; };
-		05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA07728745B7E00A0D68B /* TimeTransformer.swift */; };
-		05BBA08528747A7500A0D68B /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08428747A7500A0D68B /* Bundle.swift */; };
-		05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08828747D9B00A0D68B /* Synchronizable.swift */; };
-		05BBA0A028749DDC00A0D68B /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */; };
-		05BBA0A72874B8F600A0D68B /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A62874B8F600A0D68B /* Age.swift */; };
-		05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */; };
-		05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */; };
-		05BBA0AF2874F59E00A0D68B /* CloseToRightBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */; };
-		05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */; };
-		05BBA0B12874F59E00A0D68B /* CloseToBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AD2874F59E00A0D68B /* CloseToBottomBorder.swift */; };
-		05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D02875A9F800A0D68B /* Rect.swift */; };
-		05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D32875B18F00A0D68B /* SurviveState.swift */; };
-		05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */; };
-		05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0EF28785C4200A0D68B /* MoveX.swift */; };
-		05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F128785C4A00A0D68B /* MoveY.swift */; };
-		05BBA0F4287AF1BC00A0D68B /* ImageGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGeneratorInfo.swift */; };
-		05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F5287AF94F00A0D68B /* Benchmark.swift */; };
-		05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
-		05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FD287C84CC00A0D68B /* NSImage.swift */; };
-		05BBA100287C84EF00A0D68B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FF287C84EF00A0D68B /* String.swift */; };
-		05BBA115287C8E2B00A0D68B /* WaitableOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */; };
-		05BBA117287C934200A0D68B /* DotGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA116287C934200A0D68B /* DotGeneratorInfo.swift */; };
-		05BBA119287C95B800A0D68B /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA118287C95B800A0D68B /* Random.swift */; };
-		05BBA11B287CAB9B00A0D68B /* BarrierLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11A287CAB9B00A0D68B /* BarrierLeft.swift */; };
-		05BBA11D287CABD400A0D68B /* BarrierRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11C287CABD400A0D68B /* BarrierRight.swift */; };
-		05BBA11F287CABDC00A0D68B /* BarrierUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11E287CABDC00A0D68B /* BarrierUp.swift */; };
-		05BBA121287CABF300A0D68B /* BarrierDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA120287CABF300A0D68B /* BarrierDown.swift */; };
+		05BBA144287CCE6500A0D68B /* CloseToLeftBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AC2874F59E00A0D68B /* CloseToLeftBorder.swift */; };
+		05BBA145287CCE6500A0D68B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06F2873B98200A0D68B /* Size.swift */; };
+		05BBA146287CCE6500A0D68B /* WaitableOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA114287C8E2B00A0D68B /* WaitableOperationQueue.swift */; };
+		05BBA147287CCE6500A0D68B /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08828747D9B00A0D68B /* Synchronizable.swift */; };
+		05BBA148287CCE6500A0D68B /* BarrierUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11E287CABDC00A0D68B /* BarrierUp.swift */; };
+		05BBA149287CCE6500A0D68B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0712873B98900A0D68B /* Point.swift */; };
+		05BBA14A287CCE6500A0D68B /* SynapseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FCB28722C3D00A0D68B /* SynapseDestination.swift */; };
+		05BBA14B287CCE6500A0D68B /* Organism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0562873803000A0D68B /* Organism.swift */; };
+		05BBA14C287CCE6500A0D68B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05428737FF800A0D68B /* Settings.swift */; };
+		05BBA14D287CCE6500A0D68B /* BarrierRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11C287CABD400A0D68B /* BarrierRight.swift */; };
+		05BBA14E287CCE6500A0D68B /* DotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A82874D2AB00A0D68B /* DotGenerator.swift */; };
+		05BBA14F287CCE6500A0D68B /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FD287C84CC00A0D68B /* NSImage.swift */; };
+		05BBA150287CCE6500A0D68B /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0732873D6E000A0D68B /* ImageGenerator.swift */; };
+		05BBA151287CCE6500A0D68B /* OutputGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D52875CA8B00A0D68B /* OutputGeneration.swift */; };
+		05BBA152287CCE6500A0D68B /* CloseToBottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AD2874F59E00A0D68B /* CloseToBottomBorder.swift */; };
+		05BBA153287CCE6500A0D68B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0FF287C84EF00A0D68B /* String.swift */; };
+		05BBA154287CCE6500A0D68B /* Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FBF28722BF300A0D68B /* Synapse.swift */; };
+		05BBA155287CCE6500A0D68B /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F5287AF94F00A0D68B /* Benchmark.swift */; };
+		05BBA156287CCE6500A0D68B /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA075287452C300A0D68B /* Simulation.swift */; };
+		05BBA157287CCE6500A0D68B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA06D2873B7F200A0D68B /* World.swift */; };
+		05BBA158287CCE6500A0D68B /* CloseToTopBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AA2874F59E00A0D68B /* CloseToTopBorder.swift */; };
+		05BBA159287CCE6500A0D68B /* SynapseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA05228735BF600A0D68B /* SynapseConnection.swift */; };
+		05BBA15A287CCE6500A0D68B /* Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC728722C2A00A0D68B /* Neuron.swift */; };
+		05BBA15B287CCE6500A0D68B /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA118287C95B800A0D68B /* Random.swift */; };
+		05BBA15C287CCE6500A0D68B /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D02875A9F800A0D68B /* Rect.swift */; };
+		05BBA15D287CCE6500A0D68B /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA08428747A7500A0D68B /* Bundle.swift */; };
+		05BBA15E287CCE6500A0D68B /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA09F28749DDC00A0D68B /* VideoGenerator.swift */; };
+		05BBA15F287CCE6500A0D68B /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC128722C0600A0D68B /* NeuralNetwork.swift */; };
+		05BBA160287CCE6500A0D68B /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0A62874B8F600A0D68B /* Age.swift */; };
+		05BBA161287CCE6500A0D68B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC528722C2300A0D68B /* Output.swift */; };
+		05BBA162287CCE6500A0D68B /* TimeTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA07728745B7E00A0D68B /* TimeTransformer.swift */; };
+		05BBA163287CCE6500A0D68B /* ImageGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F3287AF1BC00A0D68B /* ImageGeneratorInfo.swift */; };
+		05BBA164287CCE6500A0D68B /* SurviveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0D32875B18F00A0D68B /* SurviveState.swift */; };
+		05BBA165287CCE6500A0D68B /* CloseToRightBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0AB2874F59E00A0D68B /* CloseToRightBorder.swift */; };
+		05BBA166287CCE6500A0D68B /* MoveX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0EF28785C4200A0D68B /* MoveX.swift */; };
+		05BBA167287CCE6500A0D68B /* MoveY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F128785C4A00A0D68B /* MoveY.swift */; };
+		05BBA168287CCE6500A0D68B /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA0F7287AFE4E00A0D68B /* NSColor.swift */; };
+		05BBA169287CCE6500A0D68B /* BarrierLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA11A287CAB9B00A0D68B /* BarrierLeft.swift */; };
+		05BBA16A287CCE6500A0D68B /* SynapseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC928722C3500A0D68B /* SynapseSource.swift */; };
+		05BBA16B287CCE6500A0D68B /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BB9FC328722C1D00A0D68B /* Input.swift */; };
+		05BBA16C287CCE6500A0D68B /* DotGeneratorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA116287C934200A0D68B /* DotGeneratorInfo.swift */; };
+		05BBA16D287CCE6500A0D68B /* BarrierDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA120287CABF300A0D68B /* BarrierDown.swift */; };
+		05BBA16F287CCE7300A0D68B /* libBrainKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBA13B287CCDEE00A0D68B /* libBrainKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -158,10 +159,19 @@
 		05BBA11C287CABD400A0D68B /* BarrierRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierRight.swift; sourceTree = "<group>"; };
 		05BBA11E287CABDC00A0D68B /* BarrierUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierUp.swift; sourceTree = "<group>"; };
 		05BBA120287CABF300A0D68B /* BarrierDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarrierDown.swift; sourceTree = "<group>"; };
+		05BBA13B287CCDEE00A0D68B /* libBrainKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBrainKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		05B6C30C286F4D810065CD26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05BBA16F287CCE7300A0D68B /* libBrainKit.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05BBA139287CCDEE00A0D68B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -177,7 +187,9 @@
 				05BB9FBE2872294400A0D68B /* README.md */,
 				05BB9FCE28722D3A00A0D68B /* xcconfig */,
 				05B6C311286F4D810065CD26 /* Brain */,
+				05BBA13C287CCDEE00A0D68B /* BrainKit */,
 				05B6C310286F4D810065CD26 /* Products */,
+				05BBA16E287CCE7300A0D68B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				05B6C30F286F4D810065CD26 /* Brain */,
+				05BBA13B287CCDEE00A0D68B /* libBrainKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,24 +207,9 @@
 			children = (
 				05BBA079287466F600A0D68B /* Brain.entitlements */,
 				05BBA07A2874676200A0D68B /* Info.plist */,
-				05BB9FCD28722CA500A0D68B /* Classes */,
 				05B6C312286F4D810065CD26 /* main.swift */,
 			);
 			path = Brain;
-			sourceTree = "<group>";
-		};
-		05BB9FCD28722CA500A0D68B /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				05BBA0B4287579BF00A0D68B /* Extensions */,
-				05BBA0D22875A9FF00A0D68B /* Geometry */,
-				05BBA0B5287579D400A0D68B /* Helpers */,
-				05BBA0A12874A76900A0D68B /* Inputs */,
-				05BBA0B22875796E00A0D68B /* Neural Network */,
-				05BBA07B287470E100A0D68B /* Outputs */,
-				05BBA0B3287579A900A0D68B /* Simulation */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		05BB9FCE28722D3A00A0D68B /* xcconfig */ = {
@@ -431,7 +429,38 @@
 			path = Geometry;
 			sourceTree = "<group>";
 		};
+		05BBA13C287CCDEE00A0D68B /* BrainKit */ = {
+			isa = PBXGroup;
+			children = (
+				05BBA0B4287579BF00A0D68B /* Extensions */,
+				05BBA0D22875A9FF00A0D68B /* Geometry */,
+				05BBA0B5287579D400A0D68B /* Helpers */,
+				05BBA0A12874A76900A0D68B /* Inputs */,
+				05BBA0B22875796E00A0D68B /* Neural Network */,
+				05BBA07B287470E100A0D68B /* Outputs */,
+				05BBA0B3287579A900A0D68B /* Simulation */,
+			);
+			path = BrainKit;
+			sourceTree = "<group>";
+		};
+		05BBA16E287CCE7300A0D68B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		05BBA137287CCDEE00A0D68B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		05B6C30E286F4D810065CD26 /* Brain */ = {
@@ -451,6 +480,23 @@
 			productReference = 05B6C30F286F4D810065CD26 /* Brain */;
 			productType = "com.apple.product-type.tool";
 		};
+		05BBA13A287CCDEE00A0D68B /* BrainKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05BBA143287CCDEE00A0D68B /* Build configuration list for PBXNativeTarget "BrainKit" */;
+			buildPhases = (
+				05BBA137287CCDEE00A0D68B /* Headers */,
+				05BBA138287CCDEE00A0D68B /* Sources */,
+				05BBA139287CCDEE00A0D68B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BrainKit;
+			productName = BrainKit;
+			productReference = 05BBA13B287CCDEE00A0D68B /* libBrainKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -462,6 +508,9 @@
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					05B6C30E286F4D810065CD26 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					05BBA13A287CCDEE00A0D68B = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
 				};
@@ -480,6 +529,7 @@
 			projectRoot = "";
 			targets = (
 				05B6C30E286F4D810065CD26 /* Brain */,
+				05BBA13A287CCDEE00A0D68B /* BrainKit */,
 			);
 		};
 /* End PBXProject section */
@@ -489,49 +539,56 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05BBA0B12874F59E00A0D68B /* CloseToBottomBorder.swift in Sources */,
-				05BBA121287CABF300A0D68B /* BarrierDown.swift in Sources */,
-				05BBA076287452C300A0D68B /* Simulation.swift in Sources */,
-				05BBA119287C95B800A0D68B /* Random.swift in Sources */,
-				05BBA0B02874F59E00A0D68B /* CloseToLeftBorder.swift in Sources */,
-				05BBA08928747D9B00A0D68B /* Synchronizable.swift in Sources */,
-				05BBA0FE287C84CC00A0D68B /* NSImage.swift in Sources */,
-				05BB9FCC28722C3D00A0D68B /* SynapseDestination.swift in Sources */,
-				05BBA0572873803000A0D68B /* Organism.swift in Sources */,
-				05BBA0F028785C4200A0D68B /* MoveX.swift in Sources */,
-				05BBA05328735BF600A0D68B /* SynapseConnection.swift in Sources */,
-				05BBA11D287CABD400A0D68B /* BarrierRight.swift in Sources */,
-				05BBA0A92874D2AB00A0D68B /* DotGenerator.swift in Sources */,
-				05BBA0A028749DDC00A0D68B /* VideoGenerator.swift in Sources */,
-				05BB9FC628722C2300A0D68B /* Output.swift in Sources */,
-				05BBA0722873B98900A0D68B /* Point.swift in Sources */,
-				05BBA0A72874B8F600A0D68B /* Age.swift in Sources */,
-				05BB9FCA28722C3500A0D68B /* SynapseSource.swift in Sources */,
-				05BBA0D42875B18F00A0D68B /* SurviveState.swift in Sources */,
-				05BBA0F4287AF1BC00A0D68B /* ImageGeneratorInfo.swift in Sources */,
-				05BBA0F6287AF94F00A0D68B /* Benchmark.swift in Sources */,
-				05BBA05528737FF800A0D68B /* Settings.swift in Sources */,
-				05BBA115287C8E2B00A0D68B /* WaitableOperationQueue.swift in Sources */,
-				05BBA0AE2874F59E00A0D68B /* CloseToTopBorder.swift in Sources */,
-				05BBA0D12875A9F800A0D68B /* Rect.swift in Sources */,
-				05BBA0AF2874F59E00A0D68B /* CloseToRightBorder.swift in Sources */,
-				05BBA117287C934200A0D68B /* DotGeneratorInfo.swift in Sources */,
-				05BBA0742873D6E000A0D68B /* ImageGenerator.swift in Sources */,
-				05BBA0D62875CA8B00A0D68B /* OutputGeneration.swift in Sources */,
 				05B6C313286F4D810065CD26 /* main.swift in Sources */,
-				05BB9FC228722C0600A0D68B /* NeuralNetwork.swift in Sources */,
-				05BB9FC428722C1D00A0D68B /* Input.swift in Sources */,
-				05BBA0F228785C4A00A0D68B /* MoveY.swift in Sources */,
-				05BBA11F287CABDC00A0D68B /* BarrierUp.swift in Sources */,
-				05BBA08528747A7500A0D68B /* Bundle.swift in Sources */,
-				05BBA0F8287AFE4E00A0D68B /* NSColor.swift in Sources */,
-				05BBA100287C84EF00A0D68B /* String.swift in Sources */,
-				05BBA07828745B7E00A0D68B /* TimeTransformer.swift in Sources */,
-				05BB9FC828722C2A00A0D68B /* Neuron.swift in Sources */,
-				05BB9FC028722BF300A0D68B /* Synapse.swift in Sources */,
-				05BBA11B287CAB9B00A0D68B /* BarrierLeft.swift in Sources */,
-				05BBA06E2873B7F200A0D68B /* World.swift in Sources */,
-				05BBA0702873B98200A0D68B /* Size.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05BBA138287CCDEE00A0D68B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05BBA160287CCE6500A0D68B /* Age.swift in Sources */,
+				05BBA145287CCE6500A0D68B /* Size.swift in Sources */,
+				05BBA166287CCE6500A0D68B /* MoveX.swift in Sources */,
+				05BBA15D287CCE6500A0D68B /* Bundle.swift in Sources */,
+				05BBA156287CCE6500A0D68B /* Simulation.swift in Sources */,
+				05BBA14B287CCE6500A0D68B /* Organism.swift in Sources */,
+				05BBA159287CCE6500A0D68B /* SynapseConnection.swift in Sources */,
+				05BBA16A287CCE6500A0D68B /* SynapseSource.swift in Sources */,
+				05BBA158287CCE6500A0D68B /* CloseToTopBorder.swift in Sources */,
+				05BBA15E287CCE6500A0D68B /* VideoGenerator.swift in Sources */,
+				05BBA15A287CCE6500A0D68B /* Neuron.swift in Sources */,
+				05BBA163287CCE6500A0D68B /* ImageGeneratorInfo.swift in Sources */,
+				05BBA16C287CCE6500A0D68B /* DotGeneratorInfo.swift in Sources */,
+				05BBA165287CCE6500A0D68B /* CloseToRightBorder.swift in Sources */,
+				05BBA151287CCE6500A0D68B /* OutputGeneration.swift in Sources */,
+				05BBA161287CCE6500A0D68B /* Output.swift in Sources */,
+				05BBA144287CCE6500A0D68B /* CloseToLeftBorder.swift in Sources */,
+				05BBA15B287CCE6500A0D68B /* Random.swift in Sources */,
+				05BBA149287CCE6500A0D68B /* Point.swift in Sources */,
+				05BBA152287CCE6500A0D68B /* CloseToBottomBorder.swift in Sources */,
+				05BBA167287CCE6500A0D68B /* MoveY.swift in Sources */,
+				05BBA154287CCE6500A0D68B /* Synapse.swift in Sources */,
+				05BBA169287CCE6500A0D68B /* BarrierLeft.swift in Sources */,
+				05BBA14F287CCE6500A0D68B /* NSImage.swift in Sources */,
+				05BBA14A287CCE6500A0D68B /* SynapseDestination.swift in Sources */,
+				05BBA148287CCE6500A0D68B /* BarrierUp.swift in Sources */,
+				05BBA164287CCE6500A0D68B /* SurviveState.swift in Sources */,
+				05BBA14D287CCE6500A0D68B /* BarrierRight.swift in Sources */,
+				05BBA14C287CCE6500A0D68B /* Settings.swift in Sources */,
+				05BBA16D287CCE6500A0D68B /* BarrierDown.swift in Sources */,
+				05BBA147287CCE6500A0D68B /* Synchronizable.swift in Sources */,
+				05BBA157287CCE6500A0D68B /* World.swift in Sources */,
+				05BBA16B287CCE6500A0D68B /* Input.swift in Sources */,
+				05BBA155287CCE6500A0D68B /* Benchmark.swift in Sources */,
+				05BBA14E287CCE6500A0D68B /* DotGenerator.swift in Sources */,
+				05BBA146287CCE6500A0D68B /* WaitableOperationQueue.swift in Sources */,
+				05BBA153287CCE6500A0D68B /* String.swift in Sources */,
+				05BBA162287CCE6500A0D68B /* TimeTransformer.swift in Sources */,
+				05BBA168287CCE6500A0D68B /* NSColor.swift in Sources */,
+				05BBA15C287CCE6500A0D68B /* Rect.swift in Sources */,
+				05BBA150287CCE6500A0D68B /* ImageGenerator.swift in Sources */,
+				05BBA15F287CCE6500A0D68B /* NeuralNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +631,24 @@
 			};
 			name = Release;
 		};
+		05BBA141287CCDEE00A0D68B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05BBA142287CCDEE00A0D68B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -591,6 +666,15 @@
 			buildConfigurations = (
 				05B6C317286F4D810065CD26 /* Debug */,
 				05B6C318286F4D810065CD26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05BBA143287CCDEE00A0D68B /* Build configuration list for PBXNativeTarget "BrainKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05BBA141287CCDEE00A0D68B /* Debug */,
+				05BBA142287CCDEE00A0D68B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

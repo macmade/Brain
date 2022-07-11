@@ -34,7 +34,7 @@ public class World
     
     private var queue = WaitableOperationQueue( label: "com.xs-labs.Brain.World", qos: .userInteractive )
     
-    init( settings: Settings )
+    public init( settings: Settings )
     {
         self.settings          = settings
         self.size              = Size( width: Int( settings.gridWidth ), height: Int( settings.gridHeight ) )

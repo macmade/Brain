@@ -43,18 +43,22 @@ public class BarrierLeft: Input
             return 0
         }
         
-        var point = organism.position
-        
-        while point.x > 0
+        let distances = world.settings.barriers.filter
         {
-            if let barrier = world.settings.barriers.first( where: { $0.contains( point: point ) } )
-            {
-                let distance = point.x - barrier.origin.x
-                
-                return Double( world.size.width - distance ) / Double( world.size.width - 1 )
-            }
-            
-            point.x -= 1
+            $0.origin.x < organism.position.x && $0.origin.y <= organism.position.y && $0.origin.y + $0.size.height >= organism.position.y
+        }
+        .map
+        {
+            organism.position.x - $0.origin.x
+        }
+        .sorted
+        {
+            $0 < $1
+        }
+        
+        if let distance = distances.first
+        {
+            return Double( world.size.width - distance ) / Double( world.size.width - 1 )
         }
         
         return 0
