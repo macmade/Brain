@@ -28,11 +28,11 @@ public class ImageGenerator
 {
     private var prepared       = [ ImageGeneratorInfo ]()
     private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.ImageGenerator", qos: .userInteractive )
-    private var cachesDirectory: URL
+    private var outputDirectory: URL
     
-    public init( cachesDirectory: URL )
+    public init( outputDirectory: URL )
     {
-        self.cachesDirectory = cachesDirectory
+        self.outputDirectory = outputDirectory
     }
     
     public func generate( world: World )
@@ -56,7 +56,7 @@ public class ImageGenerator
                 return
             }
             
-            let dir = self.cachesDirectory.appendingPathComponent( "generation-\( $0 )" )
+            let dir = self.outputDirectory.appendingPathComponent( "generation-\( $0 )" )
             
             try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
             

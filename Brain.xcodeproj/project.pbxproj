@@ -56,6 +56,7 @@
 		05BBA17F287CD62400A0D68B /* BorderInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA17E287CD62400A0D68B /* BorderInputs.swift */; };
 		05BBA181287CD81500A0D68B /* AgeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA180287CD81500A0D68B /* AgeInput.swift */; };
 		05BBA183287CDC7900A0D68B /* RandomInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA182287CDC7900A0D68B /* RandomInput.swift */; };
+		05BBA185287D704E00A0D68B /* MoveOutputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BBA184287D704E00A0D68B /* MoveOutputs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		05BBA17E287CD62400A0D68B /* BorderInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderInputs.swift; sourceTree = "<group>"; };
 		05BBA180287CD81500A0D68B /* AgeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeInput.swift; sourceTree = "<group>"; };
 		05BBA182287CDC7900A0D68B /* RandomInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomInput.swift; sourceTree = "<group>"; };
+		05BBA184287D704E00A0D68B /* MoveOutputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveOutputs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +489,7 @@
 				05BBA17E287CD62400A0D68B /* BorderInputs.swift */,
 				05BBA180287CD81500A0D68B /* AgeInput.swift */,
 				05BBA182287CDC7900A0D68B /* RandomInput.swift */,
+				05BBA184287D704E00A0D68B /* MoveOutputs.swift */,
 			);
 			path = "BrainKit-Tests";
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 			files = (
 				05BBA181287CD81500A0D68B /* AgeInput.swift in Sources */,
 				05BBA183287CDC7900A0D68B /* RandomInput.swift in Sources */,
+				05BBA185287D704E00A0D68B /* MoveOutputs.swift in Sources */,
 				05BBA177287CCF0900A0D68B /* BarrierInputs.swift in Sources */,
 				05BBA17F287CD62400A0D68B /* BorderInputs.swift in Sources */,
 			);

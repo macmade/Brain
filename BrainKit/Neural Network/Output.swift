@@ -33,6 +33,9 @@ public class Output: SynapseDestination, NSCopying
         "O"
     }
     
+    public init()
+    {}
+    
     public func take( value: Double )
     {
         self.values.append( value )

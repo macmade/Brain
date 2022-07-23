@@ -28,11 +28,11 @@ public class DotGenerator
 {
     private var prepared       = [ Int : [ DotGeneratorInfo ] ]()
     private let queue          = WaitableOperationQueue( label: "com.xs-labs.Brain.DotGenerator", qos: .userInteractive )
-    private var cachesDirectory: URL
+    private var outputDirectory: URL
     
-    public init( cachesDirectory: URL )
+    public init( outputDirectory: URL )
     {
-        self.cachesDirectory = cachesDirectory
+        self.outputDirectory = outputDirectory
     }
     
     public func prepare( state: [ SurviveState ], generation: Int )
@@ -58,7 +58,7 @@ public class DotGenerator
                 return
             }
             
-            let dir = self.cachesDirectory.appendingPathComponent( "generation-\( $0 )" )
+            let dir = self.outputDirectory.appendingPathComponent( "generation-\( $0 )" )
             
             try? FileManager.default.createDirectory( at: dir, withIntermediateDirectories: true )
             

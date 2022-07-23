@@ -39,14 +39,15 @@ public class MoveX: Output
     public override func execute( with organism: Organism )
     {
         let value = self.values.reduce( 0.0 ) { $0 + $1 }
+        let pos   = organism.nextPosition ?? organism.position
         
         if value > 0
         {
-            organism.nextPosition = organism.position.adjustingX( adding: 1 )
+            organism.nextPosition = pos.adjustingX( adding: 1 )
         }
         else if value < 0
         {
-            organism.nextPosition = organism.position.adjustingX( adding: -1 )
+            organism.nextPosition = pos.adjustingX( adding: -1 )
         }
     }
 }

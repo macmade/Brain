@@ -30,17 +30,22 @@ public class Simulation
     
     private var dotGenerator:    DotGenerator?
     private var imageGenerator:  ImageGenerator?
-    private var cachesDirectory: URL?
+    private var outputDirectory: URL?
     
     public init( settings: Settings )
     {
-        OutputGeneration.clearAll()
-        
         self.settings = settings
         
-        if let caches = Bundle.main.cachesDirectory?.appendingPathComponent( "com.xs-labs.Brain-\( UUID().uuidString )" )
+        if let outputDirectory = Bundle.main.documentDirectory
         {
-            self.cachesDirectory = caches
+            OutputGeneration.clearAll( in: outputDirectory )
+            
+            self.outputDirectory = outputDirectory
+            
+            if let data = try? PropertyListEncoder().encode( settings )
+            {
+                try? data.write( to: outputDirectory.appendingPathComponent( "settings" ).appendingPathExtension( "plist" ) )
+            }
         }
     }
     
@@ -55,11 +60,10 @@ public class Simulation
             {
                 world = World( settings: self.settings )
                 
-                if let caches = self.cachesDirectory
+                if let outputDirectory = self.outputDirectory
                 {
-                    self.imageGenerator  = ImageGenerator( cachesDirectory: caches.appendingPathComponent( "jpg" ) )
-                    self.dotGenerator    = DotGenerator(   cachesDirectory: caches.appendingPathComponent( "dot" ) )
-                    self.cachesDirectory = caches
+                    self.imageGenerator = ImageGenerator( outputDirectory: outputDirectory.appendingPathComponent( "jpg" ) )
+                    self.dotGenerator   = DotGenerator(   outputDirectory: outputDirectory.appendingPathComponent( "dot" ) )
                 }
             }
             
@@ -91,16 +95,16 @@ public class Simulation
             }
             finished:
             {
-                print( "Finished processing in \( TimeTransformer.string( for: $0 ) )" )
+                print( "Finished processing in \( TimeTransformer.string( for: $0 ) )\nFinal survivability: \( Int( survivability ) )%" )
             }
         }
         while survivability < self.settings.requiredSurvivability
         
-        if let caches = self.cachesDirectory
+        if let outputDirectory = self.outputDirectory
         {
             Benchmark.run
             {
-                print( "Generating graphs..." )
+                print( "Generating graphs:" )
                 self.dotGenerator?.generate()
             }
             finished:
@@ -110,8 +114,8 @@ public class Simulation
             
             Benchmark.run
             {
-                print( "Generating SVG scripts:" )
-                OutputGeneration.generateSVGScriptsForDotFiles( from: caches.appendingPathComponent( "dot" ), in: caches.appendingPathComponent( "svg" ) )
+                print( "Generating SVG scripts..." )
+                OutputGeneration.generateSVGScriptsForDotFiles( from: outputDirectory.appendingPathComponent( "dot" ), in: outputDirectory.appendingPathComponent( "svg" ) )
             }
             finished:
             {
@@ -120,7 +124,7 @@ public class Simulation
             
             Benchmark.run
             {
-                print( "Generating images..." )
+                print( "Generating images:" )
                 self.imageGenerator?.generate( world: world )
             }
             finished:
@@ -131,14 +135,14 @@ public class Simulation
             Benchmark.run
             {
                 print( "Generating movies:" )
-                OutputGeneration.generateMovies( from: caches.appendingPathComponent( "jpg" ), in: caches.appendingPathComponent( "mov" ), world: world )
+                OutputGeneration.generateMovies( from: outputDirectory.appendingPathComponent( "jpg" ), in: outputDirectory.appendingPathComponent( "mov" ), world: world )
             }
             finished:
             {
                 print( "Done in \( TimeTransformer.string( for: $0 ) )" )
             }
             
-            NSWorkspace.shared.selectFile( caches.path, inFileViewerRootedAtPath: caches.path )
+            NSWorkspace.shared.selectFile( outputDirectory.path, inFileViewerRootedAtPath: outputDirectory.path )
         }
     }
     

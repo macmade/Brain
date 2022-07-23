@@ -58,17 +58,42 @@ public class Organism
     
     public class func random( world: World ) -> Organism?
     {
+        let inputs                = Organism.defaultInputs()
+        let outputs               = Organism.defaultOutputs()
         var neurons:  [ Neuron ]  = []
         var synapses: [ Synapse ] = []
         
-        ( 0 ..< world.settings.numberOfNeurons ).forEach
+        if world.settings.brainType == .random
         {
-            _ in neurons.append( Neuron() )
+            ( 0 ..< world.settings.numberOfNeurons ).forEach
+            {
+                _ in neurons.append( Neuron() )
+            }
+            
+            ( 0 ..< world.settings.numberOfSynapses ).forEach
+            {
+                _ in synapses.append( Synapse( from: UInt32.random( in: 0 ... UInt32.max ) ) )
+            }
         }
-        
-        ( 0 ..< world.settings.numberOfSynapses ).forEach
+        else
         {
-            _ in synapses.append( Synapse( from: UInt32.random( in: 0 ... UInt32.max ) ) )
+            inputs.enumerated().forEach
+            {
+                input in outputs.enumerated().forEach
+                {
+                    output in
+                    
+                    let synapse = Synapse(
+                        sourceType:      .input,
+                        sourceID:        UInt8( input.offset ),
+                        destinationType: .output,
+                        destinationID:   UInt8( output.offset ),
+                        weight:          Double.random( in: -1 ... 1 )
+                    )
+                    
+                    synapses.append( synapse )
+                }
+            }
         }
         
         /*
@@ -103,7 +128,7 @@ public class Organism
         synapses.append( Synapse( sourceType: .neuron, sourceID: 2, destinationType: .output, destinationID: 2, weight: 1 ) )
         */
         
-        guard let brain = NeuralNetwork( inputs: Organism.defaultInputs(), outputs: Organism.defaultOutputs(), neurons: neurons, synapses: synapses ) else
+        guard let brain = NeuralNetwork( inputs: inputs, outputs: outputs, neurons: neurons, synapses: synapses ) else
         {
             return nil
         }
@@ -137,7 +162,8 @@ public class Organism
             }
             
             let encoded = $0.encode()
-            let mutate  = UInt32( 1 ) << Int.random( in: 0 ..< encoded.bitWidth )
+            let bits    = world.settings.brainType == .random ? 32 : 16
+            let mutate  = UInt32( 1 ) << Int.random( in: 0 ..< bits )
             
             return Synapse( from: encoded ^ mutate )
         }

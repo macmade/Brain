@@ -26,13 +26,23 @@ import Cocoa
 
 public extension Bundle
 {
-    var cachesDirectory: URL?
+    private class func urlForDirectory( type: FileManager.SearchPathDirectory ) -> URL?
     {
-        if let caches = NSSearchPathForDirectoriesInDomains( .cachesDirectory, .userDomainMask, true ).first, caches.isEmpty == false
+        if let path = NSSearchPathForDirectoriesInDomains( type, .userDomainMask, true ).first, path.isEmpty == false
         {
-            return URL( fileURLWithPath: caches )
+            return URL( fileURLWithPath: path )
         }
         
         return nil
+    }
+    
+    var cachesDirectory: URL?
+    {
+        Bundle.urlForDirectory( type: .cachesDirectory )
+    }
+    
+    var documentDirectory: URL?
+    {
+        Bundle.urlForDirectory( type: .documentDirectory )
     }
 }

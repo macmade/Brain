@@ -108,14 +108,9 @@ public class OutputGeneration
         try? scripts.joined( separator: "\n" ).data( using: .utf8 )?.write( to: directory.appendingPathComponent( "generate" ).appendingPathExtension( "sh" ) )
     }
     
-    public class func clearAll()
+    public class func clearAll( in directory: URL )
     {
-        guard let caches = Bundle.main.cachesDirectory else
-        {
-            return
-        }
-        
-        guard let enumerator = FileManager.default.enumerator( atPath: caches.path ) else
+        guard let enumerator = FileManager.default.enumerator( atPath: directory.path ) else
         {
             return
         }
@@ -129,7 +124,7 @@ public class OutputGeneration
                 return
             }
             
-            let url = caches.appendingPathComponent( name )
+            let url = directory.appendingPathComponent( name )
             
             try? FileManager.default.removeItem( at: url )
         }
